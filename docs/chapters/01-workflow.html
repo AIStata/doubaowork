@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="计量经济网 · 数量经济学">
+<meta name="keywords" content="豆包工作, AIStata MCP, 组织智能体, 环境搭建">
+<meta name="description" content="AI 与计量工具的四条技术路线、组织智能体范式、环境搭建与 AIStata MCP 接入验证">
+
+<title>第 1 章 豆包工作流 – 豆包工作 × Stata 在线书籍</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/02-stata.html" rel="next">
+<link href="../index.html" rel="prev">
+<link href="../figs/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e0ebbbfb966f34d7b20b4031aa9f120e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-eae4c73c326220b2d879c7e8603b2250.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e0ebbbfb966f34d7b20b4031aa9f120e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-b727c82732d647cfd32de91f8c1a395f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-92d468a4daf996a981e497f2aafe262d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-b727c82732d647cfd32de91f8c1a395f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../custom/styles.css">
+<link rel="stylesheet" href="../custom/extra.css">
+<meta property="og:title" content="第 1 章 豆包工作流 – 豆包工作 × Stata 在线书籍">
+<meta property="og:description" content="AI 与计量工具的四条技术路线、组织智能体范式、环境搭建与 AIStata MCP 接入验证">
+<meta property="og:site_name" content="豆包工作 × Stata 在线书籍">
+<meta name="twitter:title" content="第 1 章 豆包工作流 – 豆包工作 × Stata 在线书籍">
+<meta name="twitter:description" content="AI 与计量工具的四条技术路线、组织智能体范式、环境搭建与 AIStata MCP 接入验证">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../figs/logo.svg" alt="豆包工作 × Stata 在线书籍" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">首页</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chapters/01-workflow.html"> 
+<span class="menu-text">豆包工作流</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chapters/02-stata.html"> 
+<span class="menu-text">Stata专题</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chapters/03-reproduction.html"> 
+<span class="menu-text">论文复现</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chapters/04-pipeline.html"> 
+<span class="menu-text">实证科研流</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chapters/05-resources.html"> 
+<span class="menu-text">资源导航</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.aistata.cn"> 
+<span class="menu-text">计量经济网</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-workflow.html">课程正文</a></li><li class="breadcrumb-item"><a href="../chapters/01-workflow.html">第 1 章 豆包工作流</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">开始阅读</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">课程正文</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-workflow.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">第 1 章 豆包工作流</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-stata.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第 2 章 Stata专题</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-reproduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第 3 章 论文复现</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-pipeline.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第 4 章 实证科研流</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">资源导航</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">快速入口</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html#why" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">导语 · 为什么是这套工具链</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html#compat" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">兼容性 · 主流 Agent / IDE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html#roadmap" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">学习路径</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">本章目录</h2>
+   
+  <ul>
+  <li><a href="#豆包工作-stata组织智能体驱动的因果实证科研流水线" id="toc-豆包工作-stata组织智能体驱动的因果实证科研流水线" class="nav-link active" data-scroll-target="#豆包工作-stata组织智能体驱动的因果实证科研流水线">豆包工作 × Stata：组织智能体驱动的因果实证科研流水线</a>
+  <ul class="collapse">
+  <li><a href="#学术公开课完整讲义全本" id="toc-学术公开课完整讲义全本" class="nav-link" data-scroll-target="#学术公开课完整讲义全本">学术公开课完整讲义（全本）</a></li>
+  </ul></li>
+  <li><a href="#第一章-导论ai-计量工具的生态谱系与范式分野" id="toc-第一章-导论ai-计量工具的生态谱系与范式分野" class="nav-link" data-scroll-target="#第一章-导论ai-计量工具的生态谱系与范式分野">第一章 导论：AI × 计量工具的生态谱系与范式分野</a>
+  <ul class="collapse">
+  <li><a href="#四条技术路线从生成代码到组织级调度" id="toc-四条技术路线从生成代码到组织级调度" class="nav-link" data-scroll-target="#四条技术路线从生成代码到组织级调度">1.1 四条技术路线：从”生成代码”到”组织级调度”</a></li>
+  <li><a href="#组织智能体范式委派并行校验交付" id="toc-组织智能体范式委派并行校验交付" class="nav-link" data-scroll-target="#组织智能体范式委派并行校验交付">1.2 组织智能体范式：委派—并行—校验—交付</a></li>
+  <li><a href="#在-aiagent-里面跑-stata的mcp-是什么不是什么" id="toc-在-aiagent-里面跑-stata的mcp-是什么不是什么" class="nav-link" data-scroll-target="#在-aiagent-里面跑-stata的mcp-是什么不是什么">1.3 在 AIAgent 里面跑 Stata的MCP 是什么、不是什么</a></li>
+  <li><a href="#横向对比豆包工作aistata-vs-deepseek-harness-workbuddy-traework" id="toc-横向对比豆包工作aistata-vs-deepseek-harness-workbuddy-traework" class="nav-link" data-scroll-target="#横向对比豆包工作aistata-vs-deepseek-harness-workbuddy-traework">1.4 横向对比：豆包工作+AIStata vs DeepSeek Harness / Workbuddy / TraeWork</a></li>
+  <li><a href="#为什么要学习本课" id="toc-为什么要学习本课" class="nav-link" data-scroll-target="#为什么要学习本课">1.5 为什么要学习本课</a></li>
+  </ul></li>
+  <li><a href="#第二章-环境搭建三件套部署与连通性验证" id="toc-第二章-环境搭建三件套部署与连通性验证" class="nav-link" data-scroll-target="#第二章-环境搭建三件套部署与连通性验证">第二章 环境搭建：三件套部署与连通性验证</a>
+  <ul class="collapse">
+  <li><a href="#环境清单与版本矩阵" id="toc-环境清单与版本矩阵" class="nav-link" data-scroll-target="#环境清单与版本矩阵">2.1 环境清单与版本矩阵</a></li>
+  <li><a href="#aistata-mcp-的两种部署形态" id="toc-aistata-mcp-的两种部署形态" class="nav-link" data-scroll-target="#aistata-mcp-的两种部署形态">2.2 AIStata MCP 的两种部署形态</a></li>
+  <li><a href="#服务端配置与外部命令预装" id="toc-服务端配置与外部命令预装" class="nav-link" data-scroll-target="#服务端配置与外部命令预装">2.3 服务端配置与外部命令预装</a></li>
+  <li><a href="#在豆包工作中接入为技能" id="toc-在豆包工作中接入为技能" class="nav-link" data-scroll-target="#在豆包工作中接入为技能">2.4 在豆包工作中接入为技能</a></li>
+  <li><a href="#常见故障树" id="toc-常见故障树" class="nav-link" data-scroll-target="#常见故障树">2.7 常见故障树</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-workflow.html">课程正文</a></li><li class="breadcrumb-item"><a href="../chapters/01-workflow.html">第 1 章 豆包工作流</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">第 1 章 豆包工作流</h1>
+<p class="subtitle lead">豆包工作 × Stata：组织智能体驱动的因果实证科研流水线</p>
+</div>
+
+<div>
+  <div class="description">
+    AI 与计量工具的四条技术路线、组织智能体范式、环境搭建与 AIStata MCP 接入验证
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-contents">
+             <p>计量经济网 · 数量经济学 </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2026年11月23日</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">关键词</div>
+    <p>豆包工作, AIStata MCP, 组织智能体, 环境搭建</p>
+  </div>
+</div>
+
+</header>
+
+
+<section id="豆包工作-stata组织智能体驱动的因果实证科研流水线" class="level1">
+<h1>豆包工作 × Stata：组织智能体驱动的因果实证科研流水线</h1>
+<section id="学术公开课完整讲义全本" class="level2">
+<h2 class="anchored" data-anchor-id="学术公开课完整讲义全本">学术公开课完整讲义（全本）</h2>
+<hr>
+</section>
+</section>
+<section id="第一章-导论ai-计量工具的生态谱系与范式分野" class="level1">
+<h1>第一章 导论：AI × 计量工具的生态谱系与范式分野</h1>
+<section id="四条技术路线从生成代码到组织级调度" class="level2">
+<h2 class="anchored" data-anchor-id="四条技术路线从生成代码到组织级调度">1.1 四条技术路线：从”生成代码”到”组织级调度”</h2>
+<p>AI 进入计量实证，不是一条路，是四条完全不同的路。</p>
+<p>第一步必须先给学员装上”路线识别”的眼镜，否则后面的所有对比都会变成参数比较。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>路线</th>
+<th>代表形态</th>
+<th>AI 与 Stata 的关系</th>
+<th>人的角色</th>
+<th>典型卡点</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>L1 文本生成</strong></td>
+<td>通用对话模型</td>
+<td>AI 只写代码文本，人复制粘贴回 Stata 运行</td>
+<td>代码搬运工</td>
+<td>幻觉参数、版本不匹配、“在我这能跑”</td>
+</tr>
+<tr class="even">
+<td><strong>L2 会话内执行</strong></td>
+<td>IDE 内嵌插件（TraeWork 类）</td>
+<td>AI 在 IDE 会话里同步调用 Stata，跑完看结果再下一步</td>
+<td>调试者</td>
+<td>串行阻塞，一条命令一批结果，批量任务极慢</td>
+</tr>
+<tr class="odd">
+<td><strong>L3 运行时可编程</strong></td>
+<td>DeepSeek Harness 类</td>
+<td>AI 在沙箱 Runtime 里编排工具链，自定义循环</td>
+<td>Agent 工程师</td>
+<td>门槛高，与办公协作体系弱耦合</td>
+</tr>
+<tr class="even">
+<td><strong>L4 组织级调度</strong></td>
+<td>豆包工作 + AIStata MCP /Stata-Kernel-Jupyter等</td>
+<td>AI 把任务<strong>委派</strong>给后台子智能体并行执行，主会话保持可交互</td>
+<td>研究设计者 + 调度者</td>
+<td>批次有锁，需按批调度</td>
+</tr>
+</tbody>
+</table>
+<p><strong>总结：</strong>：</p>
+<blockquote class="blockquote">
+<p>L1 让 AI 帮你写；L2 让 AI 陪你跑；L3 让 AI 自己会跑；<strong>L4 让一组 AI 替你跑，而你还在跟人讨论下一步怎么做。</strong></p>
+</blockquote>
+<p>L4 的差别不在”模型更强”，而在<strong>时间结构变了</strong>：算力等待从”人盯着屏幕”变成”后台并行推进”，认知带宽从”一次一个任务”变成”边跑边设计”。</p>
+</section>
+<section id="组织智能体范式委派并行校验交付" class="level2">
+<h2 class="anchored" data-anchor-id="组织智能体范式委派并行校验交付">1.2 组织智能体范式：委派—并行—校验—交付</h2>
+<p>一次完整的组织智能体任务，包含四个阶段，缺一不可：</p>
+<pre class="plaintext"><code>[设计] 主会话：确定识别策略、列出独立子任务清单
+   ↓ 委派（一次性下发整批）
+[执行] 后台子智能体池：每个子任务独立跑 Stata，互不阻塞
+   ↓ 各自产出 do / log / 图 / 结果行
+[校验] 汇总智能体：检查 log 完整性、符号一致性、显著性、样本量
+   ↓ 冲突与失败项单独标记
+[交付] 主会话：收到交付包，继续批注、修订、发起下一批</code></pre>
+<p>四个阶段对应四个必须讲清的概念：</p>
+<ol type="1">
+<li><p><strong>委派（Delegation）</strong>：不是”让 AI 继续干”，而是”把一段可独立完成的工作切出去”。切分的质量决定并行度。</p></li>
+<li><p><strong>并行（Parallelism）</strong>：并行的前提是<strong>子任务之间无数据依赖</strong>。同一份清洗数据上的不同安慰剂检验可以并行；“清洗 → 回归”不能并行。</p></li>
+<li><p><strong>校验（Verification）</strong>：交付前必须有机器可判定的校验，不能只靠”看起来对”。最小校验集：log 无 <code>r(####)</code> 错误码、系数符号与预期一致、样本量与基准一致、p 值与置信区间自洽。</p></li>
+<li><p><strong>交付（Delivery）</strong>：交付物是<strong>包</strong>而非一段话——do、log、图、结果行、汇总矩阵，五件齐全才算交付。</p></li>
+</ol>
+<p><strong>为什么”主会话不阻塞”在科研里是刚需</strong></p>
+<p>实证研究的真实节奏不是线性写代码，而是”跑着等、等着想、想着改”。传统 Agent 工具在这三步里只能做第一步；一旦 Agent 开始跑，研究者的思考被迫中断。L4 的价值在于：你可以一边等 200 次置换检验跑完，一边跟合作者讨论”要不要加一个 2015 年政策叠加的排除”，讨论完回来，结果已经在飞书表里。</p>
+<p><strong>同时必须讲清的能力边界（不回避）</strong></p>
+<ul>
+<li><p>一批委派未交付，不能开第二批。这是调度锁，不是性能问题。</p></li>
+<li><p>因此真实的科研节奏是”<strong>批次化</strong>”而非”流水线化”：设计好一批 → 跑 → 评审 → 下一批。</p></li>
+<li><p>这个约束反而逼近真实科研的评审节奏：每一批检验都对应一次”导师看过、提过意见”的环节，天然留下评审痕迹。</p></li>
+</ul>
+</section>
+<section id="在-aiagent-里面跑-stata的mcp-是什么不是什么" class="level2">
+<h2 class="anchored" data-anchor-id="在-aiagent-里面跑-stata的mcp-是什么不是什么">1.3 在 AIAgent 里面跑 Stata的MCP 是什么、不是什么</h2>
+<p><strong>是</strong>：一个把 Stata 进程封装成标准化工具接口（MCP 协议）的服务端。模型通过结构化调用执行 do 代码、读取 log、取回返回值、接收生成图片、查询帮助、安装外部命令。</p>
+<p><strong>不是</strong>：</p>
+<ul>
+<li><p>不是把数据上传给大模型的通道。数据留在你的本地或服务器 Stata 实例里，出去的是<strong>指令和回执</strong>。</p></li>
+<li><p>不是”AI 自动理解计量经济学”。它执行你让它执行的，不会替你判断识别假设是否成立。</p></li>
+<li><p>不是版本管理器。可复现性仍要靠 do 文件规范、种子、包版本记录。</p></li>
+</ul>
+<p><strong>典型后端两种</strong>：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>后端</th>
+<th>机制</th>
+<th>优点</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>pystata</code> 常驻会话</td>
+<td>Stata 官方 Python 接口，进程常驻，状态可延续</td>
+<td>快、可跨调用保留内存数据、便于交互式探索</td>
+<td>需匹配 Stata 版本与 Python 版本；内存占用</td>
+</tr>
+<tr class="even">
+<td>batch 批处理</td>
+<td>每次调用 <code>stata -b do file.do</code>，读 log</td>
+<td>隔离干净、可复现性最好、崩溃不影响其他任务</td>
+<td>每次启动开销；状态不延续</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐</strong>：探索阶段用 <code>pystata</code>，<strong>交付与复现阶段强制切 batch 模式</strong>。</p>
+</section>
+<section id="横向对比豆包工作aistata-vs-deepseek-harness-workbuddy-traework" class="level2">
+<h2 class="anchored" data-anchor-id="横向对比豆包工作aistata-vs-deepseek-harness-workbuddy-traework">1.4 横向对比：豆包工作+AIStata vs DeepSeek Harness / Workbuddy / TraeWork</h2>
+<blockquote class="blockquote">
+<p>大家最关心的”我为什么要换工具”。</p>
+<p>对比只讲定位差异，不做优劣评判。</p>
+</blockquote>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>维度</th>
+<th>豆包工作 + SKJMCP</th>
+<th>DeepSeek Harness</th>
+<th>Workbuddy</th>
+<th>TraeWork / AI IDE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>一句话定位</td>
+<td>组织协同 + 异步并行的实证科研调度台</td>
+<td>可编程 Agent 运行时沙箱</td>
+<td>通用 AI 工作台（办公+轻代码）</td>
+<td>AI 原生代码 IDE</td>
+</tr>
+<tr class="even">
+<td>任务调度</td>
+<td>委派后台并行，主会话非阻塞</td>
+<td>单沙箱内脚本编排循环</td>
+<td>串行为主，轻量子任务</td>
+<td>会话内单 Agent 串行</td>
+</tr>
+<tr class="odd">
+<td>等待体验</td>
+<td>派出去就能继续讨论</td>
+<td>需自行写异步/多进程</td>
+<td>基本要等</td>
+<td>必须等当前任务结束</td>
+</tr>
+<tr class="even">
+<td>Stata 执行</td>
+<td>AIStata MCP 接真实 Stata，保留 License 与数据主权</td>
+<td>需自行接 MCP 或 API</td>
+<td>以生成代码为主，执行需接入MCP</td>
+<td>内置 MCP，也是需要接入配置</td>
+</tr>
+<tr class="odd">
+<td>协作底座</td>
+<td>原生飞书：文档/多维表/云盘/权限/评论</td>
+<td>弱耦合，需自建 API 对接</td>
+<td>可对接飞书但无组织级委派范式</td>
+<td>本地文件系统 + Git</td>
+</tr>
+<tr class="even">
+<td>最适场景</td>
+<td>课题组批量稳健性、多项目并行、导师评审核验</td>
+<td>Agent 框架二次开发、自定义流水线</td>
+<td>日常办公 + 实证分析</td>
+<td>单人沉浸式写 do、调 bug</td>
+</tr>
+<tr class="odd">
+<td>明显短板</td>
+<td>批次锁；MCP 需自部署</td>
+<td>门槛高，不适合社科研究者</td>
+<td>缺面向因果批量检验的调度原语</td>
+<td>团队协作与评审闭环弱</td>
+</tr>
+<tr class="even">
+<td>学术产出链路</td>
+<td>结果 → 多维表 → 文档 → 版本留痕</td>
+<td>产出留沙箱，需手动同步</td>
+<td>手动导出上传</td>
+<td>留本地，靠 Git 版本</td>
+</tr>
+</tbody>
+</table>
+<p><strong>差异化总结（口播版，四句）</strong></p>
+<ul>
+<li><p>DeepSeek Harness：给会写 Agent 的人造引擎；</p></li>
+<li><p>Workbuddy：给所有人一个聪明的办公助手；</p></li>
+<li><p>TraeWork：给一个人一个会写 Stata 的 IDE；</p></li>
+<li><p><strong>豆包工作 + AIStata MCP：给一个课题组一套能批量跑检验、能在飞书里逐条核验的科研生产系统。</strong></p></li>
+</ul>
+<p><strong>避免踩坑</strong></p>
+<ol type="1">
+<li><p>对比不是说”谁更强”。学员里已经在用 TraeWork、VsCode等，要给他”何时切换”的判断标准。</p></li>
+<li><p>不要夸大并行收益。并行只对<strong>无依赖任务</strong>有收益；识别策略设计、数据清洗、基准设定这些核心环节，并行帮不上忙。</p></li>
+</ol>
+</section>
+<section id="为什么要学习本课" class="level2">
+<h2 class="anchored" data-anchor-id="为什么要学习本课">1.5 为什么要学习本课</h2>
+<p>数量经济学微信公众号近期推送了系列AIStata MCP 或者Stata-Kernel-Jupyter 相关文章，涉及目前大家使用到的主流 Agent，接入自研的 MCP 扩展插件插件，可以覆盖主流 AIAgent ，实现在 AI 里面一站式跑 Stata，详见</p>
+<p><a href="https://mp.weixin.qq.com/s/kar5Ty8vMOgHDKtu33qFmA">我在一站式科研平台里面用 ClaudeCode 跑 Stata 代码</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MjM5NTM4NjU2OA==&amp;mid=2650770814&amp;idx=1&amp;sn=52593905910f16382a151573bba24346&amp;scene=21#wechat_redirect">我在 DeepseekHarness 里面跑 Stata 代码</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MjM5NTM4NjU2OA==&amp;mid=2650770748&amp;idx=1&amp;sn=9045c7a7b07832934cb070739d642440&amp;scene=21#wechat_redirect">我在 opencode 里面跑 Stata 代码</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MjM5NTM4NjU2OA==&amp;mid=2650770765&amp;idx=1&amp;sn=e41b43f003b3472afa470d255779e977&amp;scene=21#wechat_redirect">我在 Codex 里面跑 Stata 代码</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MjM5NTM4NjU2OA==&amp;mid=2650770651&amp;idx=1&amp;sn=179721060d58c1cc9f262b8d1f3080c8&amp;scene=21#wechat_redirect">我在 豆包工作 里面跑 Stata 代码</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MjM5NTM4NjU2OA==&amp;mid=2650770789&amp;idx=1&amp;sn=d7fc875ff23132232c9472b1154afd66&amp;scene=21#wechat_redirect">我在 GithubCopilot里跑Stata代码Bacon分解</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MjM5NTM4NjU2OA==&amp;mid=2650770799&amp;idx=1&amp;sn=11c1bcd3b185a315a410390a663e1df6&amp;scene=21#wechat_redirect">我在 TraeCN/TraeWork 跑Stata代码</a></p>
+<p><a href="https://mp.weixin.qq.com/s/qiQzZ6amy_hTi1SlVE6uqg">AIStata MCP接入主流Agent平台</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MjM5NTM4NjU2OA==&amp;mid=2650770556&amp;idx=1&amp;sn=a4fb8f2bce01c511dd2f1d255e7d7c9a&amp;scene=142&amp;poc_token=HBxrAmujL-gt_e5_EclIHaUaL1DnYu0VngDTtJK0">AIStata MCP全面适配Workbuddy、Trae、ClaudeCode等主流AIAgent，附论文复现展示!</a></p>
+<hr>
+</section>
+</section>
+<section id="第二章-环境搭建三件套部署与连通性验证" class="level1">
+<h1>第二章 环境搭建：三件套部署与连通性验证</h1>
+<section id="环境清单与版本矩阵" class="level2">
+<h2 class="anchored" data-anchor-id="环境清单与版本矩阵">2.1 环境清单与版本矩阵</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>组件</th>
+<th>最低</th>
+<th>推荐</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Stata</td>
+<td>16/17</td>
+<td>18 / 19</td>
+<td>17 起 <code>pystata</code> 稳定；18+ 对 <code>didregress</code>、<code>causal</code> 支持更好</td>
+</tr>
+<tr class="even">
+<td>Python（若用 pystata 后端）</td>
+<td>3.9</td>
+<td>3.11 / 3.12</td>
+<td>必须与 Stata 官方支持的 Python 版本匹配</td>
+</tr>
+<tr class="odd">
+<td>Node（若用 Node 版 MCP server）</td>
+<td>18</td>
+<td>20 / 22</td>
+<td>版本过低会导致 MCP 传输层报错</td>
+</tr>
+<tr class="even">
+<td>操作系统</td>
+<td>Win10 / macOS 12</td>
+<td>Win11 / macOS 14（Apple Silicon 需确认 Stata 为 ARM 原生版）</td>
+<td>Rosetta 下 <code>pystata</code> 常有路径问题</td>
+</tr>
+<tr class="odd">
+<td>网络</td>
+<td>可访问 SSC / 包镜像</td>
+<td>内网镜像</td>
+<td>外部命令预装是部署成败关键</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="aistata-mcp-的两种部署形态" class="level2">
+<h2 class="anchored" data-anchor-id="aistata-mcp-的两种部署形态">2.2 AIStata MCP 的两种部署形态</h2>
+<p><strong>形态 A：IDE 内嵌服务（单机自用）</strong></p>
+<ul>
+<li><p>场景：个人笔记本、单篇论文、快速探索</p></li>
+<li><p>特点：随 IDE 启动，配置集中在一个 json；适合单任务范式</p></li>
+<li><p>缺点：与本机强绑定，多人无法共享；IDE 关闭即服务消失</p></li>
+</ul>
+<p><strong>形态 B：MCP Server</strong></p>
+</section>
+<section id="服务端配置与外部命令预装" class="level2">
+<h2 class="anchored" data-anchor-id="服务端配置与外部命令预装">2.3 服务端配置与外部命令预装</h2>
+<p><strong>配置要点（四项）</strong></p>
+<ol type="1">
+<li><p><strong>Stata 可执行路径</strong>：Windows 指向 <code>Stata18.exe</code>（或 <code>StataMP-64.exe</code>），macOS 指向 <code>Stata.app/Contents/MacOS/Stata</code>。</p></li>
+<li><p><strong>工作目录白名单</strong>：只允许访问项目目录，禁止全盘。这是安全底线，不是可选。</p></li>
+<li><p><strong>超时与内存</strong>：单任务超时（建议 600–1800 秒，置换类任务放宽）、<code>set maxvar</code>（宽面板必需）。</p></li>
+<li><p><strong>图片与日志落盘</strong>：明确 figure 输出目录、log 目录，并让 MCP 返回可访问路径。</p></li>
+</ol>
+<p><strong>外部命令预装清单（按课程模块分组）</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>分组</th>
+<th>命令</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>基础</td>
+<td><code>reghdfe</code> <code>ftools</code> <code>estout</code> <code>outreg2</code> <code>coefplot</code></td>
+<td>高维固定效应、表格、图形</td>
+</tr>
+<tr class="even">
+<td>DID</td>
+<td><code>csdid</code> <code>drdid</code> <code>did_imputation</code> <code>eventdd</code> <code>did_multiplegt_dyn</code> <code>alldid</code></td>
+<td>交错 DID、事件研究、异质性稳健</td>
+</tr>
+<tr class="odd">
+<td>匹配</td>
+<td><code>psmatch2</code> <code>teffects</code>（内置） <code>cem</code>（可选）</td>
+<td>PSM、平衡性检验</td>
+</tr>
+<tr class="even">
+<td>RDD</td>
+<td><code>rdrobust</code> <code>rddensity</code> <code>rdlocrand</code></td>
+<td>断点回归与密度检验</td>
+</tr>
+<tr class="odd">
+<td>合成控制</td>
+<td><code>synth</code> <code>synth_runner</code> <code>sdid</code></td>
+<td>SCM、合成 DID</td>
+</tr>
+<tr class="even">
+<td>门槛/非线性</td>
+<td><code>xthreg</code></td>
+<td>面板门槛</td>
+</tr>
+<tr class="odd">
+<td>空间</td>
+<td><code>xsmle</code> <code>spmat</code> <code>spregress</code>（内置 sp 系列）</td>
+<td>空间面板、空间权重</td>
+</tr>
+<tr class="even">
+<td>机器学习</td>
+<td><code>ddml</code> <code>pystacked</code> <code>lassopack</code></td>
+<td>双重机器学习、堆叠、LASSO</td>
+</tr>
+<tr class="odd">
+<td>动态</td>
+<td><code>pvar</code> <code>lpirfs</code> <code>xtset</code> 配套</td>
+<td>PVAR、局部投影</td>
+</tr>
+</tbody>
+</table>
+<p><strong>预装三条铁律</strong></p>
+<ol type="1">
+<li><p>装完立即 <code>which &lt;cmd&gt;</code> 逐条验证，输出写入 <code>env_manifest.log</code>；</p></li>
+<li><p>记录每个包的版本（<code>ado describe &lt;cmd&gt;</code> 或看 ado 文件头），写进项目 <code>ENV.md</code>；</p></li>
+<li><p><strong>不要在交付后才装包</strong>。装包动作必须发生在批次执行之前，否则并行子任务会各自触发安装、相互抢占、甚至互相覆盖。</p></li>
+</ol>
+</section>
+<section id="在豆包工作中接入为技能" class="level2">
+<h2 class="anchored" data-anchor-id="在豆包工作中接入为技能">2.4 在豆包工作中接入为技能</h2>
+<p><strong>接入四步（结构）</strong></p>
+<ol type="1">
+<li><p>新建项目空间（一门课/一个课题一个空间，避免串味）</p></li>
+<li><p>添加自定义技能，填入 MCP 服务地址与传输方式（stdio / HTTP）</p></li>
+<li><p>开启工具权限：代码执行、文件读写、图片返回、帮助查询</p></li>
+<li><p>绑定飞书连接器：多维表格写入、文档创建、云盘上传</p></li>
+</ol>
+<p><strong>接入后必须验证的三类信号</strong></p>
+<ul>
+<li><p>工具可见：会话里能触发 Stata 执行工具，而不是”我以为它会调”</p></li>
+<li><p>回执完整：一次调用回来的是 <code>log + 返回值 + 产物路径</code>三样，缺一即为配置不全</p></li>
+<li><p>失败可读：故意跑一条错命令（如 <code>reg yyy xxx</code>），确认返回的是<strong>可读错误码与 log 片段</strong>，而不是”执行失败”</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>教学坑点提醒：很多学员卡在”看起来接上了，实际没回执”。判断标准很简单——<strong>能不能拿到 log 文本</strong>。拿不到 log 的接入，等于没接入，后面所有可复现性都无从谈起。</p>
+</blockquote>
+</section>
+<section id="常见故障树" class="level2">
+<h2 class="anchored" data-anchor-id="常见故障树">2.7 常见故障树</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>现象</th>
+<th>最可能原因</th>
+<th>处置</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>调用无响应</td>
+<td>服务未启动 / 端口被占</td>
+<td>查进程、换端口</td>
+</tr>
+<tr class="even">
+<td>返回空 log</td>
+<td>后端 batch 模式未正确重定向日志</td>
+<td>显式 <code>log using</code> 并回读</td>
+</tr>
+<tr class="odd">
+<td><code>r(601)</code> 文件不存在</td>
+<td>工作目录非预期</td>
+<td>强制绝对路径 + 目录白名单</td>
+</tr>
+<tr class="even">
+<td>图片不返回</td>
+<td>export 路径不在白名单 / 格式不支持</td>
+<td>统一导出 png 到固定目录</td>
+</tr>
+<tr class="odd">
+<td>中文乱码</td>
+<td>编码或字体</td>
+<td>do 文件 UTF-8；图中文字用英文或指定字体</td>
+</tr>
+<tr class="even">
+<td>并发任务互相覆盖</td>
+<td>共享 workdir</td>
+<td><strong>每子任务独立目录</strong>（关键）</td>
+</tr>
+<tr class="odd">
+<td>包找不到</td>
+<td>未预装 / 个人 ado 路径</td>
+<td>预装 + <code>which</code> 验证 + 统一 ado 路径</td>
+</tr>
+<tr class="even">
+<td>超时</td>
+<td>置换/自助类任务过长</td>
+<td>提高超时 / 拆小批次 / 减少重复次数</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/example\.com\/doubao-work-book\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link" aria-label="开始阅读">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">开始阅读</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/02-stata.html" class="pagination-link" aria-label="第 2 章 Stata专题">
+        <span class="nav-page-text">第 2 章 Stata专题</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 豆包工作 × Stata 在线书籍 · 计量经济网</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><a href="https://www.aistata.cn">AIStata</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

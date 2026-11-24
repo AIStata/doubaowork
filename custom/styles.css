@@ -1,0 +1,861 @@
+/* ============================================================
+   因果推断方法精读 · 清新自然风格自定义样式
+   ============================================================
+   设计理念：
+   - 薄荷绿 + 米白 + 柔和珊瑚橙，清新自然
+   - 低饱和度，护眼舒适
+   - 大圆角、柔阴影，通透轻盈
+   - 清晰的层级结构，适合长文阅读
+   - 卡片化布局，增强信息层次感
+   - 响应式设计，适配多端设备
+   ============================================================ */
+
+/* ---- 颜色变量 ---- */
+:root {
+  /* 主色系：薄荷绿 */
+  --econ-primary: #3d8b6a;
+  --econ-primary-light: #52b788;
+  --econ-primary-dark: #1b4332;
+  --econ-accent: #40916c;
+  --econ-accent-light: #74c69d;
+
+  /* 辅助色：森林绿 */
+  --econ-teal: #40916c;
+  --econ-teal-light: #52b788;
+
+  /* 强调色：珊瑚橙（温暖点缀） */
+  --econ-gold: #e07a5f;
+  --econ-gold-light: #f4a261;
+
+  /* 中性色（带绿调灰，更柔和） */
+  --econ-gray-50: #fafcf9;
+  --econ-gray-100: #f4f7f5;
+  --econ-gray-200: #e5ebe6;
+  --econ-gray-300: #d1dcd4;
+  --econ-gray-400: #a9b9ae;
+  --econ-gray-500: #7d9084;
+  --econ-gray-600: #5c7065;
+  --econ-gray-700: #3f5548;
+  --econ-gray-800: #2f3e46;
+  --econ-gray-900: #1f2924;
+
+  /* 功能色 */
+  --econ-success: #40916c;
+  --econ-warning: #e07a5f;
+  --econ-danger: #bc4749;
+  --econ-info: #52b788;
+
+  /* 背景 */
+  --econ-bg: #fafcf9;
+  --econ-bg-alt: #f6f8f6;
+  --econ-bg-code: #f4f7f5;
+
+  /* 字体 */
+  --econ-font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  --econ-font-serif: "Noto Serif SC", "Source Han Serif SC", "SimSun", Georgia, serif;
+  --econ-font-mono: "JetBrains Mono", "Fira Code", "Consolas", "Courier New", monospace;
+  --econ-font-heading: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+
+  /* 阴影（更柔和、更淡） */
+  --econ-shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.04);
+  --econ-shadow-md: 0 3px 10px rgba(0, 0, 0, 0.05);
+  --econ-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --econ-shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.08);
+
+  /* 圆角（更大，更柔和） */
+  --econ-radius-sm: 6px;
+  --econ-radius-md: 10px;
+  --econ-radius-lg: 14px;
+  --econ-radius-xl: 18px;
+
+  /* 过渡 */
+  --econ-transition: 0.25s ease;
+}
+
+/* ---- 全局重置 ---- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--econ-font-sans);
+  color: var(--econ-gray-800);
+  background-color: var(--econ-bg);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- 导航栏 ---- */
+.navbar {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--econ-gray-200);
+  box-shadow: var(--econ-shadow-sm);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--econ-primary) !important;
+  letter-spacing: 0.03em;
+}
+
+.navbar-brand .navbar-logo {
+  height: 44px !important;
+  width: auto !important;
+  max-height: none !important;
+  max-width: 220px !important;
+  object-fit: contain;
+  display: inline-block !important;
+}
+.navbar-brand-logo {
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.navbar .nav-link {
+  font-weight: 500;
+  color: var(--econ-gray-700) !important;
+  transition: color var(--econ-transition);
+}
+
+.navbar .nav-link:hover {
+  color: var(--econ-accent) !important;
+}
+
+.navbar .nav-link.active {
+  color: var(--econ-primary) !important;
+  font-weight: 600;
+}
+
+/* ---- 侧边栏 ---- */
+.sidebar {
+  background: var(--econ-bg-alt);
+  border-right: 1px solid var(--econ-gray-200);
+}
+
+.sidebar .sidebar-section {
+  margin-bottom: 1.5rem;
+}
+
+.sidebar .sidebar-section-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--econ-gray-500);
+  padding: 0.4rem 0.75rem;
+  margin-bottom: 0.3rem;
+}
+
+.sidebar-item {
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--econ-radius-sm);
+  color: var(--econ-gray-700);
+  transition: all var(--econ-transition);
+  font-size: 0.95rem;
+}
+
+.sidebar-item:hover {
+  background: var(--econ-gray-100);
+  color: var(--econ-primary);
+  text-decoration: none;
+}
+
+.sidebar-item.active {
+  background: rgba(43, 108, 176, 0.1);
+  color: var(--econ-primary);
+  font-weight: 600;
+  border-left: 3px solid var(--econ-accent);
+  margin-left: -3px;
+}
+
+/* ---- 正文排版 ---- */
+#quarto-content {
+  line-height: 1.85;
+}
+
+#quarto-document-content {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--econ-font-heading);
+  color: var(--econ-gray-900);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: 2.25rem;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  color: var(--econ-primary);
+  border-bottom: 3px solid var(--econ-accent);
+  padding-bottom: 0.6rem;
+}
+
+h2 {
+  font-size: 1.7rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--econ-primary-dark);
+  padding-left: 0.8rem;
+  border-left: 4px solid var(--econ-accent);
+}
+
+h3 {
+  font-size: 1.35rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--econ-gray-800);
+}
+
+h4 {
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--econ-gray-700);
+}
+
+p {
+  margin-bottom: 1.1rem;
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+
+a {
+  color: var(--econ-accent);
+  text-decoration: none;
+  transition: color var(--econ-transition);
+}
+
+a:hover {
+  color: var(--econ-primary);
+  text-decoration: underline;
+}
+
+/* ---- Hero 区域（首页）· 清新绿渐变 ---- */
+.econ-hero {
+  position: relative;
+  min-height: 440px;
+  border-radius: var(--econ-radius-xl);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(135deg,
+      rgba(27, 67, 50, 0.88) 0%,
+      rgba(45, 106, 79, 0.8) 35%,
+      rgba(82, 183, 136, 0.7) 70%,
+      rgba(116, 198, 157, 0.55) 100%),
+    linear-gradient(120deg, #1b4332 0%, #2d6a4f 40%, #40916c 75%, #52b788 100%);
+  color: #fff;
+  margin: 0.5rem 0 2.5rem;
+  box-shadow: var(--econ-shadow-lg);
+}
+
+.econ-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(255,255,255,0.06) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(167, 232, 193, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 50% 100%, rgba(255,255,255,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.econ-hero__content {
+  position: relative;
+  max-width: 720px;
+  padding: 4rem clamp(1.5rem, 5vw, 4.5rem);
+  z-index: 1;
+}
+
+.econ-eyebrow {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a7e8c1;
+  margin-bottom: 1rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(255,255,255,0.12);
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+}
+
+.econ-hero h1 {
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  line-height: 1.2;
+  margin: 0.5rem 0 1.2rem;
+  color: #fff;
+  border: none;
+  padding: 0;
+  font-weight: 750;
+}
+
+.econ-hero__subtitle {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.8rem;
+  max-width: 38rem;
+  text-align: left;
+}
+
+.econ-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.95rem;
+}
+
+.econ-hero__meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.econ-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.econ-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--econ-radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--econ-transition);
+  border: none;
+  cursor: pointer;
+  font-size: 0.98rem;
+}
+
+.econ-btn:hover {
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.econ-btn--primary {
+  background: #fff;
+  color: var(--econ-primary-dark);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.econ-btn--primary:hover {
+  background: var(--econ-gray-50);
+  color: var(--econ-primary-dark);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+
+.econ-btn--outline {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.econ-btn--outline:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+}
+
+.econ-btn--secondary {
+  background: #fff;
+  color: var(--econ-primary);
+  box-shadow: var(--econ-shadow-md);
+}
+
+.econ-btn--secondary:hover {
+  background: var(--econ-gray-50);
+  color: var(--econ-primary);
+}
+
+/* ---- 章节引言 ---- */
+.chapter-lead {
+  margin: 1rem 0 2rem;
+  padding: 1.2rem 1.4rem;
+  border-left: 4px solid var(--econ-primary-light);
+  background: linear-gradient(90deg, #eef5f0 0%, #f6f8f6 100%);
+  color: var(--econ-gray-700);
+  border-radius: 0 var(--econ-radius-md) var(--econ-radius-md) 0;
+  font-size: 1.02rem;
+}
+
+/* ---- 卡片网格 ---- */
+.econ-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin: 1.8rem 0 2.5rem;
+}
+
+.econ-card {
+  display: block;
+  padding: 1.6rem;
+  background: #fff;
+  border: 1px solid var(--econ-gray-200);
+  border-radius: var(--econ-radius-lg);
+  text-decoration: none;
+  color: var(--econ-gray-800);
+  transition: all 0.25s ease;
+  box-shadow: var(--econ-shadow-sm);
+}
+
+.econ-card:hover {
+  border-color: var(--econ-accent-light);
+  box-shadow: var(--econ-shadow-lg);
+  transform: translateY(-4px);
+  text-decoration: none;
+  color: var(--econ-gray-800);
+}
+
+.econ-card__number {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--econ-primary);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0.7rem;
+  background: rgba(82, 183, 136, 0.15);
+  border-radius: 999px;
+}
+
+.econ-card h3 {
+  font-size: 1.2rem;
+  margin: 0 0 0.7rem;
+  color: var(--econ-primary-dark);
+}
+
+.econ-card p {
+  font-size: 0.96rem;
+  color: var(--econ-gray-600);
+  margin-bottom: 0;
+  line-height: 1.65;
+}
+
+.econ-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: var(--econ-accent);
+  font-size: 0.92rem;
+}
+
+.econ-card:hover .econ-card__link {
+  gap: 0.5rem;
+}
+
+/* ---- 统计 / 数据条 ---- */
+.econ-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--econ-gray-50);
+  border-radius: var(--econ-radius-lg);
+}
+
+.econ-stat {
+  text-align: center;
+  padding: 1rem;
+}
+
+.econ-stat__number {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 750;
+  color: var(--econ-primary);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.econ-stat__label {
+  font-size: 0.9rem;
+  color: var(--econ-gray-600);
+  font-weight: 500;
+}
+
+/* ---- 学习路径 / 流程图 ---- */
+.econ-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 1.6rem 0;
+  padding: 1.2rem;
+  background: linear-gradient(135deg, #e8f5ee 0%, #f0faf3 100%);
+  border-radius: var(--econ-radius-md);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.econ-flow__step {
+  padding: 0.4rem 0.9rem;
+  background: #fff;
+  border-radius: 999px;
+  color: var(--econ-primary);
+  box-shadow: var(--econ-shadow-sm);
+  white-space: nowrap;
+}
+
+.econ-flow__arrow {
+  color: var(--econ-primary-light);
+  font-weight: 600;
+}
+
+/* ---- 重点提示面板 ---- */
+.econ-panel {
+  margin: 2rem 0;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, var(--econ-primary) 0%, var(--econ-primary-light) 100%);
+  color: #fff;
+  border-radius: var(--econ-radius-lg);
+}
+
+.econ-panel h2, .econ-panel h3 {
+  color: #fff;
+  margin-top: 0;
+}
+
+.econ-panel p {
+  color: rgba(255,255,255,0.9);
+  max-width: 44rem;
+  margin-bottom: 0;
+}
+
+.econ-panel a {
+  color: #a7e8c1;
+}
+
+/* ---- 引言块 ---- */
+blockquote {
+  margin: 1.4rem 0;
+  padding: 1rem 1.2rem;
+  border-left: 4px solid var(--econ-primary-light);
+  background: var(--econ-gray-50);
+  color: var(--econ-gray-700);
+  font-style: italic;
+  border-radius: 0 var(--econ-radius-sm) var(--econ-radius-sm) 0;
+}
+
+/* ---- 代码块 ---- */
+pre, code {
+  font-family: var(--econ-font-mono);
+}
+
+pre {
+  border-radius: var(--econ-radius-md) !important;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border: 1px solid var(--econ-gray-200) !important;
+  box-shadow: var(--econ-shadow-sm);
+}
+
+code {
+  font-size: 0.92em;
+  padding: 0.15em 0.4em;
+  background: var(--econ-bg-code);
+  border-radius: var(--econ-radius-sm);
+  color: var(--econ-primary-dark);
+}
+
+pre code {
+  padding: 0;
+  background: none;
+  color: inherit;
+}
+
+div.sourceCode {
+  border-radius: var(--econ-radius-md);
+  overflow: hidden;
+}
+
+/* ---- Callout 提示框 ---- */
+.callout {
+  margin: 1.4rem 0;
+  border-radius: var(--econ-radius-md) !important;
+  border-left: 4px solid var(--econ-accent);
+  box-shadow: var(--econ-shadow-sm);
+}
+
+.callout .callout-header {
+  font-weight: 700;
+  padding: 0.7rem 1rem;
+  background: var(--econ-gray-50);
+  border-bottom: 1px solid var(--econ-gray-200);
+}
+
+.callout .callout-body {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  padding: 0.9rem 1rem;
+}
+
+.callout-style-default .callout {
+  background: #fff;
+}
+
+.callout-note {
+  border-left-color: var(--econ-info);
+}
+
+.callout-tip {
+  border-left-color: var(--econ-success);
+}
+
+.callout-warning {
+  border-left-color: var(--econ-warning);
+}
+
+.callout-caution {
+  border-left-color: var(--econ-danger);
+}
+
+.callout-important {
+  border-left-color: var(--econ-primary);
+}
+
+/* ---- 数学公式 ---- */
+.math {
+  font-size: 1.05em;
+}
+
+.math.display {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.75rem 0;
+  text-align: center;
+}
+
+/* ---- 表格 ---- */
+table {
+  width: 100%;
+  margin: 1.4rem 0;
+  border-collapse: collapse;
+  font-size: 0.96rem;
+  border-radius: var(--econ-radius-md);
+  overflow: hidden;
+  box-shadow: var(--econ-shadow-sm);
+}
+
+table th {
+  background: var(--econ-primary);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--econ-gray-200);
+}
+
+table tbody tr:nth-child(even) {
+  background: var(--econ-gray-50);
+}
+
+table tbody tr:hover {
+  background: var(--econ-gray-100);
+}
+
+/* ---- 图片 ---- */
+.quarto-figure img,
+main img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--econ-radius-md);
+  box-shadow: var(--econ-shadow-md);
+}
+
+.quarto-figure figcaption {
+  font-size: 0.9rem;
+  color: var(--econ-gray-600);
+  text-align: center;
+  margin-top: 0.6rem;
+  font-style: italic;
+}
+
+/* ---- 目录 ---- */
+.toc {
+  font-size: 0.92rem;
+}
+
+.toc .toc-item.active > .toc-link {
+  color: var(--econ-accent);
+  font-weight: 600;
+}
+
+.toc .toc-link {
+  color: var(--econ-gray-600);
+  transition: color var(--econ-transition);
+}
+
+.toc .toc-link:hover {
+  color: var(--econ-primary);
+}
+
+/* ---- 页脚 ---- */
+.page-footer {
+  border-top: 1px solid var(--econ-gray-200);
+  background: var(--econ-gray-50);
+  color: var(--econ-gray-600);
+  font-size: 0.9rem;
+}
+
+.page-footer a {
+  color: var(--econ-accent);
+}
+
+/* ---- 章节导航（上一章/下一章）---- */
+.quarto-section-nav {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--econ-gray-200);
+}
+
+.quarto-section-nav a {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: var(--econ-radius-md);
+  transition: background var(--econ-transition);
+  color: var(--econ-gray-700);
+}
+
+.quarto-section-nav a:hover {
+  background: var(--econ-gray-50);
+  text-decoration: none;
+}
+
+/* ---- 引用悬停 ---- */
+.citation {
+  color: var(--econ-accent);
+  font-weight: 500;
+}
+
+/* ---- 响应式 ---- */
+@media (max-width: 992px) {
+  .econ-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .econ-hero {
+    min-height: auto;
+    border-radius: var(--econ-radius-lg);
+  }
+
+  .econ-hero__content {
+    padding: 2.5rem 1.3rem;
+  }
+
+  .econ-hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .econ-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .econ-panel {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+  }
+
+  .econ-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .econ-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- 减少动画偏好 ---- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .econ-btn,
+  .econ-card,
+  a {
+    transition: none;
+  }
+
+  .econ-btn:hover,
+  .econ-card:hover {
+    transform: none;
+  }
+}
+
+/* ---- 打印样式 ---- */
+@media print {
+  .navbar,
+  .sidebar,
+  .page-navigation,
+  .econ-actions,
+  .econ-card__link {
+    display: none !important;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+  }
+
+  table,
+  figure {
+    page-break-inside: avoid;
+  }
+}

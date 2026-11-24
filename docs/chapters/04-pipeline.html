@@ -1,0 +1,2659 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="计量经济网 · 数量经济学">
+<meta name="keywords" content="实证科研流水线, 交付包, 批次化调度, 复现性">
+<meta name="description" content="批次设计、并行委派、交付包规范、容错重跑、综合实战工坊与验收清单">
+
+<title>第 4 章 实证科研流 – 豆包工作 × Stata 在线书籍</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/05-resources.html" rel="next">
+<link href="../chapters/03-reproduction.html" rel="prev">
+<link href="../figs/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e0ebbbfb966f34d7b20b4031aa9f120e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-eae4c73c326220b2d879c7e8603b2250.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e0ebbbfb966f34d7b20b4031aa9f120e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-b727c82732d647cfd32de91f8c1a395f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-92d468a4daf996a981e497f2aafe262d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-b727c82732d647cfd32de91f8c1a395f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../custom/styles.css">
+<link rel="stylesheet" href="../custom/extra.css">
+<meta property="og:title" content="第 4 章 实证科研流 – 豆包工作 × Stata 在线书籍">
+<meta property="og:description" content="批次设计、并行委派、交付包规范、容错重跑、综合实战工坊与验收清单">
+<meta property="og:site_name" content="豆包工作 × Stata 在线书籍">
+<meta name="twitter:title" content="第 4 章 实证科研流 – 豆包工作 × Stata 在线书籍">
+<meta name="twitter:description" content="批次设计、并行委派、交付包规范、容错重跑、综合实战工坊与验收清单">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../figs/logo.svg" alt="豆包工作 × Stata 在线书籍" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">首页</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chapters/01-workflow.html"> 
+<span class="menu-text">豆包工作流</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chapters/02-stata.html"> 
+<span class="menu-text">Stata专题</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chapters/03-reproduction.html"> 
+<span class="menu-text">论文复现</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chapters/04-pipeline.html"> 
+<span class="menu-text">实证科研流</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chapters/05-resources.html"> 
+<span class="menu-text">资源导航</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.aistata.cn"> 
+<span class="menu-text">计量经济网</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-workflow.html">课程正文</a></li><li class="breadcrumb-item"><a href="../chapters/04-pipeline.html">第 4 章 实证科研流</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">开始阅读</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">课程正文</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第 1 章 豆包工作流</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-stata.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第 2 章 Stata专题</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-reproduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">第 3 章 论文复现</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-pipeline.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">第 4 章 实证科研流</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">附录</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">资源导航</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">快速入口</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html#why" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">导语 · 为什么是这套工具链</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html#compat" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">兼容性 · 主流 Agent / IDE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html#roadmap" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">学习路径</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">本章目录</h2>
+   
+  <ul>
+  <li><a href="#豆包工作-stata组织智能体驱动的因果实证科研流水线" id="toc-豆包工作-stata组织智能体驱动的因果实证科研流水线" class="nav-link active" data-scroll-target="#豆包工作-stata组织智能体驱动的因果实证科研流水线">豆包工作 × Stata：组织智能体驱动的因果实证科研流水线</a>
+  <ul class="collapse">
+  <li><a href="#学术公开课完整讲义全本" id="toc-学术公开课完整讲义全本" class="nav-link" data-scroll-target="#学术公开课完整讲义全本">学术公开课完整讲义（全本）</a></li>
+  </ul></li>
+  <li><a href="#第三章-基础范式单任务因果推断的标准调度流" id="toc-第三章-基础范式单任务因果推断的标准调度流" class="nav-link" data-scroll-target="#第三章-基础范式单任务因果推断的标准调度流">第三章 基础范式：单任务因果推断的标准调度流</a>
+  <ul class="collapse">
+  <li><a href="#prompt-六要素结构" id="toc-prompt-六要素结构" class="nav-link" data-scroll-target="#prompt-六要素结构">3.1 Prompt 六要素结构</a></li>
+  <li><a href="#did-全流程示例基准-事件研究-表格" id="toc-did-全流程示例基准-事件研究-表格" class="nav-link" data-scroll-target="#did-全流程示例基准-事件研究-表格">3.2 DID 全流程示例（基准 → 事件研究 → 表格）</a></li>
+  <li><a href="#rdd-全流程示例" id="toc-rdd-全流程示例" class="nav-link" data-scroll-target="#rdd-全流程示例">3.3 RDD 全流程示例</a></li>
+  <li><a href="#psm-psm-did-全流程示例" id="toc-psm-psm-did-全流程示例" class="nav-link" data-scroll-target="#psm-psm-did-全流程示例">3.4 PSM / PSM-DID 全流程示例</a></li>
+  <li><a href="#结果回流飞书的三种方式" id="toc-结果回流飞书的三种方式" class="nav-link" data-scroll-target="#结果回流飞书的三种方式">3.5 结果回流飞书的三种方式</a></li>
+  <li><a href="#结果自检清单12-项" id="toc-结果自检清单12-项" class="nav-link" data-scroll-target="#结果自检清单12-项">3.6 结果自检清单（12 项）</a></li>
+  <li><a href="#本章实操任务" id="toc-本章实操任务" class="nav-link" data-scroll-target="#本章实操任务">3.7 本章实操任务</a></li>
+  </ul></li>
+  <li><a href="#第四章-核心王牌组织智能体并行委派流水线" id="toc-第四章-核心王牌组织智能体并行委派流水线" class="nav-link" data-scroll-target="#第四章-核心王牌组织智能体并行委派流水线">第四章 核心王牌：组织智能体并行委派流水线</a>
+  <ul class="collapse">
+  <li><a href="#任务依赖图dag判定法" id="toc-任务依赖图dag判定法" class="nav-link" data-scroll-target="#任务依赖图dag判定法">4.1 任务依赖图（DAG）判定法</a></li>
+  <li><a href="#可并行-必须串行-对照表" id="toc-可并行-必须串行-对照表" class="nav-link" data-scroll-target="#可并行-必须串行-对照表">4.2 可并行 / 必须串行 对照表</a></li>
+  <li><a href="#批次设计四步法" id="toc-批次设计四步法" class="nav-link" data-scroll-target="#批次设计四步法">4.3 批次设计四步法</a></li>
+  <li><a href="#并行委派-prompt-标准模板" id="toc-并行委派-prompt-标准模板" class="nav-link" data-scroll-target="#并行委派-prompt-标准模板">4.4 并行委派 Prompt 标准模板</a></li>
+  <li><a href="#交付包目录规范与汇总矩阵" id="toc-交付包目录规范与汇总矩阵" class="nav-link" data-scroll-target="#交付包目录规范与汇总矩阵">4.5 交付包目录规范与汇总矩阵</a></li>
+  <li><a href="#容错重跑与失败归档" id="toc-容错重跑与失败归档" class="nav-link" data-scroll-target="#容错重跑与失败归档">4.6 容错、重跑与失败归档</a></li>
+  <li><a href="#调度约束下的三种分批策略" id="toc-调度约束下的三种分批策略" class="nav-link" data-scroll-target="#调度约束下的三种分批策略">4.7 调度约束下的三种分批策略</a></li>
+  <li><a href="#四大前沿场景含实现要点" id="toc-四大前沿场景含实现要点" class="nav-link" data-scroll-target="#四大前沿场景含实现要点">4.8 四大前沿场景（含实现要点）</a>
+  <ul class="collapse">
+  <li><a href="#场景-a大规模置换检验并行" id="toc-场景-a大规模置换检验并行" class="nav-link" data-scroll-target="#场景-a大规模置换检验并行">场景 A：大规模置换检验并行</a></li>
+  <li><a href="#场景-b异质性扫描" id="toc-场景-b异质性扫描" class="nav-link" data-scroll-target="#场景-b异质性扫描">场景 B：异质性扫描</a></li>
+  <li><a href="#场景-c敏感性曲线" id="toc-场景-c敏感性曲线" class="nav-link" data-scroll-target="#场景-c敏感性曲线">场景 C：敏感性曲线</a></li>
+  <li><a href="#场景-d空间权重矩阵与空间计量" id="toc-场景-d空间权重矩阵与空间计量" class="nav-link" data-scroll-target="#场景-d空间权重矩阵与空间计量">场景 D：空间权重矩阵与空间计量</a></li>
+  </ul></li>
+  <li><a href="#本章实操任务-1" id="toc-本章实操任务-1" class="nav-link" data-scroll-target="#本章实操任务-1">4.9 本章实操任务</a></li>
+  </ul></li>
+  <li><a href="#第五章-前沿方法矩阵把顶刊方法接进流水线" id="toc-第五章-前沿方法矩阵把顶刊方法接进流水线" class="nav-link" data-scroll-target="#第五章-前沿方法矩阵把顶刊方法接进流水线">第五章 前沿方法矩阵：把顶刊方法接进流水线</a>
+  <ul class="collapse">
+  <li><a href="#交错-did-与异质性处理效应" id="toc-交错-did-与异质性处理效应" class="nav-link" data-scroll-target="#交错-did-与异质性处理效应">5.1 交错 DID 与异质性处理效应</a></li>
+  <li><a href="#合成控制与合成-did" id="toc-合成控制与合成-did" class="nav-link" data-scroll-target="#合成控制与合成-did">5.2 合成控制与合成 DID</a></li>
+  <li><a href="#模糊分位数-rdd-与门槛回归" id="toc-模糊分位数-rdd-与门槛回归" class="nav-link" data-scroll-target="#模糊分位数-rdd-与门槛回归">5.3 模糊/分位数 RDD 与门槛回归</a></li>
+  <li><a href="#空间计量与空间-did" id="toc-空间计量与空间-did" class="nav-link" data-scroll-target="#空间计量与空间-did">5.4 空间计量与空间 DID</a></li>
+  <li><a href="#机器学习因果dml因果森林政策学习" id="toc-机器学习因果dml因果森林政策学习" class="nav-link" data-scroll-target="#机器学习因果dml因果森林政策学习">5.5 机器学习因果：DML、因果森林、政策学习</a></li>
+  <li><a href="#动态效应pvar局部投影" id="toc-动态效应pvar局部投影" class="nav-link" data-scroll-target="#动态效应pvar局部投影">5.6 动态效应：PVAR、局部投影</a></li>
+  <li><a href="#stata-python-混合执行" id="toc-stata-python-混合执行" class="nav-link" data-scroll-target="#stata-python-混合执行">5.7 Stata × Python 混合执行</a></li>
+  <li><a href="#方法数据样本量适配表" id="toc-方法数据样本量适配表" class="nav-link" data-scroll-target="#方法数据样本量适配表">5.8 方法—数据—样本量适配表</a></li>
+  </ul></li>
+  <li><a href="#第六章-组织协同闭环飞书作为实证结果中台" id="toc-第六章-组织协同闭环飞书作为实证结果中台" class="nav-link" data-scroll-target="#第六章-组织协同闭环飞书作为实证结果中台">第六章 组织协同闭环：飞书作为实证结果中台</a>
+  <ul class="collapse">
+  <li><a href="#多维表格字段与视图设计" id="toc-多维表格字段与视图设计" class="nav-link" data-scroll-target="#多维表格字段与视图设计">6.1 多维表格字段与视图设计</a></li>
+  <li><a href="#版本治理与命名规范" id="toc-版本治理与命名规范" class="nav-link" data-scroll-target="#版本治理与命名规范">6.2 版本治理与命名规范</a></li>
+  <li><a href="#评审泳道与批注工作流" id="toc-评审泳道与批注工作流" class="nav-link" data-scroll-target="#评审泳道与批注工作流">6.3 评审泳道与批注工作流</a></li>
+  <li><a href="#知识库挂载变量字典与课题组规范" id="toc-知识库挂载变量字典与课题组规范" class="nav-link" data-scroll-target="#知识库挂载变量字典与课题组规范">6.4 知识库挂载：变量字典与课题组规范</a></li>
+  <li><a href="#仪表盘与项目看板" id="toc-仪表盘与项目看板" class="nav-link" data-scroll-target="#仪表盘与项目看板">6.5 仪表盘与项目看板</a></li>
+  <li><a href="#权限矩阵" id="toc-权限矩阵" class="nav-link" data-scroll-target="#权限矩阵">6.6 权限矩阵</a></li>
+  </ul></li>
+  <li><a href="#第七章-学术伦理可复现性与风险边界" id="toc-第七章-学术伦理可复现性与风险边界" class="nav-link" data-scroll-target="#第七章-学术伦理可复现性与风险边界">第七章 学术伦理、可复现性与风险边界</a>
+  <ul class="collapse">
+  <li><a href="#五条学术红线" id="toc-五条学术红线" class="nav-link" data-scroll-target="#五条学术红线">7.1 五条学术红线</a></li>
+  <li><a href="#可复现性八件套" id="toc-可复现性八件套" class="nav-link" data-scroll-target="#可复现性八件套">7.2 可复现性八件套</a></li>
+  <li><a href="#反-p-hacking预注册检验清单" id="toc-反-p-hacking预注册检验清单" class="nav-link" data-scroll-target="#反-p-hacking预注册检验清单">7.3 反 p-hacking：预注册检验清单</a></li>
+  <li><a href="#数据安全与合规" id="toc-数据安全与合规" class="nav-link" data-scroll-target="#数据安全与合规">7.4 数据安全与合规</a></li>
+  <li><a href="#平台能力边界与预案" id="toc-平台能力边界与预案" class="nav-link" data-scroll-target="#平台能力边界与预案">7.5 平台能力边界与预案</a></li>
+  </ul></li>
+  <li><a href="#第八章-综合实战工坊与结业验收" id="toc-第八章-综合实战工坊与结业验收" class="nav-link" data-scroll-target="#第八章-综合实战工坊与结业验收">第八章 综合实战工坊与结业验收</a>
+  <ul class="collapse">
+  <li><a href="#六小时工坊时间表" id="toc-六小时工坊时间表" class="nav-link" data-scroll-target="#六小时工坊时间表">8.1 六小时工坊时间表</a></li>
+  <li><a href="#综合实战任务书" id="toc-综合实战任务书" class="nav-link" data-scroll-target="#综合实战任务书">8.2 综合实战任务书</a></li>
+  <li><a href="#评分-rubric" id="toc-评分-rubric" class="nav-link" data-scroll-target="#评分-rubric">8.3 评分 Rubric</a></li>
+  <li><a href="#验收-checklist讲师逐项打勾" id="toc-验收-checklist讲师逐项打勾" class="nav-link" data-scroll-target="#验收-checklist讲师逐项打勾">8.4 验收 Checklist（讲师逐项打勾）</a></li>
+  <li><a href="#结业后的三条延展路径" id="toc-结业后的三条延展路径" class="nav-link" data-scroll-target="#结业后的三条延展路径">8.5 结业后的三条延展路径</a></li>
+  </ul></li>
+  <li><a href="#附录" id="toc-附录" class="nav-link" data-scroll-target="#附录">附录</a>
+  <ul class="collapse">
+  <li><a href="#a-术语表" id="toc-a-术语表" class="nav-link" data-scroll-target="#a-术语表">A 术语表</a></li>
+  <li><a href="#b-命令速查" id="toc-b-命令速查" class="nav-link" data-scroll-target="#b-命令速查">B 命令速查</a></li>
+  <li><a href="#c-参考读物与资源" id="toc-c-参考读物与资源" class="nav-link" data-scroll-target="#c-参考读物与资源">C 参考读物与资源</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-workflow.html">课程正文</a></li><li class="breadcrumb-item"><a href="../chapters/04-pipeline.html">第 4 章 实证科研流</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">第 4 章 实证科研流</h1>
+<p class="subtitle lead">组织智能体驱动的因果实证科研流水线</p>
+</div>
+
+<div>
+  <div class="description">
+    批次设计、并行委派、交付包规范、容错重跑、综合实战工坊与验收清单
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-contents">
+             <p>计量经济网 · 数量经济学 </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2026年11月23日</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">关键词</div>
+    <p>实证科研流水线, 交付包, 批次化调度, 复现性</p>
+  </div>
+</div>
+
+</header>
+
+
+<section id="豆包工作-stata组织智能体驱动的因果实证科研流水线" class="level1">
+<h1>豆包工作 × Stata：组织智能体驱动的因果实证科研流水线</h1>
+<section id="学术公开课完整讲义全本" class="level2">
+<h2 class="anchored" data-anchor-id="学术公开课完整讲义全本">学术公开课完整讲义（全本）</h2>
+<hr>
+</section>
+</section>
+<section id="第三章-基础范式单任务因果推断的标准调度流" class="level1">
+<h1>第三章 基础范式：单任务因果推断的标准调度流</h1>
+<section id="prompt-六要素结构" class="level2">
+<h2 class="anchored" data-anchor-id="prompt-六要素结构">3.1 Prompt 六要素结构</h2>
+<p>一条能进论文的调度指令，必须含六要素。少一个，结果就要返工。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>要素</th>
+<th>作用</th>
+<th>反例</th>
+<th>正例片段</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>① 角色与目标</td>
+<td>锚定任务性质</td>
+<td>“帮我跑个回归”</td>
+<td>“以实证研究助理身份，完成基准 DID 估计”</td>
+</tr>
+<tr class="even">
+<td>② 数据与样本</td>
+<td>消除歧义</td>
+<td>“用面板数据”</td>
+<td>“使用 <code>01_raw/city_panel_v3.dta</code>，样本限定 2008–2022、剔除缺失被解释变量”</td>
+</tr>
+<tr class="odd">
+<td>③ 命令与设定</td>
+<td>保证可比</td>
+<td>“跑 DID”</td>
+<td>“<code>reghdfe y did, absorb(city year) cluster(city)</code>，另用 <code>csdid</code> 做交错稳健对照”</td>
+</tr>
+<tr class="even">
+<td>④ 输出规格</td>
+<td>决定能否交付</td>
+<td>“给我结果”</td>
+<td>“输出 esttab 三线表（系数/se/星号/N/R²）、事件研究图 png、完整 log”</td>
+</tr>
+<tr class="odd">
+<td>⑤ 校验要求</td>
+<td>决定可信度</td>
+<td>无</td>
+<td>“报告处理组/对照组样本量、平行趋势检验统计量、VIF”</td>
+</tr>
+<tr class="even">
+<td>⑥ 留存要求</td>
+<td>决定可复现</td>
+<td>无</td>
+<td>“do 存为 <code>02_do/b01_baseline_v1.do</code>，log 同名，写入多维表格一行”</td>
+</tr>
+</tbody>
+</table>
+<p><strong>六要素口诀（板书）</strong>：<strong>谁做、用什么做、怎么做、交什么、怎么验、存哪</strong>。</p>
+</section>
+<section id="did-全流程示例基准-事件研究-表格" class="level2">
+<h2 class="anchored" data-anchor-id="did-全流程示例基准-事件研究-表格">3.2 DID 全流程示例（基准 → 事件研究 → 表格）</h2>
+<p><strong>Step 1 基准估计</strong></p>
+<pre class="plaintext"><code>* b01_baseline_v1.do  —— 基准双向固定效应 DID
+version 18
+clear all
+set more off
+set seed 20261108
+
+use "01_raw/city_panel_v3.dta", clear
+
+* 样本规则（写死在 do 里，不靠提示词）
+keep if year &gt;= 2008 &amp; year &lt;= 2022
+drop if missing(y)
+xtset city year
+
+* 基准
+reghdfe y did, absorb(city year) cluster(city) keepsamplealways
+estimates store m1
+
+* 加控制变量
+reghdfe y did $controls, absorb(city year) cluster(city)
+estimates store m2
+
+* 交错处理稳健对照
+csdid y $controls, ivar(city) time(year) gvar(first_treat) method(dripw)
+estimates store m3
+
+esttab m1 m2 using "05_delivery/tab_baseline.rtf", replace ///
+    b(3) se(3) star(* 0.10 ** 0.05 *** 0.01) ///
+    stats(N r2_a, labels("N" "Adj. R2")) ///
+    title("表1 基准回归结果")
+
+log using "03_log/b01_baseline_v1.log", replace text</code></pre>
+<p><strong>Step 2 事件研究（平行趋势）</strong></p>
+<pre class="plaintext"><code>* b02_event_v1.do
+use "01_raw/city_panel_v3.dta", clear
+keep if inrange(year,2008,2022)
+xtset city year
+
+* 生成相对时间虚拟变量（以 -1 期为基期）
+gen rel = year - first_treat
+forvalues k = 5(-1)2 {
+    gen pre`k' = (rel == -`k')
+}
+forvalues k = 0/4 {
+    gen post`k' = (rel == `k')
+}
+* 基期 pre1 省略
+
+reghdfe y pre5 pre4 pre3 pre2 post0 post1 post2 post3 post4 $controls, ///
+    absorb(city year) cluster(city)
+
+coefplot, keep(pre5 pre4 pre3 pre2 post0 post1 post2 post3 post4) ///
+    vertical yline(0) xline(0) ///
+    coeflabels(pre5 "-5" pre4 "-4" pre3 "-3" pre2 "-2" ///
+               post0 "0" post1 "1" post2 "2" post3 "3" post4 "4") ///
+    xtitle("相对政策实施期") ytitle("处理效应") ///
+    title("图1 事件研究：平行趋势与动态效应")
+graph export "04_figure/fig_event_study.png", replace width(2000)</code></pre>
+<p><strong>关键教学点</strong>：事件研究的<strong>基期选择</strong>与<strong>端点期合并</strong>（把 -5 以前合并为 <code>pre5</code>、+4 以后合并为 <code>post4</code>）是审稿人最爱挑的点。要求在 Prompt 里显式写死这两条，否则 AI 常默认做”每一期一个虚拟变量”，导致共线性或样本稀疏。</p>
+<p><strong>Step 3 表格与图回流</strong></p>
+<ul>
+<li><p><code>esttab</code> 输出 rtf/tex → 上传云盘 → 贴入飞书文档《回归表模板》</p></li>
+<li><p>png → 上传 <code>04_figure</code> → 飞书文档插入</p></li>
+<li><p>一行记录写入多维表格：项目ID、批次号、子任务名、方法、系数、se、p、N、R²、do链接、log链接、图链接、状态</p></li>
+</ul>
+</section>
+<section id="rdd-全流程示例" class="level2">
+<h2 class="anchored" data-anchor-id="rdd-全流程示例">3.3 RDD 全流程示例</h2>
+<pre class="plaintext"><code>* b03_rdd_v1.do
+use "01_raw/score_panel.dta", clear
+
+* 1) 断点有效性：密度检验（操纵检验）
+rddensity running, c(0) plot
+
+* 2) 带宽选择 + 稳健估计
+rdrobust y running, c(0) all
+estimates store rd_main
+
+* 3) 协变量平衡（断点两侧）
+rdrobust x1 running, c(0)
+rdrobust x2 running, c(0)
+
+* 4) 带宽敏感性
+foreach h in 0.5 0.75 1 1.25 1.5 {
+    rdrobust y running, c(0) h(`h')
+}
+
+* 5) 安慰剂断点
+foreach c in -0.2 -0.1 0.1 0.2 {
+    rdrobust y running, c(`c')
+}</code></pre>
+<p><strong>AI 常错点（必须写进 Prompt 校验项）</strong>：</p>
+<ul>
+<li><p>忘记 <code>rdrobust</code> 默认已是<strong>稳健偏差校正</strong>，又手动加上传统方差 → 重复</p></li>
+<li><p>混淆 <code>h</code>（带宽）与 <code>b</code>（bias band）参数含义</p></li>
+<li><p>密度检验仅做图不做统计量（应报告 p 值）</p></li>
+<li><p>平衡性检验只用均值差，不做断点邻域内检验</p></li>
+</ul>
+</section>
+<section id="psm-psm-did-全流程示例" class="level2">
+<h2 class="anchored" data-anchor-id="psm-psm-did-全流程示例">3.4 PSM / PSM-DID 全流程示例</h2>
+<pre class="plaintext"><code>* b04_psm_v1.do
+use "01_raw/firm_panel.dta", clear
+
+set seed 20261108
+set matsize 2000
+
+* 1) 倾向得分
+psmatch2 treat $xlist, outcome(y) logit neighbor(1) common cal(0.01) //
+    ties noreplacement
+
+* 2) 平衡性检验（必须报告标准化偏差）
+pstest $xlist, both graph
+graph export "04_figure/fig_psm_balance.png", replace
+
+* 3) 共同支撑
+psgraph
+
+* 4) PSM-DID
+* 用 _weight 加权的 DID
+reghdfe y did [aw=_weight], absorb(firm year) cluster(firm)</code></pre>
+<p><strong>教学要点</strong>：PSM 的”结果好不好”不看 ATT 显著不显著，看<strong>平衡性</strong>。要求 Prompt 强制输出 <code>pstest</code> 的标准化偏差表与共同支撑图，否则交付不合格。</p>
+</section>
+<section id="结果回流飞书的三种方式" class="level2">
+<h2 class="anchored" data-anchor-id="结果回流飞书的三种方式">3.5 结果回流飞书的三种方式</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>方式</th>
+<th>适用</th>
+<th>做法</th>
+<th>优点</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>A 表格直写</strong></td>
+<td>结构化数值（系数、p、N）</td>
+<td>MCP 返回结构化字段 → 连接器写多维表格行</td>
+<td>可筛选、可看板、可统计</td>
+<td>字段映射错会静默丢数据</td>
+</tr>
+<tr class="even">
+<td><strong>B 文档嵌入</strong></td>
+<td>成品表格与图</td>
+<td>产物上传云盘 → 文档引用</td>
+<td>直接可写进论文</td>
+<td>版本多时易混乱，必须带批次号</td>
+</tr>
+<tr class="odd">
+<td><strong>C 双写（推荐）</strong></td>
+<td>交付批次</td>
+<td>A 写台账 + B 出报告</td>
+<td>台账可统计、报告可交付</td>
+<td>需保证两者同源（同一 log）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>规矩</strong>：<strong>台账必须与 log 同源</strong>。禁止”表格里手填一个更好看的 p 值”。这是第七章红线的技术落点。</p>
+</section>
+<section id="结果自检清单12-项" class="level2">
+<h2 class="anchored" data-anchor-id="结果自检清单12-项">3.6 结果自检清单（12 项）</h2>
+<p>交付前逐条打勾，任何一项不过，不得进入下一批：</p>
+<ol type="1">
+<li><p>log 中无 <code>r(####)</code> 错误码</p></li>
+<li><p>样本量 N 与基准一致（或差异有明确规则解释）</p></li>
+<li><p>处理组/对照组样本数已报告</p></li>
+<li><p>固定效应维度与聚类层级一致（聚类层级 ≥ 处理层级）</p></li>
+<li><p>系数符号与研究假设方向一致（不一致必须解释而非隐藏）</p></li>
+<li><p>标准误未异常缩小（警惕聚类错误或权重误用）</p></li>
+<li><p>星号规则与表注一致（10%/5%/1%）</p></li>
+<li><p>事件研究基期明确、端点合并规则写明</p></li>
+<li><p>平衡性/密度/平行趋势检验已做且报告统计量</p></li>
+<li><p>图文件名与批次号匹配，可反查 do</p></li>
+<li><p>do 文件含 <code>set seed</code>（涉及随机过程时必须）</p></li>
+<li><p>多维表格行已写入且字段无空值</p></li>
+</ol>
+</section>
+<section id="本章实操任务" class="level2">
+<h2 class="anchored" data-anchor-id="本章实操任务">3.7 本章实操任务</h2>
+<p>用 <code>sysuse</code> 或课程提供的城市面板，完成：</p>
+<ol type="1">
+<li><p>一条基准 DID（含聚类）</p></li>
+<li><p>一张事件研究图</p></li>
+<li><p>一张 esttab 三线表</p></li>
+<li><p>一行多维表格记录</p></li>
+<li><p>提交：do 链接 + log 链接 + 图 + 表行截图</p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="第四章-核心王牌组织智能体并行委派流水线" class="level1">
+<h1>第四章 核心王牌：组织智能体并行委派流水线</h1>
+<blockquote class="blockquote">
+<p>全课重心。前三章解决”会不会跑”，本章解决”跑得多、跑得稳、跑得可核验”。这一章也是与 TraeWork / DSH 分野最明显的地方。</p>
+</blockquote>
+<section id="任务依赖图dag判定法" class="level2">
+<h2 class="anchored" data-anchor-id="任务依赖图dag判定法">4.1 任务依赖图（DAG）判定法</h2>
+<p>并行度不是拍脑袋，是画图。把研究任务画成有向图，<strong>没有箭头相连的节点才能并行</strong>。</p>
+<pre class="plaintext"><code>数据获取 → 清洗 → 变量构造 → 描述统计 → 基准设定
+                                              ↓
+                        ┌─────────────────────┼─────────────────────┐
+                     安慰剂组              稳健性组              异质性组
+                   （可并行 5–20 个）    （可并行 8–15 个）     （可并行 6–12 个）
+                        └─────────────────────┼─────────────────────┘
+                                              ↓
+                                     汇总校验 → 诊断报告 → 评审</code></pre>
+<p><strong>判定的三个硬问题（逐个问，任一为”是”就不能并行）</strong></p>
+<ol type="1">
+<li><p>子任务 B 的输入是否依赖子任务 A 的输出？（是 → 串行）</p></li>
+<li><p>两个子任务是否写同一个文件/同一行表格？（是 → 必须隔离目录或串行）</p></li>
+<li><p>两个子任务是否需要同一随机种子的连续序列？（是 → 串行或显式分配独立种子）</p></li>
+</ol>
+</section>
+<section id="可并行-必须串行-对照表" class="level2">
+<h2 class="anchored" data-anchor-id="可并行-必须串行-对照表">4.2 可并行 / 必须串行 对照表</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>任务类型</th>
+<th>可否并行</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>不同安慰剂设定（时点前移、伪处理组、随机分配）</td>
+<td>✅</td>
+<td>各自独立估计，互不依赖</td>
+</tr>
+<tr class="even">
+<td>不同带宽 / 不同核函数 / 不同多项式阶数</td>
+<td>✅</td>
+<td>参数扫描，彼此独立</td>
+</tr>
+<tr class="odd">
+<td>分组异质性（东中西、国企民企、大小企业）</td>
+<td>✅</td>
+<td>子样本独立</td>
+</tr>
+<tr class="even">
+<td>空间权重矩阵多设定</td>
+<td>✅</td>
+<td>各自独立估计</td>
+</tr>
+<tr class="odd">
+<td>置换检验 N 次</td>
+<td>✅（分批）</td>
+<td>每次独立；注意种子分配</td>
+</tr>
+<tr class="even">
+<td>替换被解释变量/解释变量口径</td>
+<td>✅</td>
+<td>独立重估</td>
+</tr>
+<tr class="odd">
+<td>缩尾/截尾不同阈值</td>
+<td>✅</td>
+<td>独立重估</td>
+</tr>
+<tr class="even">
+<td>数据清洗 → 基准回归</td>
+<td>❌</td>
+<td>后者依赖前者产物</td>
+</tr>
+<tr class="odd">
+<td>基准回归 → 确定最优带宽</td>
+<td>半串行</td>
+<td>需先看基准再定扫描范围</td>
+</tr>
+<tr class="even">
+<td>汇总矩阵 → 诊断报告</td>
+<td>❌</td>
+<td>后者聚合前者</td>
+</tr>
+<tr class="odd">
+<td>多篇文献复刻</td>
+<td>✅（文献间）</td>
+<td>各自数据与代码独立</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="批次设计四步法" class="level2">
+<h2 class="anchored" data-anchor-id="批次设计四步法">4.3 批次设计四步法</h2>
+<p><strong>Step 1 定锚</strong>：确定基准spec（样本、变量、固定效应、聚类、权重）。基准只有一个，且必须<strong>先单独跑通并人工确认</strong>。基准不稳，后面全废。</p>
+<p><strong>Step 2 列质疑</strong>：把审稿人可能提的质疑逐条写成任务。来自四个维度：</p>
+<ul>
+<li><p>时点：政策时点是否准确、是否存在预期效应、是否存在滞后效应</p></li>
+<li><p>样本：极端样本、特殊地区、样本选择、缺失机制</p></li>
+<li><p>设定：控制变量集、固定效应层级、聚类层级、权重</p></li>
+<li><p>测量：变量口径替换、测量误差、代理变量 每个维度产出 2–5 个任务，一批控制在 <strong>8–20 个</strong>（太少不值得并行，太多交付校验成本上升）。</p></li>
+</ul>
+<p><strong>Step 3 造清单</strong>：写成结构化任务表（见 4.4 模板）。每个任务必须独立可跑：独立数据读取、独立 do、独立 log、独立图名。</p>
+<p><strong>Step 4 定验收</strong>：批次执行前先写”什么算通过”。示例：基准系数 0.12（p&lt;0.01）；通过标准 = 至少 80% 的稳健性检验符号一致且 p&lt;0.10；任何检验出现符号反转必须单列说明。</p>
+</section>
+<section id="并行委派-prompt-标准模板" class="level2">
+<h2 class="anchored" data-anchor-id="并行委派-prompt-标准模板">4.4 并行委派 Prompt 标准模板</h2>
+<pre class="plaintext"><code>【任务类型】批量稳健性检验（并行委派批次）
+
+【背景】
+研究问题：X 政策对 Y 的影响
+基准设定：reghdfe y did, absorb(city year) cluster(city)，样本 2008–2022，N=样本量
+基准结果：系数 β=【填写】，se=【填写】，p=【填写】
+数据文件：01_raw/city_panel_v3.dta（只读，不得修改）
+
+【委派要求】
+请将下列子任务委派给后台智能体并行执行。各子任务之间无数据依赖，必须彼此隔离：
+- 每个子任务使用独立工作目录 05_delivery/batch01/{task_id}/
+- 每个子任务输出独立 do、log、figure，命名含 task_id
+- 全部子任务完成后统一交付，并做交叉校验
+
+【子任务清单】
+T01 基准复现（仅用于对齐，不作结论）
+T02 安慰剂：政策时点整体前移 2 年
+T03 安慰剂：随机抽取 300 个伪处理组（seed=20261108，并行时按 T03_1..T03_6 分配独立种子）
+T04 稳健性：剔除直辖市与计划单列市
+T05 稳健性：替换被解释变量为 y_alt
+T06 稳健性：控制变量增减（加/减各一版）
+T07 异质性：按东部/中部/西部分组
+T08 异质性：按企业规模中位数分组
+T09 敏感性：缩尾 1% / 5%
+T10 敏感性：聚类层级改为省份
+
+【每个子任务的输出规格】
+1) do 文件（含 set seed、样本规则、完整命令）
+2) log（完整，含错误码检查）
+3) 若涉及图形：png 到 04_figure/batch01/
+4) 一行结果记录：task_id、方法、系数、se、p、N、R²、结论方向（一致/反转/不显著）
+
+【校验要求】
+- 报告每个任务的 N 与基准 N 的差异及原因
+- 标记所有符号反转或显著性下降的任务，不得省略
+- 生成一张汇总矩阵（行=子任务，列=系数、se、p、显著性、方向）
+- 若任一子任务失败，返回该任务的错误码与 log 片段，不影响其他任务交付
+
+【交付】
+- 汇总矩阵写入飞书多维表格《实证结果中台》，批次号 batch01
+- 诊断报告写入飞书文档，含"结论稳定性判定"段落
+- 明确告知：本批次交付完成后我才可发起下一批委派</code></pre>
+<p><strong>模板使用要点（讲给学员的话）</strong></p>
+<ul>
+<li><p>第 3 段”隔离”是防并发覆盖的关键，删掉它事故率会飙升</p></li>
+<li><p>“结论方向”字段是防”只报显著”的技术手段</p></li>
+<li><p>最后一句是<strong>主动声明调度约束</strong>，避免学员以为 Agent 能连续接活</p></li>
+</ul>
+</section>
+<section id="交付包目录规范与汇总矩阵" class="level2">
+<h2 class="anchored" data-anchor-id="交付包目录规范与汇总矩阵">4.5 交付包目录规范与汇总矩阵</h2>
+<p><strong>单批次目录树</strong></p>
+<pre class="plaintext"><code>05_delivery/batch01/
+  batch_manifest.json          # 批次元信息：任务清单、开始/结束时间、环境版本
+  summary_matrix.csv           # 汇总矩阵
+  T01/{run.do, run.log, result.json}
+  T02/...
+  T03_1/ ... T03_6/            # 置换类可再分子批
+  figures/                     # 该批次所有图
+  failures/                    # 失败任务与 log 片段</code></pre>
+<p><strong><code>batch_manifest.json</code></strong>** 最小字段**</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"batch_id"</span><span class="fu">:</span> <span class="st">"batch01"</span><span class="fu">,</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"created_at"</span><span class="fu">:</span> <span class="st">"2026-11-08T10:00:00+08:00"</span><span class="fu">,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"data_file"</span><span class="fu">:</span> <span class="st">"01_raw/city_panel_v3.dta"</span><span class="fu">,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"data_hash"</span><span class="fu">:</span> <span class="st">"sha256:xxxx"</span><span class="fu">,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"stata_version"</span><span class="fu">:</span> <span class="st">"18.5"</span><span class="fu">,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"python_version"</span><span class="fu">:</span> <span class="st">"3.12"</span><span class="fu">,</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"packages"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"reghdfe 6.12.1"</span><span class="ot">,</span> <span class="st">"csdid 1.7"</span><span class="ot">,</span> <span class="st">"estout 3.1"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"tasks"</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span><span class="dt">"id"</span><span class="fu">:</span><span class="st">"T01"</span><span class="fu">,</span><span class="dt">"status"</span><span class="fu">:</span><span class="st">"ok"</span><span class="fu">,</span><span class="dt">"n"</span><span class="fu">:</span><span class="dv">12431</span><span class="fu">,</span><span class="dt">"coef"</span><span class="fu">:</span><span class="fl">0.121</span><span class="fu">,</span><span class="dt">"p"</span><span class="fu">:</span><span class="fl">0.003</span><span class="fu">}</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"seed_policy"</span><span class="fu">:</span> <span class="st">"T03 使用 20261108+子批索引"</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>为什么要 data_hash</strong>：三个月后审稿人问”结果是不是换了数据”，<code>sha256</code> 一句话解决。这一步是”AI 科研”和”AI 乱跑”的分水岭。</p>
+<p><strong>汇总矩阵列设计</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>task_id</th>
+<th>设定</th>
+<th>系数</th>
+<th>se</th>
+<th>p</th>
+<th>N</th>
+<th>方向</th>
+<th>显著性</th>
+<th>与基准一致</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>“与基准一致”列只允许三值：一致 / 反转 / 不显著。禁止自由文本，否则无法统计。</p>
+</section>
+<section id="容错重跑与失败归档" class="level2">
+<h2 class="anchored" data-anchor-id="容错重跑与失败归档">4.6 容错、重跑与失败归档</h2>
+<p><strong>四类失败与处置</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>失败类型</th>
+<th>表现</th>
+<th>处置</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>环境类</td>
+<td>包缺失、路径不存在</td>
+<td>修正环境后重跑该任务，不动其他</td>
+</tr>
+<tr class="even">
+<td>语法类</td>
+<td><code>r(198)</code> 等</td>
+<td>从 log 定位行号，改 do 重跑</td>
+</tr>
+<tr class="odd">
+<td>数据类</td>
+<td>子样本为空、共线</td>
+<td>记录为”不可估计”，写入失败表并说明原因</td>
+</tr>
+<tr class="even">
+<td>超时类</td>
+<td>置换/自助超时</td>
+<td>拆小批次、降重复次数、提超时</td>
+</tr>
+</tbody>
+</table>
+<p><strong>原则</strong>：<strong>失败必须进交付包，不能静默消失</strong>。失败任务写进 <code>failures/</code> 与汇总矩阵的”备注”列，评审时一并呈现。学术上，“这条做不了”本身就是信息。</p>
+<p><strong>重跑规范</strong>：重跑不改文件名，改版本后缀：<code>T02_v2.do</code>。原版保留。禁止覆盖。</p>
+</section>
+<section id="调度约束下的三种分批策略" class="level2">
+<h2 class="anchored" data-anchor-id="调度约束下的三种分批策略">4.7 调度约束下的三种分批策略</h2>
+<p><strong>约束复述</strong>：同一对话内，上一批委派未全部交付核验前，不能发起新一批。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>策略</th>
+<th>做法</th>
+<th>适用</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>S1 单批大规模</strong></td>
+<td>一次塞 15–20 个任务</td>
+<td>任务同质（如全部置换）</td>
+<td>单点失败影响整批交付时间</td>
+</tr>
+<tr class="even">
+<td><strong>S2 多对话分区</strong></td>
+<td>按主题拆到不同对话（识别稳健性 / 异质性 / 敏感性各一对话）</td>
+<td>任务异质、想边跑边讨论</td>
+<td>需人工合并各对话交付包</td>
+</tr>
+<tr class="odd">
+<td><strong>S3 串批流水</strong></td>
+<td>批1 交付 → 评审 → 批2</td>
+<td>需要导师逐批把关</td>
+<td>总时长最长，但质量最高</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐组合</strong>：教学期用 S3（强调评审节奏）；项目冲刺用 S1+S2（强调吞吐）。<strong>永远不要</strong>为了并行而把”基准设定”和”稳健性”塞进同一批——基准没定，稳健性检验没有意义。</p>
+</section>
+<section id="四大前沿场景含实现要点" class="level2">
+<h2 class="anchored" data-anchor-id="四大前沿场景含实现要点">4.8 四大前沿场景（含实现要点）</h2>
+<section id="场景-a大规模置换检验并行" class="level3">
+<h3 class="anchored" data-anchor-id="场景-a大规模置换检验并行">场景 A：大规模置换检验并行</h3>
+<p><strong>目标</strong>：给 DID/SCM 的估计量构造经验分布，得到更严格的 p 值。</p>
+<p><strong>实现要点</strong></p>
+<ol type="1">
+<li><p>置换单元选择：处理分配层级（城市/省份）而非观测层级。选错会让 p 值虚低。</p></li>
+<li><p>种子分配：<code>seed = base_seed + 子批索引</code>，写进 manifest，保证可复现。</p></li>
+<li><p>并行切分：300 次 → 6 个子任务 × 50 次，每子任务落 <code>placebo_XXX.csv</code>。</p></li>
+<li><p>合并：汇总所有”伪系数”，计算 <code>p = (#{|β_placebo| ≥ |β_true|}+1)/(M+1)</code>。这个 <code>+1</code> 很多 AI 会漏，必须在 Prompt 里写死。</p></li>
+<li><p>出图：置换分布直方图 + 真实系数竖线 + 置信区间。</p></li>
+</ol>
+<p><strong>教学价值</strong>：这是最能体现并行收益的场景——串行 300 次可能 2 小时，并行 6 路约 20–30 分钟。</p>
+</section>
+<section id="场景-b异质性扫描" class="level3">
+<h3 class="anchored" data-anchor-id="场景-b异质性扫描">场景 B：异质性扫描</h3>
+<p><strong>目标</strong>：一次性扫出”在哪些子群体里效应更强”，避免人工一个个写循环。</p>
+<p><strong>实现要点</strong></p>
+<ol type="1">
+<li><p>分组维度表：地区、行业、企业规模、所有制、人口密度、财政能力等，每维 2–4 组。</p></li>
+<li><p>每组独立子任务，输出<strong>组内系数、组间差异检验</strong>（<code>suest</code> 或交互项）。</p></li>
+<li><p>汇总成热力图：行=维度，列=组，色=系数大小/显著性。</p></li>
+<li><p><strong>纪律</strong>：异质性扫描属于探索性分析，必须标注”探索性”，不能与预注册假设混为一谈（呼应第七章）。</p></li>
+</ol>
+</section>
+<section id="场景-c敏感性曲线" class="level3">
+<h3 class="anchored" data-anchor-id="场景-c敏感性曲线">场景 C：敏感性曲线</h3>
+<p><strong>目标</strong>：证明结论不依赖特定参数设定。</p>
+<p><strong>实现要点</strong></p>
+<ol type="1">
+<li><p>扫描维度：带宽（RDD）、缩尾阈值、控制变量集、固定效应层级、聚类层级、权重。</p></li>
+<li><p>每个取值一个子任务，输出 (设定值, 系数, 置信区间)。</p></li>
+<li><p>绘”系数—设定”敏感性曲线，附”结论翻转临界点”标注。</p></li>
+<li><p>交付时明确：<strong>哪个设定下结论不成立</strong>，这是最有价值的发现，不是污点。</p></li>
+</ol>
+</section>
+<section id="场景-d空间权重矩阵与空间计量" class="level3">
+<h3 class="anchored" data-anchor-id="场景-d空间权重矩阵与空间计量">场景 D：空间权重矩阵与空间计量</h3>
+<p><strong>目标</strong>：检验空间计量结论对权重矩阵设定的稳健性。</p>
+<p><strong>实现要点</strong></p>
+<ol type="1">
+<li><p>权重矩阵集：邻接（0/1）、地理距离反比、经济距离、嵌套权重。</p></li>
+<li><p>每矩阵独立跑 <code>xsmle</code>（SAR/SEM/SDM 各一版）→ 任务数 = 矩阵数 × 模型数。</p></li>
+<li><p>汇总：直接效应/间接效应分解表（空间模型必须报告分解，不能只报总系数）。</p></li>
+<li><p>注意：<code>spmat</code> 构建矩阵是<strong>前置串行步骤</strong>，必须先单独跑通并把矩阵存成文件，再并行估计。</p></li>
+</ol>
+</section>
+</section>
+<section id="本章实操任务-1" class="level2">
+<h2 class="anchored" data-anchor-id="本章实操任务-1">4.9 本章实操任务</h2>
+<p>给定基准 DID，完成：</p>
+<ol type="1">
+<li><p>画任务 DAG（手绘或工具）</p></li>
+<li><p>设计一批 10 个子任务（含 1 个基准对齐任务）</p></li>
+<li><p>用 4.4 模板委派并行执行</p></li>
+<li><p>产出汇总矩阵 + 诊断报告 + 飞书台账 10 行</p></li>
+<li><p>提交：<code>batch01/</code> 完整目录 + 飞书链接</p></li>
+<li><p>反思题：你这批里哪一个任务其实不该并行？为什么？</p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="第五章-前沿方法矩阵把顶刊方法接进流水线" class="level1">
+<h1>第五章 前沿方法矩阵：把顶刊方法接进流水线</h1>
+<blockquote class="blockquote">
+<p>本章不重讲方法原理（那是计量课的事），只讲<strong>如何把方法接进并行流水线</strong>，以及 AI 在这些方法上最常犯的错。</p>
+</blockquote>
+<section id="交错-did-与异质性处理效应" class="level2">
+<h2 class="anchored" data-anchor-id="交错-did-与异质性处理效应">5.1 交错 DID 与异质性处理效应</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>用途</th>
+<th>接入要点</th>
+<th>AI 常见错</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>csdid</code></td>
+<td>Callaway–Sant’Anna 组别—时期 ATT</td>
+<td>必须给 <code>gvar</code>（首次处理期，未处理设为 0 或缺失）；<code>method(dripw)</code> 与 <code>method(dr)</code> 结果常不同，必须都报</td>
+<td>把 <code>gvar</code> 填成”是否处理”的 0/1</td>
+</tr>
+<tr class="even">
+<td><code>drdid</code></td>
+<td>双重稳健 DID</td>
+<td>需 <code>ivar time treatment</code> 三要素清晰</td>
+<td>混淆面板与重复截面语法</td>
+</tr>
+<tr class="odd">
+<td><code>did_imputation</code></td>
+<td>Borusyak 等插补估计</td>
+<td>需完整面板，缺失处理需说明</td>
+<td>面板不平衡未处理</td>
+</tr>
+<tr class="even">
+<td><code>eventdd</code></td>
+<td>事件研究图 + 同步置信带</td>
+<td>可配 <code>accum</code> 累积效应</td>
+<td>基期未指定导致共线</td>
+</tr>
+<tr class="odd">
+<td><code>did_multiplegt_dyn</code></td>
+<td>多期/多组异质稳健</td>
+<td>需 <code>placebo</code> 与 <code>controls</code> 参数</td>
+<td>忽略其”动态效应”含义，仍按静态解读</td>
+</tr>
+<tr class="even">
+<td><code>alldid</code></td>
+<td>多估计量对照集合</td>
+<td>适合作为”一个任务=多方法对照”的聚合任务</td>
+<td>只看其中一个估计量就下结论</td>
+</tr>
+</tbody>
+</table>
+<p><strong>流水线接法</strong>：把”同一数据的 4 种 DID 估计量”做成<strong>一个子任务</strong>（内部串行、对外并行），输出”多估计量对照表”。这比拆成 4 个子任务更有解释力，也更省交付成本。</p>
+<p><strong>教学金句</strong>：交错 DID 的稳健性不在于”换一个命令”,而在于<strong>同时报告多个估计量并解释差异</strong>。</p>
+</section>
+<section id="合成控制与合成-did" class="level2">
+<h2 class="anchored" data-anchor-id="合成控制与合成-did">5.2 合成控制与合成 DID</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>用途</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>synth</code></td>
+<td>单处理单元 SCM</td>
+<td>需 predictor 与 donor pool；<code>trunit</code>/<code>trperiod</code> 明确</td>
+</tr>
+<tr class="even">
+<td><code>synth_runner</code></td>
+<td>SCM + 安慰剂空间 + 前处理 RMSPE</td>
+<td>一次出置换推断，<strong>批量并行的最佳载体</strong></td>
+</tr>
+<tr class="odd">
+<td><code>sdid</code></td>
+<td>合成 DID（Arkhangelsky 等）</td>
+<td>需平衡面板；权重与单位权重可输出</td>
+</tr>
+</tbody>
+</table>
+<p><strong>并行设计</strong>：<code>synth_runner</code> 自带 placebo 循环，可作为<strong>单任务</strong>；若处理单元多（多省政策），则”每省一个任务”并行，最后汇总”处理效应分布”。</p>
+<p><strong>AI 常见错</strong>：donor pool 污染（把受政策影响的其他单元放进对照池）；前处理拟合期太短；RMSPE 比值不报告。</p>
+</section>
+<section id="模糊分位数-rdd-与门槛回归" class="level2">
+<h2 class="anchored" data-anchor-id="模糊分位数-rdd-与门槛回归">5.3 模糊/分位数 RDD 与门槛回归</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>命令</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>模糊 RDD</td>
+<td><code>rdrobust</code> + <code>iv</code> 思路，或 <code>ivregress</code> 局部样本</td>
+<td>需报告第一阶段强度（弱工具问题）</td>
+</tr>
+<tr class="even">
+<td>分位数 RDD</td>
+<td><code>qrd</code> 类命令（外部包）或分位数切分近似</td>
+<td>分位数结果必须报多条分位线，不能只挑中位数</td>
+</tr>
+<tr class="odd">
+<td>面板门槛</td>
+<td><code>xthreg</code></td>
+<td>需 <code>rx()</code> <code>qx()</code> <code>thx()</code> 明确；门槛个数用 bootstrap</td>
+</tr>
+<tr class="even">
+<td>密度操纵检验</td>
+<td><code>rddensity</code></td>
+<td><strong>必做</strong>，报告 p 值与图</td>
+</tr>
+</tbody>
+</table>
+<p><strong>流水线接法</strong>：门槛回归的”门槛个数 + 门槛值 + 置信区间”三件套必须一起交付；分位数 RDD 建议做成”分位扫描”子任务集（0.25/0.5/0.75/0.9 各一任务）。</p>
+</section>
+<section id="空间计量与空间-did" class="level2">
+<h2 class="anchored" data-anchor-id="空间计量与空间-did">5.4 空间计量与空间 DID</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>用途</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>spmat</code></td>
+<td>构建空间权重矩阵</td>
+<td>前置串行；矩阵存文件复用</td>
+</tr>
+<tr class="even">
+<td><code>xsmle</code></td>
+<td>SAR/SEM/SDM 面板估计</td>
+<td>需 <code>wmat()</code>、<code>model()</code>、<code>fe</code>/<code>re</code> 明确</td>
+</tr>
+<tr class="odd">
+<td><code>spregress</code> / <code>spxtregress</code></td>
+<td>官方 sp 系列</td>
+<td>与 <code>xsmle</code> 结果口径不同，别混用</td>
+</tr>
+<tr class="even">
+<td>空间 DID</td>
+<td>交互项 + 空间滞后</td>
+<td>需同时报直接效应与间接效应</td>
+</tr>
+</tbody>
+</table>
+<p><strong>必须报告</strong>：效应分解（直接/间接/总）。只报总系数是空间计量最常见的外行错误。</p>
+</section>
+<section id="机器学习因果dml因果森林政策学习" class="level2">
+<h2 class="anchored" data-anchor-id="机器学习因果dml因果森林政策学习">5.5 机器学习因果：DML、因果森林、政策学习</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>Stata 路径</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>双重机器学习</td>
+<td><code>ddml</code>（SSC）</td>
+<td>需 3 个 learner（如 <code>reg</code> + <code>lasso</code> + <code>rf</code>），样本分割次数、交叉拟合折数必须写死</td>
+</tr>
+<tr class="even">
+<td>堆叠/集成</td>
+<td><code>pystacked</code></td>
+<td>依赖 Python；需在 ENV.md 记录 Python 包版本</td>
+</tr>
+<tr class="odd">
+<td>LASSO 变量选择</td>
+<td><code>lassopack</code>（<code>lasso2</code>/<code>rlasso</code>）</td>
+<td>仅作选择，后续推断需正交化或 Post-double-selection</td>
+</tr>
+<tr class="even">
+<td>因果森林</td>
+<td>Stata 内嵌 Python 调 <code>grf</code></td>
+<td>输出 CATE 分布 + 分组异质性 + 校准检验</td>
+</tr>
+<tr class="odd">
+<td>政策学习</td>
+<td>同上 + 自定义策略评价</td>
+<td>需明确”政策价值函数”定义</td>
+</tr>
+</tbody>
+</table>
+<p><strong>并行设计</strong>：DML 的”不同 learner 组合”天然可并行（每组合一任务），输出对照表：ATE 估计的稳定性。这比调参追显著性更有学术价值。</p>
+<p><strong>AI 常见错</strong>：把 DML 当”高级 OLS”直接报系数不做稳健性；不报告 learner 设定；不检查重叠性（overlap）。</p>
+</section>
+<section id="动态效应pvar局部投影" class="level2">
+<h2 class="anchored" data-anchor-id="动态效应pvar局部投影">5.6 动态效应：PVAR、局部投影</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>命令</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PVAR</td>
+<td><code>pvar</code></td>
+<td>需 <code>lags()</code>、<code>inst()</code>（GMM）、Helmholtz–Hoffmann 变换</td>
+</tr>
+<tr class="even">
+<td>局部投影</td>
+<td><code>lpirfs</code> 类外部包</td>
+<td>需明确 horizon、控制基期、聚类</td>
+</tr>
+<tr class="odd">
+<td>脉冲响应图</td>
+<td><code>pvarirf</code> / <code>irf</code></td>
+<td>必须带置信带</td>
+</tr>
+</tbody>
+</table>
+<p><strong>流水线接法</strong>：PVAR 的”滞后阶数选择”（AIC/BIC/HQIC 三准则）可做成并行任务，输出阶数敏感性对照。</p>
+</section>
+<section id="stata-python-混合执行" class="level2">
+<h2 class="anchored" data-anchor-id="stata-python-混合执行">5.7 Stata × Python 混合执行</h2>
+<p><strong>为什么需要</strong>：Stata 强在估计与面板处理，Python 强在置换分布、机器学习、可视化与批量 IO。</p>
+<p><strong>三种混合形态</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>形态</th>
+<th>做法</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Stata 调 Python</td>
+<td><code>python script.py</code> / <code>python:</code> 块</td>
+<td>生成图、跑 sklearn</td>
+</tr>
+<tr class="even">
+<td>Python 调 Stata</td>
+<td><code>pystata</code>（<code>stata.run()</code>）</td>
+<td>Python 编排、Stata 计算</td>
+</tr>
+<tr class="odd">
+<td>MCP 分别调</td>
+<td>两个工具并列，各跑各的</td>
+<td>最稳，适合并行流水线</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐第三种</strong>：并行场景下，让 Stata 任务与 Python 任务<strong>互不内嵌</strong>，各自独立进程，避免版本/路径互扰。混合内嵌只在单机探索时用。</p>
+</section>
+<section id="方法数据样本量适配表" class="level2">
+<h2 class="anchored" data-anchor-id="方法数据样本量适配表">5.8 方法—数据—样本量适配表</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>最低样本结构</th>
+<th>常见失败点</th>
+<th>建议批次规模</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>双向 FE DID</td>
+<td>面板 ≥ 5 期，处理组 ≥ 30 单元</td>
+<td>聚类层级过低</td>
+<td>8–12 任务</td>
+</tr>
+<tr class="even">
+<td>交错 DID (csdid)</td>
+<td>多处理时点，每组 ≥ 2 单元</td>
+<td>gvar 构造错</td>
+<td>6–10</td>
+</tr>
+<tr class="odd">
+<td>RDD</td>
+<td>断点邻域 ≥ 500 观测</td>
+<td>带宽过窄</td>
+<td>10–15（扫描类）</td>
+</tr>
+<tr class="even">
+<td>SCM</td>
+<td>前处理期 ≥ 10 期，donor ≥ 10</td>
+<td>donor 污染</td>
+<td>按处理单元数 ×2</td>
+</tr>
+<tr class="odd">
+<td>空间计量</td>
+<td>空间单元 ≥ 100</td>
+<td>权重矩阵未标准化</td>
+<td>4–8（矩阵×模型）</td>
+</tr>
+<tr class="even">
+<td>DML</td>
+<td>N ≥ 2000，特征 ≥ 20</td>
+<td>learner 未调、重叠不足</td>
+<td>4–6（learner 组合）</td>
+</tr>
+<tr class="odd">
+<td>PVAR</td>
+<td>T ≥ 15，N ≥ 30</td>
+<td>滞后阶数过多</td>
+<td>3–5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>授课提醒</strong>：这张表是”该不该用这个方法”的第一道闸。AI 不会告诉你”你样本不够”，它只会给你一个 p 值。<strong>判断样本适配是人不可让渡的责任</strong>。</p>
+<hr>
+</section>
+</section>
+<section id="第六章-组织协同闭环飞书作为实证结果中台" class="level1">
+<h1>第六章 组织协同闭环：飞书作为实证结果中台</h1>
+<section id="多维表格字段与视图设计" class="level2">
+<h2 class="anchored" data-anchor-id="多维表格字段与视图设计">6.1 多维表格字段与视图设计</h2>
+<p><strong>主表《实证结果中台》字段（最小可行集，详细版见 04 号文件）</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>字段</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>项目ID</td>
+<td>文本</td>
+<td>P01、P02…</td>
+</tr>
+<tr class="even">
+<td>批次号</td>
+<td>文本</td>
+<td>batch01、batch02</td>
+</tr>
+<tr class="odd">
+<td>任务ID</td>
+<td>文本</td>
+<td>T01、T02…</td>
+</tr>
+<tr class="even">
+<td>分析类型</td>
+<td>单选</td>
+<td>基准/安慰剂/稳健性/异质性/敏感性/空间/ML</td>
+</tr>
+<tr class="odd">
+<td>方法</td>
+<td>单选</td>
+<td>reghdfe / csdid / rdrobust / synth / xsmle / ddml</td>
+</tr>
+<tr class="even">
+<td>设定摘要</td>
+<td>文本</td>
+<td>一句话写清这行在测什么</td>
+</tr>
+<tr class="odd">
+<td>系数 / se / p</td>
+<td>数字</td>
+<td>同源 log</td>
+</tr>
+<tr class="even">
+<td>N</td>
+<td>数字</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>R²</td>
+<td>数字</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>方向</td>
+<td>单选</td>
+<td>一致/反转/不显著</td>
+</tr>
+<tr class="odd">
+<td>状态</td>
+<td>单选</td>
+<td>通过/失败/待复核</td>
+</tr>
+<tr class="even">
+<td>do 链接 / log 链接 / 图链接</td>
+<td>URL</td>
+<td>云盘直链</td>
+</tr>
+<tr class="odd">
+<td>评审人 / 评审意见</td>
+<td>人员/文本</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>数据哈希</td>
+<td>文本</td>
+<td>便于溯源</td>
+</tr>
+<tr class="odd">
+<td>探索性标记</td>
+<td>复选</td>
+<td>是/否</td>
+</tr>
+</tbody>
+</table>
+<p><strong>四个必备视图</strong></p>
+<ol type="1">
+<li><p><strong>批次视图</strong>：按批次分组，看一批是否齐</p></li>
+<li><p><strong>异常视图</strong>：筛选 <code>方向=反转</code> 或 <code>状态=失败</code></p></li>
+<li><p><strong>评审视图</strong>：筛选 <code>状态=待复核</code></p></li>
+<li><p><strong>看板视图</strong>：按分析类型统计通过率</p></li>
+</ol>
+</section>
+<section id="版本治理与命名规范" class="level2">
+<h2 class="anchored" data-anchor-id="版本治理与命名规范">6.2 版本治理与命名规范</h2>
+<p><strong>命名公式</strong>：<code>{批次}_{任务}_{内容}_v{版本}.{ext}</code> 示例：<code>b01_T04_drop_municipality_v2.do</code></p>
+<p><strong>版本规则</strong></p>
+<ul>
+<li><p><code>v1</code> 首次执行；<code>v2</code> 因评审修改；<code>v3</code> 因数据更新</p></li>
+<li><p><strong>禁止</strong> <code>final</code>、<code>final2</code>、<code>最终版</code>、<code>真的最终</code> —— 这类命名是证据链的天敌</p></li>
+<li><p>每次升版，多维表格新增一行，不覆盖旧行（旧行状态改”已废弃”）</p></li>
+</ul>
+<p><strong>为什么这么严</strong>：论文返修时最常见的灾难是”我改了一版，旧结果找不到了”。多维表格天然保留全部历史，这是它相对文件夹管理的核心优势。</p>
+</section>
+<section id="评审泳道与批注工作流" class="level2">
+<h2 class="anchored" data-anchor-id="评审泳道与批注工作流">6.3 评审泳道与批注工作流</h2>
+<pre class="plaintext"><code>学生：设计批次 → 委派执行 → 交付包回流（表格+文档+云盘）
+   ↓
+导师：只看"异常视图"与"评审视图" → 在文档评论区批注 → 表格"评审意见"栏
+   ↓
+学生：据批注发起下一批（新批次号）→ 旧批次标"已废弃"
+   ↓
+终稿：交付包 + 诊断报告 + ENV.md + 预注册清单 一并归档</code></pre>
+<p><strong>评审三问（导师只需问这三句）</strong></p>
+<ol type="1">
+<li><p>基准的样本与聚类层级，为什么是这个设定？</p></li>
+<li><p>反转的那几条，论文里怎么处理？</p></li>
+<li><p>log 里 N 和表里 N 一致吗？</p></li>
+</ol>
+<p>这三问能在 3 分钟内判定一个实证项目是否可交付。</p>
+</section>
+<section id="知识库挂载变量字典与课题组规范" class="level2">
+<h2 class="anchored" data-anchor-id="知识库挂载变量字典与课题组规范">6.4 知识库挂载：变量字典与课题组规范</h2>
+<p><strong>挂载三样东西</strong></p>
+<ol type="1">
+<li><p><strong>变量字典</strong>：变量名、含义、口径、来源、构造公式、缺失率</p></li>
+<li><p><strong>课题组规范</strong>：命名规则、表注模板、星号规则、图样式</p></li>
+<li><p><strong>识别策略说明</strong>：处理定义、对照池规则、样本筛选规则</p></li>
+</ol>
+<p><strong>价值</strong>：AI 生成代码时读取知识库，产出符合课题组口径的 do，而不是”通用教科书式” do。这一步把”AI 写的代码”变成”我们组的代码”。</p>
+</section>
+<section id="仪表盘与项目看板" class="level2">
+<h2 class="anchored" data-anchor-id="仪表盘与项目看板">6.5 仪表盘与项目看板</h2>
+<p><strong>单项目看板四块</strong></p>
+<ul>
+<li><p>稳健性通过率（通过/总数）</p></li>
+<li><p>反转任务数（红色计数）</p></li>
+<li><p>失败任务数</p></li>
+<li><p>批次进度（已交付/计划）</p></li>
+</ul>
+<p><strong>多项目看板（团队负责人视角）</strong></p>
+<ul>
+<li><p>各项目最近交付时间</p></li>
+<li><p>各项目待复核行数</p></li>
+<li><p>各项目数据哈希是否与登记一致</p></li>
+</ul>
+</section>
+<section id="权限矩阵" class="level2">
+<h2 class="anchored" data-anchor-id="权限矩阵">6.6 权限矩阵</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>角色</th>
+<th>原始数据</th>
+<th>do/log</th>
+<th>多维表格</th>
+<th>文档</th>
+<th>云盘交付包</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>项目负责人</td>
+<td>读写</td>
+<td>读写</td>
+<td>读写</td>
+<td>读写</td>
+<td>读写</td>
+</tr>
+<tr class="even">
+<td>执行学生</td>
+<td>只读</td>
+<td>读写</td>
+<td>读写（本批次）</td>
+<td>评论</td>
+<td>读写本人目录</td>
+</tr>
+<tr class="odd">
+<td>导师/评审</td>
+<td>只读</td>
+<td>只读</td>
+<td>只读</td>
+<td>评论</td>
+<td>只读</td>
+</tr>
+<tr class="even">
+<td>外部合作者</td>
+<td>不可见</td>
+<td>只读指定批次</td>
+<td>只读指定视图</td>
+<td>只读</td>
+<td>只读</td>
+</tr>
+</tbody>
+</table>
+<p><strong>原则</strong>：<strong>原始数据最小可见，结果最大可审</strong>。这与直觉相反——很多人把数据锁死、结果随便传；正确做法是数据严格、结果透明可审。</p>
+<hr>
+</section>
+</section>
+<section id="第七章-学术伦理可复现性与风险边界" class="level1">
+<h1>第七章 学术伦理、可复现性与风险边界</h1>
+<section id="五条学术红线" class="level2">
+<h2 class="anchored" data-anchor-id="五条学术红线">7.1 五条学术红线</h2>
+<ol type="1">
+<li><p><strong>AI 产出必须人工复核</strong>。所有进入论文的数字，作者必须亲自核对 log。署名意味着责任，AI 不能署名。</p></li>
+<li><p><strong>不得选择性报告</strong>。所有跑过的检验（含失败、含反转）必须在台账留痕；论文可以只报部分，但台账必须全。</p></li>
+<li><p><strong>不得为显著性反复改设定</strong>。设定修改必须留版本号与理由；“试了 30 个设定取最好的”属于 p-hacking。</p></li>
+<li><p><strong>不得隐藏样本修改</strong>。样本筛选规则写死在 do 里，不得在结果出来后偷偷剔除。</p></li>
+<li><p><strong>不得把探索性分析包装成预注册假设</strong>。异质性扫描结果必须标注”探索性”。</p></li>
+</ol>
+</section>
+<section id="可复现性八件套" class="level2">
+<h2 class="anchored" data-anchor-id="可复现性八件套">7.2 可复现性八件套</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>#</th>
+<th>内容</th>
+<th>落地方式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>do 文件完整可跑</td>
+<td>从原始数据到最终表的单一入口 <code>master.do</code></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>种子固定</td>
+<td>所有随机过程 <code>set seed</code>，写进 manifest</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>包版本记录</td>
+<td><code>ENV.md</code> 记录每个外部命令版本</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>数据哈希</td>
+<td><code>sha256</code> 写入 manifest 与多维表格</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>样本规则前置</td>
+<td>所有 <code>keep/drop</code> 集中在 do 前部，不散落</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>log 全留</td>
+<td>每任务一 log，命名与 do 对应</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>表图可再生成</td>
+<td>表由 <code>esttab</code> 出、图由命令出，禁止手工贴数</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>交付包归档</td>
+<td><code>05_delivery</code> 按批次归档，不删除</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>master.do</code></strong>** 骨架**</p>
+<pre class="plaintext"><code>* master.do —— 单一入口，按批次顺序调用
+do "02_do/00_setup.do"        // 环境、路径、宏
+do "02_do/01_clean.do"        // 清洗（串行，唯一）
+do "02_do/b01_T01_baseline.do"
+do "02_do/b01_T02_placebo_time.do"
+* ... 按批次排列
+do "02_do/99_export_tables.do" // 统一出表出图</code></pre>
+</section>
+<section id="反-p-hacking预注册检验清单" class="level2">
+<h2 class="anchored" data-anchor-id="反-p-hacking预注册检验清单">7.3 反 p-hacking：预注册检验清单</h2>
+<p><strong>做法</strong>：在跑任何稳健性之前，先在飞书文档写一份《稳健性检验预注册清单》，列明要做的检验、判定标准、以及”若不一致将如何解释”。执行时严格按清单委派。</p>
+<p><strong>三个收益</strong></p>
+<ul>
+<li><p>技术上：清单即批次模板，直接转成任务表</p></li>
+<li><p>学术上：具备预注册痕迹，抗审稿质疑</p></li>
+<li><p>心理上：防止”跑着跑着开始找显著”</p></li>
+</ul>
+<p><strong>清单模板字段</strong>：检验编号｜质疑维度｜检验设计｜预期方向｜判定标准｜若不一致的处理方式</p>
+</section>
+<section id="数据安全与合规" class="level2">
+<h2 class="anchored" data-anchor-id="数据安全与合规">7.4 数据安全与合规</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>风险</th>
+<th>处置</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>原始微观数据外泄</td>
+<td>StataMCP 本地/内网部署；数据不出域</td>
+</tr>
+<tr class="even">
+<td>个体隐私字段</td>
+<td>进 Stata 前脱敏；do 中不 print 明细</td>
+</tr>
+<tr class="odd">
+<td>涉密/受限数据</td>
+<td>独立机器、断网、禁止上传云盘</td>
+</tr>
+<tr class="even">
+<td>云盘权限过宽</td>
+<td>按 6.6 矩阵设置；外部合作者限定批次</td>
+</tr>
+<tr class="odd">
+<td>提示词泄露数据</td>
+<td>Prompt 里只写路径与字段名，不贴数据行</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话原则</strong>：<strong>指令可以出域，数据不出域；结果可以上云，原始不上云。</strong></p>
+</section>
+<section id="平台能力边界与预案" class="level2">
+<h2 class="anchored" data-anchor-id="平台能力边界与预案">7.5 平台能力边界与预案</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>边界</th>
+<th>表现</th>
+<th>预案</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>批次锁</td>
+<td>上一批未交付不能开新批</td>
+<td>提前规划批次；或用多对话分区（S2）</td>
+</tr>
+<tr class="even">
+<td>并发资源上限</td>
+<td>任务太多排队</td>
+<td>单批 ≤ 20 个；置换类再分子批</td>
+</tr>
+<tr class="odd">
+<td>MCP 服务单点</td>
+<td>服务挂了全部停</td>
+<td>关键批次前做 L1–L5 验证；保留 batch 回退路径</td>
+</tr>
+<tr class="even">
+<td>长任务超时</td>
+<td>置换/自助超时</td>
+<td>降重复次数、拆批、提高超时</td>
+</tr>
+<tr class="odd">
+<td>模型理解偏差</td>
+<td>生成的设定与意图不符</td>
+<td>Prompt 六要素 + 执行后必查 log 首行设定</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="第八章-综合实战工坊与结业验收" class="level1">
+<h1>第八章 综合实战工坊与结业验收</h1>
+<section id="六小时工坊时间表" class="level2">
+<h2 class="anchored" data-anchor-id="六小时工坊时间表">8.1 六小时工坊时间表</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>时段</th>
+<th>内容</th>
+<th>产出</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0:00–0:40</td>
+<td>环境自检（L1–L5）+ 故障排除</td>
+<td>五级验证截图</td>
+</tr>
+<tr class="even">
+<td>0:40–1:30</td>
+<td>单任务跑通基准 DID</td>
+<td>基准 do/log/表</td>
+</tr>
+<tr class="odd">
+<td>1:30–2:00</td>
+<td>事件研究 + 平行趋势判读</td>
+<td>事件研究图</td>
+</tr>
+<tr class="even">
+<td>2:00–2:15</td>
+<td>休息</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>2:15–3:30</td>
+<td>批次设计（DAG + 10 任务清单）</td>
+<td>任务表</td>
+</tr>
+<tr class="even">
+<td>3:30–4:30</td>
+<td>并行委派执行 + 汇总</td>
+<td><code>batch01/</code> 交付包</td>
+</tr>
+<tr class="odd">
+<td>4:30–5:15</td>
+<td>飞书台账 + 诊断报告</td>
+<td>多维表 10 行 + 文档</td>
+</tr>
+<tr class="even">
+<td>5:15–6:00</td>
+<td>交叉评审 + 讲师点评</td>
+<td>评审记录</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="综合实战任务书" class="level2">
+<h2 class="anchored" data-anchor-id="综合实战任务书">8.2 综合实战任务书</h2>
+<p><strong>题目</strong>：任选一个公开政策冲击（环保督察、高铁开通、自贸区设立、低碳城市试点等），使用地级市面板，完成一套可提交评审的实证交付包。</p>
+<p><strong>必做项</strong></p>
+<ol type="1">
+<li><p>识别策略说明（1 页，含处理定义、对照逻辑、样本规则）</p></li>
+<li><p>基准 DID（含聚类，报 N 与组别样本量）</p></li>
+<li><p>事件研究（基期明确、端点合并规则写明）</p></li>
+<li><p>预注册稳健性清单（≥ 8 项）</p></li>
+<li><p>一次并行委派执行（≥ 8 子任务）</p></li>
+<li><p>汇总矩阵 + 置换分布图或异质性热力图（二选一）</p></li>
+<li><p>飞书多维表格台账（每任务一行，含 do/log/图链接）</p></li>
+<li><p>诊断报告（含”结论稳定性判定”与”反转项处理说明”）</p></li>
+<li><p><code>ENV.md</code> + <code>batch_manifest.json</code></p></li>
+</ol>
+<p><strong>选做项（加分）</strong></p>
+<ul>
+<li><p>多估计量 DID 对照表（csdid/drdid/did_imputation）</p></li>
+<li><p>合成控制对照</p></li>
+<li><p>DML 稳健性</p></li>
+<li><p>空间权重矩阵敏感性</p></li>
+</ul>
+</section>
+<section id="评分-rubric" class="level2">
+<h2 class="anchored" data-anchor-id="评分-rubric">8.3 评分 Rubric</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>维度</th>
+<th>权重</th>
+<th>优秀（90+）</th>
+<th>合格（75–89）</th>
+<th>不合格（&lt;75）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>识别设计</td>
+<td>20%</td>
+<td>处理定义清晰、对照逻辑站得住、有反事实讨论</td>
+<td>基本成立，个别环节含糊</td>
+<td>处理/对照混淆</td>
+</tr>
+<tr class="even">
+<td>执行完整性</td>
+<td>20%</td>
+<td>批次全交付、无静默失败、目录规范</td>
+<td>有 1–2 项缺失但已说明</td>
+<td>大量缺失且无说明</td>
+</tr>
+<tr class="odd">
+<td>校验严谨性</td>
+<td>20%</td>
+<td>12 项自检全打勾、反转项如实报告并解释</td>
+<td>少数项缺失</td>
+<td>只报显著、隐藏反转</td>
+</tr>
+<tr class="even">
+<td>可复现性</td>
+<td>20%</td>
+<td>master.do 可一键跑通、ANOM 版本齐全、哈希登记</td>
+<td>部分可复现</td>
+<td>换机跑不通</td>
+</tr>
+<tr class="odd">
+<td>协同治理</td>
+<td>15%</td>
+<td>台账字段完整、版本规范、评审痕迹清晰</td>
+<td>台账可用</td>
+<td>无台账或手填数据</td>
+</tr>
+<tr class="even">
+<td>前沿应用</td>
+<td>5%</td>
+<td>有方法对照或敏感性曲线</td>
+<td>有 1 项拓展</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="验收-checklist讲师逐项打勾" class="level2">
+<h2 class="anchored" data-anchor-id="验收-checklist讲师逐项打勾">8.4 验收 Checklist（讲师逐项打勾）</h2>
+<ul class="task-list">
+<li><p><label><input type="checkbox">L1–L5 连通性全部通过</label></p></li>
+<li><p><label><input type="checkbox">基准 do 含 set seed、样本规则前置</label></p></li>
+<li><p><label><input type="checkbox">事件研究基期与端点合并规则写明</label></p></li>
+<li><p><label><input type="checkbox">批次任务 ≥ 8 且各自独立目录</label></p></li>
+<li><p><label><input type="checkbox">batch_manifest.json 含数据哈希与包版本</label></p></li>
+<li><p><label><input type="checkbox">汇总矩阵”方向”列仅三值</label></p></li>
+<li><p><label><input type="checkbox">失败任务进 failures/ 且台账有记录</label></p></li>
+<li><p><label><input type="checkbox">多维表格字段无空值</label></p></li>
+<li><p><label><input type="checkbox">诊断报告含稳定性判定段落</label></p></li>
+<li><p><label><input type="checkbox">master.do 可从原始数据一键重跑</label></p></li>
+</ul>
+</section>
+<section id="结业后的三条延展路径" class="level2">
+<h2 class="anchored" data-anchor-id="结业后的三条延展路径">8.5 结业后的三条延展路径</h2>
+<ol type="1">
+<li><p><strong>课题组制度化</strong>：把本课流水线写成《课题组实证规范 v1》，含命名、目录、批次、评审、归档五章；新生入学第一周培训。</p></li>
+<li><p><strong>共享计算池</strong>：搭一台课题组 StataMCP 服务器，统一版本与包，成员各用各的对话、共用一套环境。</p></li>
+<li><p><strong>方法扩展</strong>：把第五章某一方法（如 SCM 安慰剂、DML、空间）做成标准化批次模板，沉淀成”组内方法卡”。</p></li>
+</ol>
+<p><strong>关于工具链切换的判断标准（回应第一章对比）</strong></p>
+<ul>
+<li><p>单人、快速调试单个 do、要即时看每一步输出 → TraeWork 类 IDE 更顺手</p></li>
+<li><p>要自研 Agent 流程、自定义工具编排 → DeepSeek Harness</p></li>
+<li><p>日常办公 + 轻量分析 → Workbuddy</p></li>
+<li><p><strong>多人协作、批量检验、需要导师逐条核验证据链 → 本课方案</strong></p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="附录" class="level1">
+<h1>附录</h1>
+<section id="a-术语表" class="level2">
+<h2 class="anchored" data-anchor-id="a-术语表">A 术语表</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>术语</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MCP</td>
+<td>Model Context Protocol，模型调用外部工具的标准化协议</td>
+</tr>
+<tr class="even">
+<td>StataMCP</td>
+<td>把 Stata 进程封装为 MCP 工具的服务端</td>
+</tr>
+<tr class="odd">
+<td>委派 Delegation</td>
+<td>主会话把可独立完成的工作切给后台子智能体</td>
+</tr>
+<tr class="even">
+<td>批次 Batch</td>
+<td>一次委派下发的任务集合，有唯一批次号</td>
+</tr>
+<tr class="odd">
+<td>交付包</td>
+<td>do+log+图+结果行+汇总矩阵 五件齐全的产物集合</td>
+</tr>
+<tr class="even">
+<td>批次锁</td>
+<td>上一批未交付不得开新批的调度约束</td>
+</tr>
+<tr class="odd">
+<td>DAG</td>
+<td>有向无环图，用于判定任务依赖与并行度</td>
+</tr>
+<tr class="even">
+<td>预注册清单</td>
+<td>执行前写定的检验清单与判定标准</td>
+</tr>
+<tr class="odd">
+<td>数据哈希</td>
+<td>数据文件指纹，用于溯源</td>
+</tr>
+<tr class="even">
+<td>方向列</td>
+<td>汇总矩阵中标记结果与基准一致/反转/不显著的字段</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="b-命令速查" class="level2">
+<h2 class="anchored" data-anchor-id="b-命令速查">B 命令速查</h2>
+<pre class="plaintext"><code>* 固定效应与表格
+reghdfe y x, absorb(id t) cluster(id)
+esttab m1 m2 using out.rtf, b(3) se(3) star(* 0.1 ** 0.05 *** 0.01) stats(N r2_a)
+
+* DID 家族
+csdid y x, ivar(id) time(t) gvar(g) method(dripw)
+drdid y x, ivar(id) time(t) treatment(treat)
+eventdd y x, timevar(t) cohort(g) graph
+
+* RDD
+rdrobust y run, c(0) all
+rddensity run, c(0) plot
+
+* 匹配
+psmatch2 t x1 x2, outcome(y) neighbor(1) common cal(0.01)
+pstest x1 x2, both graph
+
+* 合成控制
+synth y x1 x2, trunit(3) trperiod(2015) fig
+synth_runner y x1 x2, trunit(3) trperiod(2015) preperiod(2006) postperiod(2020)
+
+* 门槛与空间
+xthreg y x1 x2, rx(x1) qx(th) thx(th) trim(0.01 0.01) grid(100)
+xsmle y x1 x2, wmat(W) model(sdm) fe type(both) nolog
+
+* 机器学习
+ddml crossfit, y(y) d(did) learners(reg lasso) fold(5)
+
+* 动态
+pvar y x, lags(1) inst(gmm)</code></pre>
+</section>
+<section id="c-参考读物与资源" class="level2">
+<h2 class="anchored" data-anchor-id="c-参考读物与资源">C 参考读物与资源</h2>
+<ul>
+<li><p>Stata 官方手册：<code>help reghdfe</code>、<code>help csdid</code>、<code>help rdrobust</code>、<code>help xsmle</code>、<code>help pvar</code></p></li>
+<li><p>Callaway &amp; Sant’Anna (2021) 交错 DID 与异质性处理效应</p></li>
+<li><p>Goodman-Bacon (2021) 双向固定效应 DID 的偏误分解</p></li>
+<li><p>Borusyak, Jaravel &amp; Spiess (2024) 插补估计</p></li>
+<li><p>Arkhangelsky et al. (2021) 合成 DID</p></li>
+<li><p>Chernozhukov et al. (2018) 双重机器学习</p></li>
+<li><p>Abadie, Diamond &amp; Hainmueller 合成控制系列</p></li>
+<li><p>各组方法卡：建议课题组自建”方法—数据—陷阱”三列表，随用随补</p></li>
+</ul>
+<hr>
+<blockquote class="blockquote">
+<p><strong>讲义结语（建议作为最后一页 PPT）</strong> AI 不会让实证研究变简单，它只是把”跑得慢”变成”想得清”的机会。 并行省下的时间，应该花在识别策略上，而不是花在找更多设定上。</p>
+</blockquote>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/example\.com\/doubao-work-book\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/03-reproduction.html" class="pagination-link" aria-label="第 3 章 论文复现">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">第 3 章 论文复现</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/05-resources.html" class="pagination-link" aria-label="资源导航">
+        <span class="nav-page-text">资源导航</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 豆包工作 × Stata 在线书籍 · 计量经济网</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><a href="https://www.aistata.cn">AIStata</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

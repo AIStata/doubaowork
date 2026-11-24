@@ -1,0 +1,83 @@
+// ============================================================
+// 因果推断方法精读 · 清新自然浅色主题（SCSS 变量覆盖 Bootswatch Cosmo）
+// ============================================================
+// 设计理念：薄荷绿 + 米白 + 柔和珊瑚橙
+// 特点：清新、护眼、通透、自然舒适
+// ============================================================
+
+/*-- scss:defaults --*/
+
+// 主色：薄荷绿系
+$primary:       #3d8b6a;   // 薄荷绿（主色）
+$secondary:     #52b788;   // 嫩草绿（次色）
+$success:       #40916c;   // 森林绿
+$info:          #52b788;   // 草绿
+$warning:       #e07a5f;   // 珊瑚橙（温暖强调色）
+$danger:        #bc4749;   // 砖红（降低饱和度）
+
+// 背景与文字
+$body-bg:       #fafcf9;   // 极浅米白绿
+$body-color:    #2f3e46;   // 偏绿的深灰，护眼
+
+// 字体
+$font-family-sans-serif:      "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+$font-family-serif:           "Noto Serif SC", "Source Han Serif SC", "SimSun", Georgia, serif;
+$font-family-monospace:       "JetBrains Mono", "Fira Code", "Consolas", "Courier New", monospace;
+$font-size-base:              1rem;
+$line-height-base:            1.8;
+
+// 头部
+$headings-font-family:        $font-family-sans-serif;
+$headings-font-weight:        600;
+$headings-color:              #1b4332;   // 深墨绿，柔和不刺眼
+$headings-line-height:        1.4;
+
+// 链接
+$link-color:                  #2d6a4f;   // 森林绿
+$link-decoration:             none;
+$link-hover-color:            #1b4332;   // 深墨绿
+$link-hover-decoration:       underline;
+
+// 边框与圆角（更大圆角，更柔和）
+$border-radius:               10px;
+$border-radius-lg:            14px;
+$border-radius-sm:            6px;
+$border-color:                #e5ebe6;   // 带绿调的浅灰
+
+// 阴影（更柔和、更淡）
+$box-shadow-sm:               0 1px 4px rgba(0, 0, 0, 0.04);
+$box-shadow:                  0 3px 10px rgba(0, 0, 0, 0.05);
+$box-shadow-lg:               0 8px 24px rgba(0, 0, 0, 0.06);
+
+// 表格
+$table-bg:                    transparent;
+$table-color:                 $body-color;
+$table-head-bg:               #40916c;   // 森林绿表头
+$table-head-color:            #fff;
+$table-striped-bg:            #f4f7f5;   // 极浅绿
+$table-hover-bg:              #eef4f0;   // 浅绿
+$table-border-color:          #e5ebe6;
+
+// 代码
+$code-font-size:              0.9em;
+$code-color:                  #2d6a4f;   // 森林绿
+$pre-color:                   #2f3e46;
+$pre-bg:                      #f4f7f5;   // 极浅绿背景
+
+// TOC
+$toc-color:                   #5c7065;
+$toc-active-color:            #2d6a4f;
+
+// Navbar
+$navbar-light-color:          #3a5a40;
+$navbar-light-hover-color:    #2d6a4f;
+$navbar-light-active-color:   #1b4332;
+$navbar-light-bg:             rgba(250, 252, 249, 0.92);
+$navbar-light-border-color:   #e5ebe6;
+
+// Sidebar
+$sidebar-bg:                  #f6f8f6;   // 极浅米绿
+$sidebar-color:               #5c7065;
+$sidebar-active-bg:           rgba(82, 183, 136, 0.12);
+$sidebar-active-color:        #1b4332;
+$sidebar-section-title-color: #8aa393;

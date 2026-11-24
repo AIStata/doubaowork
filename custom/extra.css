@@ -1,0 +1,407 @@
+/* ============================================================
+   豆包工作 × Stata 在线书籍 · 扩展组件样式
+   沿用 causal-methods 的薄荷绿 / 米白 / 珊瑚橙设计语言
+   ============================================================ */
+
+/* ---- Hero 中的技术标签行 ---- */
+.econ-hero__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 1.6rem;
+}
+
+.econ-hero__tech span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.32rem 0.8rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #eaf6ef;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ---- 兼容性横幅 ---- */
+.econ-compat {
+  margin: 2.4rem 0;
+  padding: 1.6rem 1.8rem;
+  border: 1px solid var(--econ-gray-200);
+  border-radius: var(--econ-radius-lg);
+  background: linear-gradient(135deg, #f2f8f4 0%, #fbfdfb 100%);
+  box-shadow: var(--econ-shadow-sm);
+}
+
+.econ-compat__head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.econ-compat__head h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 1.35rem;
+  color: var(--econ-primary-dark);
+}
+
+.econ-compat__head p {
+  margin: 0;
+  color: var(--econ-gray-600);
+  font-size: 0.96rem;
+}
+
+.econ-agent-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.econ-agent-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--econ-gray-200);
+  color: var(--econ-gray-700);
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: var(--econ-shadow-sm);
+}
+
+.econ-agent-tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--econ-primary-light);
+}
+
+/* ---- 双栏能力卡 ---- */
+.econ-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin: 1.8rem 0 2.4rem;
+}
+
+.econ-split__item {
+  padding: 1.6rem;
+  background: #fff;
+  border: 1px solid var(--econ-gray-200);
+  border-radius: var(--econ-radius-lg);
+  box-shadow: var(--econ-shadow-sm);
+  transition: transform var(--econ-transition), box-shadow var(--econ-transition);
+}
+
+.econ-split__item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--econ-shadow-lg);
+}
+
+.econ-split__item h3 {
+  margin-top: 0;
+  color: var(--econ-primary-dark);
+  font-size: 1.18rem;
+}
+
+.econ-split__item p {
+  margin-bottom: 0;
+  color: var(--econ-gray-600);
+  font-size: 0.96rem;
+}
+
+.econ-split__item .econ-split__tag {
+  display: inline-block;
+  margin-bottom: 0.7rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(82, 183, 136, 0.15);
+  color: var(--econ-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+/* ---- 章节卡片增强 ---- */
+.econ-card__desc {
+  min-height: 4.6em;
+}
+
+.econ-card__meta {
+  display: block;
+  margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--econ-gray-200);
+  color: var(--econ-gray-500);
+  font-size: 0.84rem;
+}
+
+/* ---- 小标题 + 说明行 ---- */
+.econ-section-head {
+  margin: 2.4rem 0 0.4rem;
+}
+
+.econ-section-head h2 {
+  margin-top: 0;
+}
+
+.econ-section-head p {
+  color: var(--econ-gray-600);
+  margin-bottom: 0.4rem;
+}
+
+/* ---- Hero 主标语（组件名单独成行，不重复整句定位） ---- */
+.econ-hero__lead {
+  margin: 0.8rem 0 1.3rem;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.6;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+/* ---- 兼容性区域：标题居中 + 卡片网格 ---- */
+.econ-compat__head {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.35rem;
+}
+
+.econ-compat__head p {
+  max-width: 46rem;
+}
+
+.econ-agent-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.econ-agent {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+  min-height: 68px;
+  padding: 0.7rem 0.8rem;
+  background: #fff;
+  border: 1px solid var(--econ-gray-200);
+  border-radius: var(--econ-radius-md);
+  box-shadow: var(--econ-shadow-sm);
+  transition: transform var(--econ-transition), box-shadow var(--econ-transition), border-color var(--econ-transition);
+}
+
+.econ-agent:hover {
+  transform: translateY(-3px);
+  border-color: var(--econ-accent-light);
+  box-shadow: var(--econ-shadow-md);
+}
+
+.econ-agent__icon {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--icon-bg, #f1f3f5);
+  color: var(--icon-fg, #3d8b6a);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.035);
+}
+
+.econ-agent__icon svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.econ-agent__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.econ-agent__text strong {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--econ-gray-800);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.econ-agent__text small {
+  font-size: 0.74rem;
+  color: var(--econ-gray-500);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.econ-agent__badges {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-left: auto;
+}
+
+.econ-agent__badge {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  padding: 0.12rem 0.4rem;
+  border-radius: 5px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+}
+
+.econ-agent__badge--mcp {
+  color: #2f7d5b;
+  background: #e7f6ee;
+}
+
+.econ-agent__badge--ext {
+  color: #3a68c9;
+  background: #eaf1ff;
+}
+
+/* ---- 实战文章卡片 ---- */
+.econ-article-group {
+  margin: 1.6rem 0 2.2rem;
+}
+
+.econ-article-group__title {
+  margin: 1.2rem 0 0.8rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--econ-accent);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--econ-primary-dark);
+}
+
+.econ-article-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.econ-article {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+  min-height: 72px;
+  padding: 0.8rem 0.9rem;
+  background: #fff;
+  border: 1px solid var(--econ-gray-200);
+  border-radius: var(--econ-radius-md);
+  box-shadow: var(--econ-shadow-sm);
+  text-decoration: none;
+  transition: transform var(--econ-transition), box-shadow var(--econ-transition), border-color var(--econ-transition);
+}
+
+.econ-article:hover {
+  transform: translateY(-3px);
+  border-color: var(--econ-accent-light);
+  box-shadow: var(--econ-shadow-md);
+  text-decoration: none;
+}
+
+.econ-article__no {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #eef5f0;
+  color: var(--econ-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.econ-article__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.4;
+}
+
+.econ-article__body strong {
+  font-size: 0.9rem;
+  font-weight: 650;
+  color: var(--econ-gray-800);
+}
+
+.econ-article__body small {
+  margin-top: 0.2rem;
+  font-size: 0.74rem;
+  color: var(--econ-gray-500);
+}
+
+.econ-article__arrow {
+  margin-left: auto;
+  flex: 0 0 auto;
+  color: var(--econ-accent);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* ---- 响应式 ---- */
+@media (max-width: 1100px) {
+  .econ-agent-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .econ-article-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .econ-split {
+    grid-template-columns: 1fr;
+  }
+
+  .econ-compat {
+    padding: 1.2rem;
+  }
+
+  .econ-agent-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .econ-article-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .econ-hero__tech span {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .econ-agent-grid {
+    grid-template-columns: 1fr;
+  }
+}

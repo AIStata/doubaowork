@@ -1,0 +1,153 @@
+# ============================================================
+# 豆包工作 + AIStata MCP + Stata-Kernel-Jupyter
+# 组织智能体科研流水线 · 在线书籍 / 网站
+# ============================================================
+
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - chapters/01-workflow.qmd
+    - chapters/02-stata.qmd
+    - chapters/03-reproduction.qmd
+    - chapters/04-pipeline.qmd
+    - chapters/05-resources.qmd
+  resources:
+    - figs/**
+
+website:
+  # ---- 站点基础信息 ----
+  title: "豆包工作 × Stata 在线书籍"
+  site-url: https://example.com/doubao-work-book/
+  description: "豆包工作 + AIStata MCP + Stata-Kernel-Jupyter：面向经管社科因果推断的组织智能体科研流水线"
+  favicon: figs/favicon.svg
+  open-graph: true
+  twitter-card: true
+
+  # ---- 页面导航 ----
+  page-navigation: true
+
+  # ---- 顶部导航栏 ----
+  navbar:
+    logo: figs/logo.svg
+    logo-alt: "豆包工作 × Stata 在线书籍"
+    title: false
+    background: light
+    foreground: dark
+    collapse-below: lg
+    left:
+      - text: "首页"
+        href: index.qmd
+      - text: "豆包工作流"
+        href: chapters/01-workflow.qmd
+      - text: "Stata专题"
+        href: chapters/02-stata.qmd
+      - text: "论文复现"
+        href: chapters/03-reproduction.qmd
+      - text: "实证科研流"
+        href: chapters/04-pipeline.qmd
+      - text: "资源导航"
+        href: chapters/05-resources.qmd
+    right:
+      - text: "计量经济网"
+        href: "https://www.aistata.cn"
+      - icon: search
+        aria-label: "搜索"
+
+  # ---- 左侧边栏导航 ----
+  sidebar:
+    style: docked
+    search: true
+    contents:
+      - text: "开始阅读"
+        href: index.qmd
+      - section: "课程正文"
+        contents:
+          - text: "第 1 章 豆包工作流"
+            href: chapters/01-workflow.qmd
+          - text: "第 2 章 Stata专题"
+            href: chapters/02-stata.qmd
+          - text: "第 3 章 论文复现"
+            href: chapters/03-reproduction.qmd
+          - text: "第 4 章 实证科研流"
+            href: chapters/04-pipeline.qmd
+      - section: "附录"
+        contents:
+          - text: "资源导航"
+            href: chapters/05-resources.qmd
+      - section: "快速入口"
+        contents:
+          - text: "导语 · 为什么是这套工具链"
+            href: index.qmd#why
+          - text: "兼容性 · 主流 Agent / IDE"
+            href: index.qmd#compat
+          - text: "学习路径"
+            href: index.qmd#roadmap
+
+  # ---- 页脚 ----
+  page-footer:
+    left: |
+      © 2026 豆包工作 × Stata 在线书籍 · 计量经济网
+    right: |
+      [AIStata](https://www.aistata.cn)
+    border: true
+    background: light
+
+  # ---- 搜索 ----
+  search:
+    location: navbar
+    type: overlay
+
+# ============================================================
+# 输出格式配置
+# ============================================================
+format:
+  html:
+    # ---- 主题与样式 ----
+    theme:
+      light: [cosmo, custom/theme-light.scss]
+      dark:  [darkly, custom/theme-dark.scss]
+    css:
+      - custom/styles.css
+      - custom/extra.css
+
+    # ---- 目录 ----
+    toc: true
+    toc-depth: 3
+    toc-expand: 2
+    toc-title: "本章目录"
+
+    # ---- 数学公式 ----
+    html-math-method: mathjax
+
+    # ---- 代码 ----
+    code-fold: show
+    code-overflow: wrap
+    code-link: true
+
+    # ---- 语言 ----
+    lang: zh-CN
+
+    # ---- 其他 ----
+    smooth-scroll: true
+    link-external-newwindow: true
+    link-external-icon: true
+    fig-align: center
+    fig-cap-location: bottom
+    tbl-cap-location: top
+    grid:
+      body-width: 940px
+      margin-width: 300px
+      gutter-width: 1.5rem
+
+# ============================================================
+# 执行配置：讲义正文原样呈现，不执行代码块
+# ============================================================
+execute:
+  enabled: false
+  echo: true
+  warning: false
+  message: false
+  cache: false
+  freeze: auto

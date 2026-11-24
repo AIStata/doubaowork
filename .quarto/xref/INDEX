@@ -1,0 +1,20 @@
+{
+  "index.qmd": {
+    "index.html": "aa407e0f"
+  },
+  "chapters/01-workflow.qmd": {
+    "01-workflow.html": "bd32c22a"
+  },
+  "chapters/02-stata.qmd": {
+    "02-stata.html": "fc5c6bf9"
+  },
+  "chapters/03-reproduction.qmd": {
+    "03-reproduction.html": "fed18f58"
+  },
+  "chapters/04-pipeline.qmd": {
+    "04-pipeline.html": "e000b3bc"
+  },
+  "chapters/05-resources.qmd": {
+    "05-resources.html": "350c2638"
+  }
+}

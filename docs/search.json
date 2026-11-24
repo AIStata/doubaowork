@@ -1,0 +1,801 @@
+[
+  {
+    "objectID": "chapters/05-resources.html",
+    "href": "chapters/05-resources.html",
+    "title": "资源导航",
+    "section": "",
+    "text": "本书是「数量经济学」微信公众号 2026 年 11 月—2027 年 1 月系列公开课的配套资料，逐章重写并持续更新。本章汇总本书仓库、公开课入口与相关项目主页，方便你随时找到最新版本与配套资源。",
+    "crumbs": [
+      "首页",
+      "附录",
+      "资源导航"
+    ]
+  },
+  {
+    "objectID": "chapters/05-resources.html#本书仓库与公开课入口",
+    "href": "chapters/05-resources.html#本书仓库与公开课入口",
+    "title": "资源导航",
+    "section": "本书仓库与公开课入口",
+    "text": "本书仓库与公开课入口\n\n\n\n资源\n链接\n说明\n\n\n\n\n本书仓库（GitHub）\nhttps://github.com/AIStata/deepseek-harness-metrics\n全部章节源文件与最新修订，欢迎提 Issue 反馈\n\n\n最新公开课\nhttps://www.aistata.cn/2025AI.html\n2027 年 AIStata MCP + Agent 科研训练专题课页面\n\n\n系列专题课\nhttps://mp.weixin.qq.com/s/LiqQKxHdMilu9FrWnQ5wQg\n2027 年 AIStata MCP + Workbuddy + Claude 等智能体 + Stata 学术应用专题课",
+    "crumbs": [
+      "首页",
+      "附录",
+      "资源导航"
+    ]
+  },
+  {
+    "objectID": "chapters/05-resources.html#配套课程",
+    "href": "chapters/05-resources.html#配套课程",
+    "title": "资源导航",
+    "section": "配套课程",
+    "text": "配套课程\n2027 年 AIStata MCP + Workbuddy + Claude 等智能体 + Stata 学术应用专题课\nStata 课程已持续开设 10 年 · 2017—2026 年 · 10 年 Stata 经典课程好评\nAIStata MCP论文复现智能体协作\n\n💡提示\n本书所有外部链接均在新的浏览器标签页中打开，阅读时不会丢失当前进度。若某个链接失效，请优先到本书仓库查看最新版说明。",
+    "crumbs": [
+      "首页",
+      "附录",
+      "资源导航"
+    ]
+  },
+  {
+    "objectID": "chapters/05-resources.html#相关项目主页",
+    "href": "chapters/05-resources.html#相关项目主页",
+    "title": "资源导航",
+    "section": "相关项目主页",
+    "text": "相关项目主页\n\n\n\n项目\n链接\n说明\n\n\n\n\nAIStata MCP 主页\nhttps://github.com/AIStata/AIStata-for-StataMCP\n第 9 章接入的 23 工具 MCP 通道，配置与更新说明\n\n\nStata-Kernel-Jupyter 主页\nhttps://github.com/AIStata/Stata-Kernel-Jupyter\n第 8 章接入的轻量执行通道，内核源码与文档",
+    "crumbs": [
+      "首页",
+      "附录",
+      "资源导航"
+    ]
+  },
+  {
+    "objectID": "chapters/05-resources.html#其他链接",
+    "href": "chapters/05-resources.html#其他链接",
+    "title": "资源导航",
+    "section": "其他链接",
+    "text": "其他链接\n\n\n\n资源\n链接\n说明\n\n\n\n\nAI 工具导航\nhttps://www.aistata.cn/aitools.html\nDeepSeekHarness、Workbuddy、Codex 等 8 个智能体平台专题页入口\n\n\n计量经济网\nhttps://www.aistata.cn/\n数量经济学微信公众号配套网站，课程与资料总入口",
+    "crumbs": [
+      "首页",
+      "附录",
+      "资源导航"
+    ]
+  },
+  {
+    "objectID": "chapters/03-reproduction.html",
+    "href": "chapters/03-reproduction.html",
+    "title": "第 3 章 论文复现",
+    "section": "",
+    "text": "我用豆包工作跑双重差分\n\n\n我用 豆包工作 跑合成控制法\n\n\n我用 豆包工作跑双重机器学习",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 3 章 论文复现"
+    ]
+  },
+  {
+    "objectID": "chapters/01-workflow.html#四条技术路线从生成代码到组织级调度",
+    "href": "chapters/01-workflow.html#四条技术路线从生成代码到组织级调度",
+    "title": "第 1 章 豆包工作流",
+    "section": "1.1 四条技术路线：从”生成代码”到”组织级调度”",
+    "text": "1.1 四条技术路线：从”生成代码”到”组织级调度”\nAI 进入计量实证，不是一条路，是四条完全不同的路。\n第一步必须先给学员装上”路线识别”的眼镜，否则后面的所有对比都会变成参数比较。\n\n\n\n\n\n\n\n\n\n\n路线\n代表形态\nAI 与 Stata 的关系\n人的角色\n典型卡点\n\n\n\n\nL1 文本生成\n通用对话模型\nAI 只写代码文本，人复制粘贴回 Stata 运行\n代码搬运工\n幻觉参数、版本不匹配、“在我这能跑”\n\n\nL2 会话内执行\nIDE 内嵌插件（TraeWork 类）\nAI 在 IDE 会话里同步调用 Stata，跑完看结果再下一步\n调试者\n串行阻塞，一条命令一批结果，批量任务极慢\n\n\nL3 运行时可编程\nDeepSeek Harness 类\nAI 在沙箱 Runtime 里编排工具链，自定义循环\nAgent 工程师\n门槛高，与办公协作体系弱耦合\n\n\nL4 组织级调度\n豆包工作 + AIStata MCP /Stata-Kernel-Jupyter等\nAI 把任务委派给后台子智能体并行执行，主会话保持可交互\n研究设计者 + 调度者\n批次有锁，需按批调度\n\n\n\n总结：：\n\nL1 让 AI 帮你写；L2 让 AI 陪你跑；L3 让 AI 自己会跑；L4 让一组 AI 替你跑，而你还在跟人讨论下一步怎么做。\n\nL4 的差别不在”模型更强”，而在时间结构变了：算力等待从”人盯着屏幕”变成”后台并行推进”，认知带宽从”一次一个任务”变成”边跑边设计”。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 1 章 豆包工作流"
+    ]
+  },
+  {
+    "objectID": "chapters/01-workflow.html#组织智能体范式委派并行校验交付",
+    "href": "chapters/01-workflow.html#组织智能体范式委派并行校验交付",
+    "title": "第 1 章 豆包工作流",
+    "section": "1.2 组织智能体范式：委派—并行—校验—交付",
+    "text": "1.2 组织智能体范式：委派—并行—校验—交付\n一次完整的组织智能体任务，包含四个阶段，缺一不可：\n[设计] 主会话：确定识别策略、列出独立子任务清单\n   ↓ 委派（一次性下发整批）\n[执行] 后台子智能体池：每个子任务独立跑 Stata，互不阻塞\n   ↓ 各自产出 do / log / 图 / 结果行\n[校验] 汇总智能体：检查 log 完整性、符号一致性、显著性、样本量\n   ↓ 冲突与失败项单独标记\n[交付] 主会话：收到交付包，继续批注、修订、发起下一批\n四个阶段对应四个必须讲清的概念：\n\n委派（Delegation）：不是”让 AI 继续干”，而是”把一段可独立完成的工作切出去”。切分的质量决定并行度。\n并行（Parallelism）：并行的前提是子任务之间无数据依赖。同一份清洗数据上的不同安慰剂检验可以并行；“清洗 → 回归”不能并行。\n校验（Verification）：交付前必须有机器可判定的校验，不能只靠”看起来对”。最小校验集：log 无 r(####) 错误码、系数符号与预期一致、样本量与基准一致、p 值与置信区间自洽。\n交付（Delivery）：交付物是包而非一段话——do、log、图、结果行、汇总矩阵，五件齐全才算交付。\n\n为什么”主会话不阻塞”在科研里是刚需\n实证研究的真实节奏不是线性写代码，而是”跑着等、等着想、想着改”。传统 Agent 工具在这三步里只能做第一步；一旦 Agent 开始跑，研究者的思考被迫中断。L4 的价值在于：你可以一边等 200 次置换检验跑完，一边跟合作者讨论”要不要加一个 2015 年政策叠加的排除”，讨论完回来，结果已经在飞书表里。\n同时必须讲清的能力边界（不回避）\n\n一批委派未交付，不能开第二批。这是调度锁，不是性能问题。\n因此真实的科研节奏是”批次化”而非”流水线化”：设计好一批 → 跑 → 评审 → 下一批。\n这个约束反而逼近真实科研的评审节奏：每一批检验都对应一次”导师看过、提过意见”的环节，天然留下评审痕迹。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 1 章 豆包工作流"
+    ]
+  },
+  {
+    "objectID": "chapters/01-workflow.html#在-aiagent-里面跑-stata的mcp-是什么不是什么",
+    "href": "chapters/01-workflow.html#在-aiagent-里面跑-stata的mcp-是什么不是什么",
+    "title": "第 1 章 豆包工作流",
+    "section": "1.3 在 AIAgent 里面跑 Stata的MCP 是什么、不是什么",
+    "text": "1.3 在 AIAgent 里面跑 Stata的MCP 是什么、不是什么\n是：一个把 Stata 进程封装成标准化工具接口（MCP 协议）的服务端。模型通过结构化调用执行 do 代码、读取 log、取回返回值、接收生成图片、查询帮助、安装外部命令。\n不是：\n\n不是把数据上传给大模型的通道。数据留在你的本地或服务器 Stata 实例里，出去的是指令和回执。\n不是”AI 自动理解计量经济学”。它执行你让它执行的，不会替你判断识别假设是否成立。\n不是版本管理器。可复现性仍要靠 do 文件规范、种子、包版本记录。\n\n典型后端两种：\n\n\n\n\n\n\n\n\n\n后端\n机制\n优点\n代价\n\n\n\n\npystata 常驻会话\nStata 官方 Python 接口，进程常驻，状态可延续\n快、可跨调用保留内存数据、便于交互式探索\n需匹配 Stata 版本与 Python 版本；内存占用\n\n\nbatch 批处理\n每次调用 stata -b do file.do，读 log\n隔离干净、可复现性最好、崩溃不影响其他任务\n每次启动开销；状态不延续\n\n\n\n推荐：探索阶段用 pystata，交付与复现阶段强制切 batch 模式。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 1 章 豆包工作流"
+    ]
+  },
+  {
+    "objectID": "chapters/01-workflow.html#横向对比豆包工作aistata-vs-deepseek-harness-workbuddy-traework",
+    "href": "chapters/01-workflow.html#横向对比豆包工作aistata-vs-deepseek-harness-workbuddy-traework",
+    "title": "第 1 章 豆包工作流",
+    "section": "1.4 横向对比：豆包工作+AIStata vs DeepSeek Harness / Workbuddy / TraeWork",
+    "text": "1.4 横向对比：豆包工作+AIStata vs DeepSeek Harness / Workbuddy / TraeWork\n\n大家最关心的”我为什么要换工具”。\n对比只讲定位差异，不做优劣评判。\n\n\n\n\n\n\n\n\n\n\n\n维度\n豆包工作 + SKJMCP\nDeepSeek Harness\nWorkbuddy\nTraeWork / AI IDE\n\n\n\n\n一句话定位\n组织协同 + 异步并行的实证科研调度台\n可编程 Agent 运行时沙箱\n通用 AI 工作台（办公+轻代码）\nAI 原生代码 IDE\n\n\n任务调度\n委派后台并行，主会话非阻塞\n单沙箱内脚本编排循环\n串行为主，轻量子任务\n会话内单 Agent 串行\n\n\n等待体验\n派出去就能继续讨论\n需自行写异步/多进程\n基本要等\n必须等当前任务结束\n\n\nStata 执行\nAIStata MCP 接真实 Stata，保留 License 与数据主权\n需自行接 MCP 或 API\n以生成代码为主，执行需接入MCP\n内置 MCP，也是需要接入配置\n\n\n协作底座\n原生飞书：文档/多维表/云盘/权限/评论\n弱耦合，需自建 API 对接\n可对接飞书但无组织级委派范式\n本地文件系统 + Git\n\n\n最适场景\n课题组批量稳健性、多项目并行、导师评审核验\nAgent 框架二次开发、自定义流水线\n日常办公 + 实证分析\n单人沉浸式写 do、调 bug\n\n\n明显短板\n批次锁；MCP 需自部署\n门槛高，不适合社科研究者\n缺面向因果批量检验的调度原语\n团队协作与评审闭环弱\n\n\n学术产出链路\n结果 → 多维表 → 文档 → 版本留痕\n产出留沙箱，需手动同步\n手动导出上传\n留本地，靠 Git 版本\n\n\n\n差异化总结（口播版，四句）\n\nDeepSeek Harness：给会写 Agent 的人造引擎；\nWorkbuddy：给所有人一个聪明的办公助手；\nTraeWork：给一个人一个会写 Stata 的 IDE；\n豆包工作 + AIStata MCP：给一个课题组一套能批量跑检验、能在飞书里逐条核验的科研生产系统。\n\n避免踩坑\n\n对比不是说”谁更强”。学员里已经在用 TraeWork、VsCode等，要给他”何时切换”的判断标准。\n不要夸大并行收益。并行只对无依赖任务有收益；识别策略设计、数据清洗、基准设定这些核心环节，并行帮不上忙。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 1 章 豆包工作流"
+    ]
+  },
+  {
+    "objectID": "chapters/01-workflow.html#为什么要学习本课",
+    "href": "chapters/01-workflow.html#为什么要学习本课",
+    "title": "第 1 章 豆包工作流",
+    "section": "1.5 为什么要学习本课",
+    "text": "1.5 为什么要学习本课\n数量经济学微信公众号近期推送了系列AIStata MCP 或者Stata-Kernel-Jupyter 相关文章，涉及目前大家使用到的主流 Agent，接入自研的 MCP 扩展插件插件，可以覆盖主流 AIAgent ，实现在 AI 里面一站式跑 Stata，详见\n我在一站式科研平台里面用 ClaudeCode 跑 Stata 代码\n我在 DeepseekHarness 里面跑 Stata 代码\n我在 opencode 里面跑 Stata 代码\n我在 Codex 里面跑 Stata 代码\n我在 豆包工作 里面跑 Stata 代码\n我在 GithubCopilot里跑Stata代码Bacon分解\n我在 TraeCN/TraeWork 跑Stata代码\nAIStata MCP接入主流Agent平台\nAIStata MCP全面适配Workbuddy、Trae、ClaudeCode等主流AIAgent，附论文复现展示!",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 1 章 豆包工作流"
+    ]
+  },
+  {
+    "objectID": "chapters/01-workflow.html#环境清单与版本矩阵",
+    "href": "chapters/01-workflow.html#环境清单与版本矩阵",
+    "title": "第 1 章 豆包工作流",
+    "section": "2.1 环境清单与版本矩阵",
+    "text": "2.1 环境清单与版本矩阵\n\n\n\n\n\n\n\n\n\n组件\n最低\n推荐\n说明\n\n\n\n\nStata\n16/17\n18 / 19\n17 起 pystata 稳定；18+ 对 didregress、causal 支持更好\n\n\nPython（若用 pystata 后端）\n3.9\n3.11 / 3.12\n必须与 Stata 官方支持的 Python 版本匹配\n\n\nNode（若用 Node 版 MCP server）\n18\n20 / 22\n版本过低会导致 MCP 传输层报错\n\n\n操作系统\nWin10 / macOS 12\nWin11 / macOS 14（Apple Silicon 需确认 Stata 为 ARM 原生版）\nRosetta 下 pystata 常有路径问题\n\n\n网络\n可访问 SSC / 包镜像\n内网镜像\n外部命令预装是部署成败关键",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 1 章 豆包工作流"
+    ]
+  },
+  {
+    "objectID": "chapters/01-workflow.html#aistata-mcp-的两种部署形态",
+    "href": "chapters/01-workflow.html#aistata-mcp-的两种部署形态",
+    "title": "第 1 章 豆包工作流",
+    "section": "2.2 AIStata MCP 的两种部署形态",
+    "text": "2.2 AIStata MCP 的两种部署形态\n形态 A：IDE 内嵌服务（单机自用）\n\n场景：个人笔记本、单篇论文、快速探索\n特点：随 IDE 启动，配置集中在一个 json；适合单任务范式\n缺点：与本机强绑定，多人无法共享；IDE 关闭即服务消失\n\n形态 B：MCP Server",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 1 章 豆包工作流"
+    ]
+  },
+  {
+    "objectID": "chapters/01-workflow.html#服务端配置与外部命令预装",
+    "href": "chapters/01-workflow.html#服务端配置与外部命令预装",
+    "title": "第 1 章 豆包工作流",
+    "section": "2.3 服务端配置与外部命令预装",
+    "text": "2.3 服务端配置与外部命令预装\n配置要点（四项）\n\nStata 可执行路径：Windows 指向 Stata18.exe（或 StataMP-64.exe），macOS 指向 Stata.app/Contents/MacOS/Stata。\n工作目录白名单：只允许访问项目目录，禁止全盘。这是安全底线，不是可选。\n超时与内存：单任务超时（建议 600–1800 秒，置换类任务放宽）、set maxvar（宽面板必需）。\n图片与日志落盘：明确 figure 输出目录、log 目录，并让 MCP 返回可访问路径。\n\n外部命令预装清单（按课程模块分组）\n\n\n\n\n\n\n\n\n分组\n命令\n用途\n\n\n\n\n基础\nreghdfe ftools estout outreg2 coefplot\n高维固定效应、表格、图形\n\n\nDID\ncsdid drdid did_imputation eventdd did_multiplegt_dyn alldid\n交错 DID、事件研究、异质性稳健\n\n\n匹配\npsmatch2 teffects（内置） cem（可选）\nPSM、平衡性检验\n\n\nRDD\nrdrobust rddensity rdlocrand\n断点回归与密度检验\n\n\n合成控制\nsynth synth_runner sdid\nSCM、合成 DID\n\n\n门槛/非线性\nxthreg\n面板门槛\n\n\n空间\nxsmle spmat spregress（内置 sp 系列）\n空间面板、空间权重\n\n\n机器学习\nddml pystacked lassopack\n双重机器学习、堆叠、LASSO\n\n\n动态\npvar lpirfs xtset 配套\nPVAR、局部投影\n\n\n\n预装三条铁律\n\n装完立即 which &lt;cmd&gt; 逐条验证，输出写入 env_manifest.log；\n记录每个包的版本（ado describe &lt;cmd&gt; 或看 ado 文件头），写进项目 ENV.md；\n不要在交付后才装包。装包动作必须发生在批次执行之前，否则并行子任务会各自触发安装、相互抢占、甚至互相覆盖。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 1 章 豆包工作流"
+    ]
+  },
+  {
+    "objectID": "chapters/01-workflow.html#在豆包工作中接入为技能",
+    "href": "chapters/01-workflow.html#在豆包工作中接入为技能",
+    "title": "第 1 章 豆包工作流",
+    "section": "2.4 在豆包工作中接入为技能",
+    "text": "2.4 在豆包工作中接入为技能\n接入四步（结构）\n\n新建项目空间（一门课/一个课题一个空间，避免串味）\n添加自定义技能，填入 MCP 服务地址与传输方式（stdio / HTTP）\n开启工具权限：代码执行、文件读写、图片返回、帮助查询\n绑定飞书连接器：多维表格写入、文档创建、云盘上传\n\n接入后必须验证的三类信号\n\n工具可见：会话里能触发 Stata 执行工具，而不是”我以为它会调”\n回执完整：一次调用回来的是 log + 返回值 + 产物路径三样，缺一即为配置不全\n失败可读：故意跑一条错命令（如 reg yyy xxx），确认返回的是可读错误码与 log 片段，而不是”执行失败”\n\n\n教学坑点提醒：很多学员卡在”看起来接上了，实际没回执”。判断标准很简单——能不能拿到 log 文本。拿不到 log 的接入，等于没接入，后面所有可复现性都无从谈起。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 1 章 豆包工作流"
+    ]
+  },
+  {
+    "objectID": "chapters/01-workflow.html#常见故障树",
+    "href": "chapters/01-workflow.html#常见故障树",
+    "title": "第 1 章 豆包工作流",
+    "section": "2.7 常见故障树",
+    "text": "2.7 常见故障树\n\n\n\n现象\n最可能原因\n处置\n\n\n\n\n调用无响应\n服务未启动 / 端口被占\n查进程、换端口\n\n\n返回空 log\n后端 batch 模式未正确重定向日志\n显式 log using 并回读\n\n\nr(601) 文件不存在\n工作目录非预期\n强制绝对路径 + 目录白名单\n\n\n图片不返回\nexport 路径不在白名单 / 格式不支持\n统一导出 png 到固定目录\n\n\n中文乱码\n编码或字体\ndo 文件 UTF-8；图中文字用英文或指定字体\n\n\n并发任务互相覆盖\n共享 workdir\n每子任务独立目录（关键）\n\n\n包找不到\n未预装 / 个人 ado 路径\n预装 + which 验证 + 统一 ado 路径\n\n\n超时\n置换/自助类任务过长\n提高超时 / 拆小批次 / 减少重复次数",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 1 章 豆包工作流"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "豆包工作 × Stata 在线书籍",
+    "section": "",
+    "text": "在线讲义 · 组织智能体 · 因果实证科研\n    \n    \n      豆包工作 + AIStata MCP + Stata-Kernel-Jupyter\n      面向经管社科因果推断的组织智能体科研流水线\n    \n    \n      组织智能体\n      MCP 连接器\n      常驻内核\n      论文复现\n    \n    \n      从工具链部署、Stata 内核接入，到论文复现与批量实证作业调度，把「写—跑—验—交」串成可协同、可留痕、可复现的完整链路。\n    \n    \n      4 大章节\n      7 份原始讲义\n      双形态 Stata 扩展\n      持续更新\n    \n    \n      开始阅读\n      了解兼容性",
+    "crumbs": [
+      "首页",
+      "开始阅读"
+    ]
+  },
+  {
+    "objectID": "index.html#why",
+    "href": "index.html#why",
+    "title": "豆包工作 × Stata 在线书籍",
+    "section": "导语：为什么是这套工具链",
+    "text": "导语：为什么是这套工具链\n本站以讲义原文为主线，围绕豆包工作中的 Stata 执行能力展开：先用组织智能体范式理解”人—AI—工具”的分工，再把 AIStata MCP 与 Stata-Kernel-Jupyter 接进日常科研，最后落到论文复现与整条实证科研流水线。\n一句话概括这套组合的定位：\n\n豆包工作 + AIStata MCP + Stata-Kernel-Jupyter —— 面向经管社科因果推断的组织智能体科研流水线。\n\n这套组合提供两条接入形态：VS Code 扩展插件与 MCP 协议连接器。下面的章节按”范式认知 → 工具接入 → 论文复现 → 流水线调度”的顺序展开。\n\n\n  \n    主流 AI Agent / IDE，都能接上我们的 Stata 扩展\n    自研扩展同时提供 VS Code 扩展插件与 MCP 协议两种形态 —— 凡是支持任一种的 Agent 与编辑器，都能与 Stata 交互执行、读数据、出图。\n  \n  \n    \n      \n        \n      \n      CodexOpenAI 编码 Agent\n      MCP\n    \n    \n      \n        \n      \n      Claude CodeAnthropic 终端 Agent\n      MCP\n    \n    \n      \n        \n      \n      OpenCode开源编码 Agent\n      MCP\n    \n    \n      \n        WB\n      \n      WorkBuddy国产 Agent 工作台\n      扩展MCP\n    \n    \n      \n        \n      \n      Trae / TraeCN国产 AI IDE · 字节出品\n      扩展MCP\n    \n    \n      \n        \n      \n      TraeWork原 TraeSolo · 工作流\n      MCP\n    \n    \n      \n        \n      \n      DeepSeek Harness深度探索 Agent 框架\n      MCP\n    \n    \n      \n        DB\n      \n      豆包工作字节跳动 Agent\n      MCP\n    \n    \n      \n        \n      \n      VS Code 扩展微软编辑器原生扩展\n      扩展\n    \n    \n      \n        \n      \n      GitHub CopilotGitHub 编码助手\n      MCP\n    \n    \n      \n        \n      \n      Cursor / WindsurfAI 原生编辑器 · 含 Cline / Roo Code\n      MCP\n    \n    \n      \n        \n      \n      Jupyter / Quarto笔记本与动态文档\n      扩展",
+    "crumbs": [
+      "首页",
+      "开始阅读"
+    ]
+  },
+  {
+    "objectID": "index.html#articles",
+    "href": "index.html#articles",
+    "title": "豆包工作 × Stata 在线书籍",
+    "section": "实战文章与接入指南",
+    "text": "实战文章与接入指南\n从一站式科研平台到 Claude Code、DeepSeek Harness、opencode、Codex、豆包工作、GitHub Copilot、TraeCN / TraeWork，这些实战记录完整呈现了各家 Agent 与 IDE 调用 Stata 的过程；另附 MCP 接入与平台适配说明。\n\n  在各家 Agent 里跑 Stata\n  \n    \n      01\n      我在一站式科研平台里面用 ClaudeCode 跑 Stata 代码Claude Code · 实战记录\n      ↗\n    \n    \n      02\n      我在 DeepseekHarness 里面跑 Stata 代码DeepSeek Harness · 实战记录\n      ↗\n    \n    \n      03\n      我在 opencode 里面跑 Stata 代码OpenCode · 实战记录\n      ↗\n    \n    \n      04\n      我在 Codex 里面跑 Stata 代码Codex · 实战记录\n      ↗\n    \n    \n      05\n      我在 豆包工作 里面跑 Stata 代码豆包工作 · 实战记录\n      ↗\n    \n    \n      06\n      我在 GithubCopilot 里跑 Stata 代码 Bacon 分解GitHub Copilot · Bacon 分解\n      ↗\n    \n    \n      07\n      我在 TraeCN/TraeWork 跑 Stata 代码TraeCN / TraeWork · 实战记录\n      ↗\n    \n  \n\n\n  MCP 接入与平台适配\n  \n    \n      08\n      AIStata MCP 接入主流 Agent 平台MCP · 接入指南\n      ↗\n    \n    \n      09\n      AIStata MCP 全面适配 Workbuddy、Trae、ClaudeCode 等主流 AI Agent，附论文复现展示MCP · 适配与论文复现\n      ↗",
+    "crumbs": [
+      "首页",
+      "开始阅读"
+    ]
+  },
+  {
+    "objectID": "index.html#内容概览",
+    "href": "index.html#内容概览",
+    "title": "豆包工作 × Stata 在线书籍",
+    "section": "内容概览",
+    "text": "内容概览\n本在线书籍按四章组织，正文均来自原始讲义，仅作章节化排版与导航整理。配套仓库、公开课入口与项目主页见「资源导航」。\n\n\n  \n    第 1 章\n    豆包工作流\n    从 AI × 计量工具的四条技术路线讲起，厘清组织智能体\"委派—并行—校验—交付\"范式，并完成环境搭建、MCP 接入与连通性验证。\n    开始阅读 →\n    来源：豆包工作 × StataMCP 实证科研流水线（讲义全本上篇）\n  \n  \n    第 2 章\n    Stata专题\n    三份讲义合并编排：Stata-Kernel-Jupyter 扩展简介、在豆包工作中的连接器入门，以及计量经济网科研平台中的综合应用。\n    开始阅读 →\n    来源：扩展简介 / 豆包工作入门指南 / 科研平台应用\n  \n  \n    第 3 章\n    论文复现\n    以单任务因果推断的标准调度流为主线，覆盖 DID、RDD、PSM 全流程，并延伸到前沿方法矩阵、飞书协同闭环与学术伦理。\n    开始阅读 →\n    来源：豆包工作 · 论文复现专题（讲义全本中下篇）\n  \n  \n    第 4 章\n    实证科研流\n    完整呈现组织智能体驱动的因果实证科研流水线：批次设计、并行委派、交付包规范、容错重跑与综合实战工坊。\n    开始阅读 →\n    来源：豆包工作 × StataMCP 实证科研流水线（全本）\n  \n  \n    附录\n    资源导航\n    本书仓库、最新公开课与系列专题课入口，AIStata MCP 与 Stata-Kernel-Jupyter 项目主页，以及 AI 工具导航与配套课程。\n    查看资源 →\n    来源：在线资源",
+    "crumbs": [
+      "首页",
+      "开始阅读"
+    ]
+  },
+  {
+    "objectID": "index.html#roadmap",
+    "href": "index.html#roadmap",
+    "title": "豆包工作 × Stata 在线书籍",
+    "section": "学习路径",
+    "text": "学习路径\n\n  豆包工作流\n  →\n  Stata专题\n  →\n  论文复现\n  →\n  实证科研流\n  →\n  资源导航\n\n\n\n\n如果你的目标是\n建议从哪里开始\n\n\n\n\n判断该用哪条 AI × Stata 路线\n第 1 章：豆包工作流\n\n\n在 VS Code / Jupyter / 豆包工作里跑通 Stata\n第 2 章：Stata专题\n\n\n复现一篇因果推断论文并留存交付物\n第 3 章：论文复现\n\n\n给课题组搭建批量检验与评审闭环\n第 4 章：实证科研流\n\n\n找到仓库、公开课与项目主页\n附录：资源导航\n\n\n\n\n\n\n\n\n\n如何使用本站\n\n\n\n\n初学者：从第 1 章开始，先建立”路线识别”的框架，再动手接工具。\n有 Stata 基础者：直接跳到第 2 章，按讲义顺序完成扩展安装、内核注册与 MCP 接入。\n研究者与课题组：重点阅读第 3、4 章，关注交付包规范、校验清单与飞书协同闭环。\n\n站内正文保持讲义原貌，章节标题、目录与导航按在线阅读习惯重新组织。\n\n\n\n\n  \n    让 AI 接上 Stata，让科研流程可协同、可复现\n    从一条 do 命令到一组并行检验，从单机探索到课题组级流水线 —— 这套工具链把因果实证的每个环节都变成可交付、可核验的成果。\n  \n  开始学习 →",
+    "crumbs": [
+      "首页",
+      "开始阅读"
+    ]
+  },
+  {
+    "objectID": "chapters/02-stata.html",
+    "href": "chapters/02-stata.html",
+    "title": "第 2 章 Stata专题",
+    "section": "",
+    "text": "Run Stata in VS Code / Jupyter notebooks / Quarto — with a persistent session, rich outputs, and built-in AI Agent (MCP) support.\n在 VS Code / Jupyter / Quarto 中直接运行 Stata —— 常驻会话、富结果输出、内置 AI Agent（MCP）支持。\n\n作者 / Author：Econometric 计量经济网 · www.aistata.cn\n\n\n\n\nOpen any .ipynb, switch the kernel to Stata (Stata-Kernel-Jupyter), and write Stata code. Results — logs, graphs, and auto-rendered coefficient tables — appear inline, in a persistent Stata session (no cold start per cell).\n\n\n\n\n\n\n\n\n\n🧭 Activity-bar sidebar\nFour views: Overview / Environment & Kernel / Current Session / Documents & Formats. Environment status, variables and e(b) at a glance.\n\n\n🚀 Persistent session\nStata launches once. Every cell runs in ~0.1–1s with full data/macro state retained across cells.\n\n\n📊 Rich outputs\nFull log stream, inline PNG/SVG graphs, and e(b)/e(V) coefficient tables auto-rendered as HTML with significance stars.\n\n\n📓 Jupyter-native\nReal ipykernel: code-completeness detection (foreach/program/#delimit), Tab completion, Shift+Tab help, interrupt support.\n\n\n🪄 Magics\n%head %tail %browse %describe %sum %tab %locals %help %set %png %svg %restart (also *% prefix — survives .do export) and %%stata -g / -q cell magic.\n\n\n📄 Quarto & Markdown\nOne-click .do → .ipynb and .ipynb → .qmd conversion; run ``{stata} chunks in.qmd/.mdvia CodeLens; export HTML (Quarto CLI preferred). | | 🤖 **AI Agent ready**       | Built-in MCP server (stata_run/stata_help/stata_dataset) with structuredRunResult v1JSON + image outputs. One command registers it to **VS Code Chat/agent tools**, Claude, Cursor, Windsurf, Cline, Roo Code, WorkBuddy and more. | | 🔌 **Driver fallback**      | PyStata (Stata 17+, in-process) → resident worker (persistent process) → CLI batch. Auto-detected. | | 🇨🇳 **中文友好**            | Chinese docs/UI, UTF-8 full pipeline, CN mirror install, common community commands (reghdfe,esttab,winsor2`…) built into completion.\n\n\n\n\n\n\n\nInstall this extension from the VS Code Marketplace.\nClick the Stata icon in the Activity Bar → Overview → 一键注册内核 (or the Stata 内核 status-bar item). The wizard auto-detects Python, Stata, installs the kernel package and registers the Jupyter kernelspec.\nOpen a .ipynb → kernel picker → search Stata → run:\n\nsysuse auto, clear\nregress price mpg weight\n\n\n\n\n\n\n\n\n\n\nCommand\nDescription\n\n\n\n\n一键注册 Jupyter Stata 内核\nOne-stop wizard: environment check → package install → kernelspec registration → verify\n\n\n环境体检 (doctor)\nDiagnose Stata / Python / ipykernel / Quarto availability\n\n\n把 .do 文件转换为 Notebook\nSplit a .do file into notebook cells (auto-binds the Stata kernel)\n\n\n把 .ipynb 转换为 Quarto\nConvert notebook to a Quarto .qmd\n\n\n执行当前 .qmd/.md 中的全部 Stata 代码块\nRun all {stata} chunks in one session, write results back\n\n\n导出为 HTML\nRender .qmd/.md/.ipynb to HTML\n\n\n把 Stata MCP 注册到 AI 客户端\nWrite the MCP server config to supported AI clients\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSetting\nDescription\nDefault\n\n\n\n\nskj.pythonPath\nPython interpreter used to run the kernel\nauto-detect\n\n\nskj.stataExe\nStata executable path (or env STATA_EXE)\nauto-detect\n\n\nskj.driver\nauto / pystata / cli\nauto\n\n\n\n\n\n\npip install stata-kernel-jupyter[jupyter]\nskj kernel install          # register the Jupyter kernel\nskj doctor                  # environment check\nskj run \"reg y x\" --json    # structured RunResult v1\nskj install-agent           # register MCP to AI clients\nskj quarto run paper.qmd    # execute all {stata} chunks\nskj html paper.qmd          # render HTML\n\n\n\n\nStata 16–19 (MP/SE/BE) installed locally\nPython ≥ 3.9 with ipykernel (the wizard installs what is missing)\nOptional: Quarto CLI for best HTML/PDF rendering\n\n\n\n\nMIT. This extension is an independent front-end; the Stata engine logic lives in the Python package stata_kernel_jupyter. Stata® is a trademark of StataCorp LLC; this project is not affiliated with StataCorp.\n\n\n\n\n\n打开任意 .ipynb，把内核切换为 Stata (Stata-Kernel-Jupyter)，直接写 Stata 代码。 日志、图形、自动渲染的回归系数表内联显示 —— 全程使用常驻 Stata 会话（每个 cell 无冷启动）。\n\n\n\n\n\n\n\n\n\n🧭 左侧侧边栏\n活动栏 Stata 图标，4 个视图：概览 / 环境与内核 / 当前会话 / 文档与格式。环境状态、变量表、e(b) 系数一眼可见\n\n\n🚀 常驻会话\nStata 只启动一次，每个 cell 约 0.1–1 秒出结果，数据/宏跨 cell 完整保留\n\n\n📊 富输出\n完整日志流、PNG/SVG 图形内嵌、e(b)/e(V) 自动渲染为带显著性星号的 HTML 系数表\n\n\n📓 Jupyter 原生\n真正的 ipykernel：代码完整性判定（foreach/program/#delimit）、Tab 补全、Shift+Tab 帮助、中断支持\n\n\n🪄 Magics\n%head %browse %sum %help %restart 等（兼容 *% 前缀，导出 .do 仍可跑）与 %%stata -g/-q\n\n\n📄 Quarto/Markdown\n.do→.ipynb、.ipynb→.qmd 一键转换；.qmd/.md 中 stata 代码块 CodeLens 一键运行；HTML 导出\n\n\n🤖 AI Agent 适配\n内置 MCP server（stata_run/stata_help/stata_dataset，RunResult v1 结构化 JSON + 图像）；一条命令注册到 VS Code Chat/Agent 工具、Claude、Cursor、Windsurf、Cline、Roo Code、WorkBuddy 等\n\n\n🔌 驱动降级\nPyStata（17+ 进程内）→ 常驻进程 → CLI 批处理，自动探测\n\n\n🇨🇳 国内化\n中文文档与 UI、UTF-8 全链路、国内镜像安装、补全内置 reghdfe/esttab/winsor2 等常用社区命令\n\n\n\n\n\n\n\n商城安装本扩展；\n点左侧活动栏 Stata 图标 → 「概览」点 一键注册内核（或点右下角状态栏「Stata 内核」），向导自动完成环境检测、装包、内核注册；\n打开 .ipynb → 内核选择器搜 Stata → 运行代码。\n\nsysuse auto, clear\nregress price mpg weight\n\n\n\n\n\n\n\n\n\n\n视图\n内容\n\n\n\n\n概览\n环境状态卡、4 步快速开始、常用入口按钮\n\n\n环境与内核\nPython 切换、Stata 版本与路径、驱动模式、依赖检查、内核注册状态\n\n\n当前会话\n数据集（观测×变量）、变量表、e()/r() 宏、e(b) 系数表（含标准误/星号）\n\n\n文档与格式\n工作区 .ipynb/.do/.qmd/.md 文件树、转换与执行入口\n\n\n\n\n\n\n\n\n\n\n\n\n\n命令\n说明\n\n\n\n\n一键注册 Jupyter Stata 内核\n选环境 → 体检 Stata → 装包 → 注册 → 校验\n\n\n环境体检 (doctor)\n诊断 Stata / Python / ipykernel / Quarto\n\n\n把 .do 文件转换为 Notebook\n按空行/* %% 分节转成 ipynb 并自动绑定内核\n\n\n把 .ipynb 转换为 Quarto\n生成 .qmd\n\n\n执行当前 .qmd/.md 中的全部 Stata 代码块\n单会话顺序执行，结果回写 -executed.qmd\n\n\n导出为 HTML\nquarto CLI 优先，无则内置渲染\n\n\n把 Stata MCP 注册到 AI 客户端\n自动写入 8 类客户端配置\n\n\n刷新侧边栏\n重新探测环境 + 读取会话快照\n\n\n选择 Python 解释器 / 指定 Stata 路径\n修改 skj.pythonPath / skj.stataExe\n\n\n设置驱动模式\nauto / pystata / resident / cli\n\n\n新建 Stata Notebook\n生成绑定内核的 .ipynb 并打开\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n设置\n说明\n默认\n\n\n\n\nskj.pythonPath\n运行内核的 Python\n自动探测\n\n\nskj.stataExe\nStata 可执行文件路径（或环境变量 STATA_EXE）\n自动探测\n\n\nskj.driver\nauto / pystata / resident / cli\nauto\n\n\n\n\n\n\n\n本机安装 Stata 16–19（MP/SE/BE）\nPython ≥ 3.9 与 ipykernel（向导会自动安装缺失项）\n可选：Quarto CLI（获得最佳 HTML/PDF 渲染）",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 2 章 Stata专题"
+    ]
+  },
+  {
+    "objectID": "chapters/02-stata.html#english",
+    "href": "chapters/02-stata.html#english",
+    "title": "第 2 章 Stata专题",
+    "section": "",
+    "text": "Open any .ipynb, switch the kernel to Stata (Stata-Kernel-Jupyter), and write Stata code. Results — logs, graphs, and auto-rendered coefficient tables — appear inline, in a persistent Stata session (no cold start per cell).\n\n\n\n\n\n\n\n\n\n🧭 Activity-bar sidebar\nFour views: Overview / Environment & Kernel / Current Session / Documents & Formats. Environment status, variables and e(b) at a glance.\n\n\n🚀 Persistent session\nStata launches once. Every cell runs in ~0.1–1s with full data/macro state retained across cells.\n\n\n📊 Rich outputs\nFull log stream, inline PNG/SVG graphs, and e(b)/e(V) coefficient tables auto-rendered as HTML with significance stars.\n\n\n📓 Jupyter-native\nReal ipykernel: code-completeness detection (foreach/program/#delimit), Tab completion, Shift+Tab help, interrupt support.\n\n\n🪄 Magics\n%head %tail %browse %describe %sum %tab %locals %help %set %png %svg %restart (also *% prefix — survives .do export) and %%stata -g / -q cell magic.\n\n\n📄 Quarto & Markdown\nOne-click .do → .ipynb and .ipynb → .qmd conversion; run ``{stata} chunks in.qmd/.mdvia CodeLens; export HTML (Quarto CLI preferred). | | 🤖 **AI Agent ready**       | Built-in MCP server (stata_run/stata_help/stata_dataset) with structuredRunResult v1JSON + image outputs. One command registers it to **VS Code Chat/agent tools**, Claude, Cursor, Windsurf, Cline, Roo Code, WorkBuddy and more. | | 🔌 **Driver fallback**      | PyStata (Stata 17+, in-process) → resident worker (persistent process) → CLI batch. Auto-detected. | | 🇨🇳 **中文友好**            | Chinese docs/UI, UTF-8 full pipeline, CN mirror install, common community commands (reghdfe,esttab,winsor2`…) built into completion.\n\n\n\n\n\n\n\nInstall this extension from the VS Code Marketplace.\nClick the Stata icon in the Activity Bar → Overview → 一键注册内核 (or the Stata 内核 status-bar item). The wizard auto-detects Python, Stata, installs the kernel package and registers the Jupyter kernelspec.\nOpen a .ipynb → kernel picker → search Stata → run:\n\nsysuse auto, clear\nregress price mpg weight\n\n\n\n\n\n\n\n\n\n\nCommand\nDescription\n\n\n\n\n一键注册 Jupyter Stata 内核\nOne-stop wizard: environment check → package install → kernelspec registration → verify\n\n\n环境体检 (doctor)\nDiagnose Stata / Python / ipykernel / Quarto availability\n\n\n把 .do 文件转换为 Notebook\nSplit a .do file into notebook cells (auto-binds the Stata kernel)\n\n\n把 .ipynb 转换为 Quarto\nConvert notebook to a Quarto .qmd\n\n\n执行当前 .qmd/.md 中的全部 Stata 代码块\nRun all {stata} chunks in one session, write results back\n\n\n导出为 HTML\nRender .qmd/.md/.ipynb to HTML\n\n\n把 Stata MCP 注册到 AI 客户端\nWrite the MCP server config to supported AI clients\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSetting\nDescription\nDefault\n\n\n\n\nskj.pythonPath\nPython interpreter used to run the kernel\nauto-detect\n\n\nskj.stataExe\nStata executable path (or env STATA_EXE)\nauto-detect\n\n\nskj.driver\nauto / pystata / cli\nauto\n\n\n\n\n\n\npip install stata-kernel-jupyter[jupyter]\nskj kernel install          # register the Jupyter kernel\nskj doctor                  # environment check\nskj run \"reg y x\" --json    # structured RunResult v1\nskj install-agent           # register MCP to AI clients\nskj quarto run paper.qmd    # execute all {stata} chunks\nskj html paper.qmd          # render HTML\n\n\n\n\nStata 16–19 (MP/SE/BE) installed locally\nPython ≥ 3.9 with ipykernel (the wizard installs what is missing)\nOptional: Quarto CLI for best HTML/PDF rendering\n\n\n\n\nMIT. This extension is an independent front-end; the Stata engine logic lives in the Python package stata_kernel_jupyter. Stata® is a trademark of StataCorp LLC; this project is not affiliated with StataCorp.",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 2 章 Stata专题"
+    ]
+  },
+  {
+    "objectID": "chapters/02-stata.html#中文说明",
+    "href": "chapters/02-stata.html#中文说明",
+    "title": "第 2 章 Stata专题",
+    "section": "",
+    "text": "打开任意 .ipynb，把内核切换为 Stata (Stata-Kernel-Jupyter)，直接写 Stata 代码。 日志、图形、自动渲染的回归系数表内联显示 —— 全程使用常驻 Stata 会话（每个 cell 无冷启动）。\n\n\n\n\n\n\n\n\n\n🧭 左侧侧边栏\n活动栏 Stata 图标，4 个视图：概览 / 环境与内核 / 当前会话 / 文档与格式。环境状态、变量表、e(b) 系数一眼可见\n\n\n🚀 常驻会话\nStata 只启动一次，每个 cell 约 0.1–1 秒出结果，数据/宏跨 cell 完整保留\n\n\n📊 富输出\n完整日志流、PNG/SVG 图形内嵌、e(b)/e(V) 自动渲染为带显著性星号的 HTML 系数表\n\n\n📓 Jupyter 原生\n真正的 ipykernel：代码完整性判定（foreach/program/#delimit）、Tab 补全、Shift+Tab 帮助、中断支持\n\n\n🪄 Magics\n%head %browse %sum %help %restart 等（兼容 *% 前缀，导出 .do 仍可跑）与 %%stata -g/-q\n\n\n📄 Quarto/Markdown\n.do→.ipynb、.ipynb→.qmd 一键转换；.qmd/.md 中 stata 代码块 CodeLens 一键运行；HTML 导出\n\n\n🤖 AI Agent 适配\n内置 MCP server（stata_run/stata_help/stata_dataset，RunResult v1 结构化 JSON + 图像）；一条命令注册到 VS Code Chat/Agent 工具、Claude、Cursor、Windsurf、Cline、Roo Code、WorkBuddy 等\n\n\n🔌 驱动降级\nPyStata（17+ 进程内）→ 常驻进程 → CLI 批处理，自动探测\n\n\n🇨🇳 国内化\n中文文档与 UI、UTF-8 全链路、国内镜像安装、补全内置 reghdfe/esttab/winsor2 等常用社区命令\n\n\n\n\n\n\n\n商城安装本扩展；\n点左侧活动栏 Stata 图标 → 「概览」点 一键注册内核（或点右下角状态栏「Stata 内核」），向导自动完成环境检测、装包、内核注册；\n打开 .ipynb → 内核选择器搜 Stata → 运行代码。\n\nsysuse auto, clear\nregress price mpg weight\n\n\n\n\n\n\n\n\n\n\n视图\n内容\n\n\n\n\n概览\n环境状态卡、4 步快速开始、常用入口按钮\n\n\n环境与内核\nPython 切换、Stata 版本与路径、驱动模式、依赖检查、内核注册状态\n\n\n当前会话\n数据集（观测×变量）、变量表、e()/r() 宏、e(b) 系数表（含标准误/星号）\n\n\n文档与格式\n工作区 .ipynb/.do/.qmd/.md 文件树、转换与执行入口\n\n\n\n\n\n\n\n\n\n\n\n\n\n命令\n说明\n\n\n\n\n一键注册 Jupyter Stata 内核\n选环境 → 体检 Stata → 装包 → 注册 → 校验\n\n\n环境体检 (doctor)\n诊断 Stata / Python / ipykernel / Quarto\n\n\n把 .do 文件转换为 Notebook\n按空行/* %% 分节转成 ipynb 并自动绑定内核\n\n\n把 .ipynb 转换为 Quarto\n生成 .qmd\n\n\n执行当前 .qmd/.md 中的全部 Stata 代码块\n单会话顺序执行，结果回写 -executed.qmd\n\n\n导出为 HTML\nquarto CLI 优先，无则内置渲染\n\n\n把 Stata MCP 注册到 AI 客户端\n自动写入 8 类客户端配置\n\n\n刷新侧边栏\n重新探测环境 + 读取会话快照\n\n\n选择 Python 解释器 / 指定 Stata 路径\n修改 skj.pythonPath / skj.stataExe\n\n\n设置驱动模式\nauto / pystata / resident / cli\n\n\n新建 Stata Notebook\n生成绑定内核的 .ipynb 并打开\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n设置\n说明\n默认\n\n\n\n\nskj.pythonPath\n运行内核的 Python\n自动探测\n\n\nskj.stataExe\nStata 可执行文件路径（或环境变量 STATA_EXE）\n自动探测\n\n\nskj.driver\nauto / pystata / resident / cli\nauto\n\n\n\n\n\n\n\n本机安装 Stata 16–19（MP/SE/BE）\nPython ≥ 3.9 与 ipykernel（向导会自动安装缺失项）\n可选：Quarto CLI（获得最佳 HTML/PDF 渲染）",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 2 章 Stata专题"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#prompt-六要素结构",
+    "href": "chapters/04-pipeline.html#prompt-六要素结构",
+    "title": "第 4 章 实证科研流",
+    "section": "3.1 Prompt 六要素结构",
+    "text": "3.1 Prompt 六要素结构\n一条能进论文的调度指令，必须含六要素。少一个，结果就要返工。\n\n\n\n\n\n\n\n\n\n要素\n作用\n反例\n正例片段\n\n\n\n\n① 角色与目标\n锚定任务性质\n“帮我跑个回归”\n“以实证研究助理身份，完成基准 DID 估计”\n\n\n② 数据与样本\n消除歧义\n“用面板数据”\n“使用 01_raw/city_panel_v3.dta，样本限定 2008–2022、剔除缺失被解释变量”\n\n\n③ 命令与设定\n保证可比\n“跑 DID”\n“reghdfe y did, absorb(city year) cluster(city)，另用 csdid 做交错稳健对照”\n\n\n④ 输出规格\n决定能否交付\n“给我结果”\n“输出 esttab 三线表（系数/se/星号/N/R²）、事件研究图 png、完整 log”\n\n\n⑤ 校验要求\n决定可信度\n无\n“报告处理组/对照组样本量、平行趋势检验统计量、VIF”\n\n\n⑥ 留存要求\n决定可复现\n无\n“do 存为 02_do/b01_baseline_v1.do，log 同名，写入多维表格一行”\n\n\n\n六要素口诀（板书）：谁做、用什么做、怎么做、交什么、怎么验、存哪。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#did-全流程示例基准-事件研究-表格",
+    "href": "chapters/04-pipeline.html#did-全流程示例基准-事件研究-表格",
+    "title": "第 4 章 实证科研流",
+    "section": "3.2 DID 全流程示例（基准 → 事件研究 → 表格）",
+    "text": "3.2 DID 全流程示例（基准 → 事件研究 → 表格）\nStep 1 基准估计\n* b01_baseline_v1.do  —— 基准双向固定效应 DID\nversion 18\nclear all\nset more off\nset seed 20261108\n\nuse \"01_raw/city_panel_v3.dta\", clear\n\n* 样本规则（写死在 do 里，不靠提示词）\nkeep if year &gt;= 2008 & year &lt;= 2022\ndrop if missing(y)\nxtset city year\n\n* 基准\nreghdfe y did, absorb(city year) cluster(city) keepsamplealways\nestimates store m1\n\n* 加控制变量\nreghdfe y did $controls, absorb(city year) cluster(city)\nestimates store m2\n\n* 交错处理稳健对照\ncsdid y $controls, ivar(city) time(year) gvar(first_treat) method(dripw)\nestimates store m3\n\nesttab m1 m2 using \"05_delivery/tab_baseline.rtf\", replace ///\n    b(3) se(3) star(* 0.10 ** 0.05 *** 0.01) ///\n    stats(N r2_a, labels(\"N\" \"Adj. R2\")) ///\n    title(\"表1 基准回归结果\")\n\nlog using \"03_log/b01_baseline_v1.log\", replace text\nStep 2 事件研究（平行趋势）\n* b02_event_v1.do\nuse \"01_raw/city_panel_v3.dta\", clear\nkeep if inrange(year,2008,2022)\nxtset city year\n\n* 生成相对时间虚拟变量（以 -1 期为基期）\ngen rel = year - first_treat\nforvalues k = 5(-1)2 {\n    gen pre`k' = (rel == -`k')\n}\nforvalues k = 0/4 {\n    gen post`k' = (rel == `k')\n}\n* 基期 pre1 省略\n\nreghdfe y pre5 pre4 pre3 pre2 post0 post1 post2 post3 post4 $controls, ///\n    absorb(city year) cluster(city)\n\ncoefplot, keep(pre5 pre4 pre3 pre2 post0 post1 post2 post3 post4) ///\n    vertical yline(0) xline(0) ///\n    coeflabels(pre5 \"-5\" pre4 \"-4\" pre3 \"-3\" pre2 \"-2\" ///\n               post0 \"0\" post1 \"1\" post2 \"2\" post3 \"3\" post4 \"4\") ///\n    xtitle(\"相对政策实施期\") ytitle(\"处理效应\") ///\n    title(\"图1 事件研究：平行趋势与动态效应\")\ngraph export \"04_figure/fig_event_study.png\", replace width(2000)\n关键教学点：事件研究的基期选择与端点期合并（把 -5 以前合并为 pre5、+4 以后合并为 post4）是审稿人最爱挑的点。要求在 Prompt 里显式写死这两条，否则 AI 常默认做”每一期一个虚拟变量”，导致共线性或样本稀疏。\nStep 3 表格与图回流\n\nesttab 输出 rtf/tex → 上传云盘 → 贴入飞书文档《回归表模板》\npng → 上传 04_figure → 飞书文档插入\n一行记录写入多维表格：项目ID、批次号、子任务名、方法、系数、se、p、N、R²、do链接、log链接、图链接、状态",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#rdd-全流程示例",
+    "href": "chapters/04-pipeline.html#rdd-全流程示例",
+    "title": "第 4 章 实证科研流",
+    "section": "3.3 RDD 全流程示例",
+    "text": "3.3 RDD 全流程示例\n* b03_rdd_v1.do\nuse \"01_raw/score_panel.dta\", clear\n\n* 1) 断点有效性：密度检验（操纵检验）\nrddensity running, c(0) plot\n\n* 2) 带宽选择 + 稳健估计\nrdrobust y running, c(0) all\nestimates store rd_main\n\n* 3) 协变量平衡（断点两侧）\nrdrobust x1 running, c(0)\nrdrobust x2 running, c(0)\n\n* 4) 带宽敏感性\nforeach h in 0.5 0.75 1 1.25 1.5 {\n    rdrobust y running, c(0) h(`h')\n}\n\n* 5) 安慰剂断点\nforeach c in -0.2 -0.1 0.1 0.2 {\n    rdrobust y running, c(`c')\n}\nAI 常错点（必须写进 Prompt 校验项）：\n\n忘记 rdrobust 默认已是稳健偏差校正，又手动加上传统方差 → 重复\n混淆 h（带宽）与 b（bias band）参数含义\n密度检验仅做图不做统计量（应报告 p 值）\n平衡性检验只用均值差，不做断点邻域内检验",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#psm-psm-did-全流程示例",
+    "href": "chapters/04-pipeline.html#psm-psm-did-全流程示例",
+    "title": "第 4 章 实证科研流",
+    "section": "3.4 PSM / PSM-DID 全流程示例",
+    "text": "3.4 PSM / PSM-DID 全流程示例\n* b04_psm_v1.do\nuse \"01_raw/firm_panel.dta\", clear\n\nset seed 20261108\nset matsize 2000\n\n* 1) 倾向得分\npsmatch2 treat $xlist, outcome(y) logit neighbor(1) common cal(0.01) //\n    ties noreplacement\n\n* 2) 平衡性检验（必须报告标准化偏差）\npstest $xlist, both graph\ngraph export \"04_figure/fig_psm_balance.png\", replace\n\n* 3) 共同支撑\npsgraph\n\n* 4) PSM-DID\n* 用 _weight 加权的 DID\nreghdfe y did [aw=_weight], absorb(firm year) cluster(firm)\n教学要点：PSM 的”结果好不好”不看 ATT 显著不显著，看平衡性。要求 Prompt 强制输出 pstest 的标准化偏差表与共同支撑图，否则交付不合格。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#结果回流飞书的三种方式",
+    "href": "chapters/04-pipeline.html#结果回流飞书的三种方式",
+    "title": "第 4 章 实证科研流",
+    "section": "3.5 结果回流飞书的三种方式",
+    "text": "3.5 结果回流飞书的三种方式\n\n\n\n\n\n\n\n\n\n\n方式\n适用\n做法\n优点\n风险\n\n\n\n\nA 表格直写\n结构化数值（系数、p、N）\nMCP 返回结构化字段 → 连接器写多维表格行\n可筛选、可看板、可统计\n字段映射错会静默丢数据\n\n\nB 文档嵌入\n成品表格与图\n产物上传云盘 → 文档引用\n直接可写进论文\n版本多时易混乱，必须带批次号\n\n\nC 双写（推荐）\n交付批次\nA 写台账 + B 出报告\n台账可统计、报告可交付\n需保证两者同源（同一 log）\n\n\n\n规矩：台账必须与 log 同源。禁止”表格里手填一个更好看的 p 值”。这是第七章红线的技术落点。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#结果自检清单12-项",
+    "href": "chapters/04-pipeline.html#结果自检清单12-项",
+    "title": "第 4 章 实证科研流",
+    "section": "3.6 结果自检清单（12 项）",
+    "text": "3.6 结果自检清单（12 项）\n交付前逐条打勾，任何一项不过，不得进入下一批：\n\nlog 中无 r(####) 错误码\n样本量 N 与基准一致（或差异有明确规则解释）\n处理组/对照组样本数已报告\n固定效应维度与聚类层级一致（聚类层级 ≥ 处理层级）\n系数符号与研究假设方向一致（不一致必须解释而非隐藏）\n标准误未异常缩小（警惕聚类错误或权重误用）\n星号规则与表注一致（10%/5%/1%）\n事件研究基期明确、端点合并规则写明\n平衡性/密度/平行趋势检验已做且报告统计量\n图文件名与批次号匹配，可反查 do\ndo 文件含 set seed（涉及随机过程时必须）\n多维表格行已写入且字段无空值",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#本章实操任务",
+    "href": "chapters/04-pipeline.html#本章实操任务",
+    "title": "第 4 章 实证科研流",
+    "section": "3.7 本章实操任务",
+    "text": "3.7 本章实操任务\n用 sysuse 或课程提供的城市面板，完成：\n\n一条基准 DID（含聚类）\n一张事件研究图\n一张 esttab 三线表\n一行多维表格记录\n提交：do 链接 + log 链接 + 图 + 表行截图",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#任务依赖图dag判定法",
+    "href": "chapters/04-pipeline.html#任务依赖图dag判定法",
+    "title": "第 4 章 实证科研流",
+    "section": "4.1 任务依赖图（DAG）判定法",
+    "text": "4.1 任务依赖图（DAG）判定法\n并行度不是拍脑袋，是画图。把研究任务画成有向图，没有箭头相连的节点才能并行。\n数据获取 → 清洗 → 变量构造 → 描述统计 → 基准设定\n                                              ↓\n                        ┌─────────────────────┼─────────────────────┐\n                     安慰剂组              稳健性组              异质性组\n                   （可并行 5–20 个）    （可并行 8–15 个）     （可并行 6–12 个）\n                        └─────────────────────┼─────────────────────┘\n                                              ↓\n                                     汇总校验 → 诊断报告 → 评审\n判定的三个硬问题（逐个问，任一为”是”就不能并行）\n\n子任务 B 的输入是否依赖子任务 A 的输出？（是 → 串行）\n两个子任务是否写同一个文件/同一行表格？（是 → 必须隔离目录或串行）\n两个子任务是否需要同一随机种子的连续序列？（是 → 串行或显式分配独立种子）",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#可并行-必须串行-对照表",
+    "href": "chapters/04-pipeline.html#可并行-必须串行-对照表",
+    "title": "第 4 章 实证科研流",
+    "section": "4.2 可并行 / 必须串行 对照表",
+    "text": "4.2 可并行 / 必须串行 对照表\n\n\n\n\n\n\n\n\n任务类型\n可否并行\n原因\n\n\n\n\n不同安慰剂设定（时点前移、伪处理组、随机分配）\n✅\n各自独立估计，互不依赖\n\n\n不同带宽 / 不同核函数 / 不同多项式阶数\n✅\n参数扫描，彼此独立\n\n\n分组异质性（东中西、国企民企、大小企业）\n✅\n子样本独立\n\n\n空间权重矩阵多设定\n✅\n各自独立估计\n\n\n置换检验 N 次\n✅（分批）\n每次独立；注意种子分配\n\n\n替换被解释变量/解释变量口径\n✅\n独立重估\n\n\n缩尾/截尾不同阈值\n✅\n独立重估\n\n\n数据清洗 → 基准回归\n❌\n后者依赖前者产物\n\n\n基准回归 → 确定最优带宽\n半串行\n需先看基准再定扫描范围\n\n\n汇总矩阵 → 诊断报告\n❌\n后者聚合前者\n\n\n多篇文献复刻\n✅（文献间）\n各自数据与代码独立",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#批次设计四步法",
+    "href": "chapters/04-pipeline.html#批次设计四步法",
+    "title": "第 4 章 实证科研流",
+    "section": "4.3 批次设计四步法",
+    "text": "4.3 批次设计四步法\nStep 1 定锚：确定基准spec（样本、变量、固定效应、聚类、权重）。基准只有一个，且必须先单独跑通并人工确认。基准不稳，后面全废。\nStep 2 列质疑：把审稿人可能提的质疑逐条写成任务。来自四个维度：\n\n时点：政策时点是否准确、是否存在预期效应、是否存在滞后效应\n样本：极端样本、特殊地区、样本选择、缺失机制\n设定：控制变量集、固定效应层级、聚类层级、权重\n测量：变量口径替换、测量误差、代理变量 每个维度产出 2–5 个任务，一批控制在 8–20 个（太少不值得并行，太多交付校验成本上升）。\n\nStep 3 造清单：写成结构化任务表（见 4.4 模板）。每个任务必须独立可跑：独立数据读取、独立 do、独立 log、独立图名。\nStep 4 定验收：批次执行前先写”什么算通过”。示例：基准系数 0.12（p&lt;0.01）；通过标准 = 至少 80% 的稳健性检验符号一致且 p&lt;0.10；任何检验出现符号反转必须单列说明。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#并行委派-prompt-标准模板",
+    "href": "chapters/04-pipeline.html#并行委派-prompt-标准模板",
+    "title": "第 4 章 实证科研流",
+    "section": "4.4 并行委派 Prompt 标准模板",
+    "text": "4.4 并行委派 Prompt 标准模板\n【任务类型】批量稳健性检验（并行委派批次）\n\n【背景】\n研究问题：X 政策对 Y 的影响\n基准设定：reghdfe y did, absorb(city year) cluster(city)，样本 2008–2022，N=样本量\n基准结果：系数 β=【填写】，se=【填写】，p=【填写】\n数据文件：01_raw/city_panel_v3.dta（只读，不得修改）\n\n【委派要求】\n请将下列子任务委派给后台智能体并行执行。各子任务之间无数据依赖，必须彼此隔离：\n- 每个子任务使用独立工作目录 05_delivery/batch01/{task_id}/\n- 每个子任务输出独立 do、log、figure，命名含 task_id\n- 全部子任务完成后统一交付，并做交叉校验\n\n【子任务清单】\nT01 基准复现（仅用于对齐，不作结论）\nT02 安慰剂：政策时点整体前移 2 年\nT03 安慰剂：随机抽取 300 个伪处理组（seed=20261108，并行时按 T03_1..T03_6 分配独立种子）\nT04 稳健性：剔除直辖市与计划单列市\nT05 稳健性：替换被解释变量为 y_alt\nT06 稳健性：控制变量增减（加/减各一版）\nT07 异质性：按东部/中部/西部分组\nT08 异质性：按企业规模中位数分组\nT09 敏感性：缩尾 1% / 5%\nT10 敏感性：聚类层级改为省份\n\n【每个子任务的输出规格】\n1) do 文件（含 set seed、样本规则、完整命令）\n2) log（完整，含错误码检查）\n3) 若涉及图形：png 到 04_figure/batch01/\n4) 一行结果记录：task_id、方法、系数、se、p、N、R²、结论方向（一致/反转/不显著）\n\n【校验要求】\n- 报告每个任务的 N 与基准 N 的差异及原因\n- 标记所有符号反转或显著性下降的任务，不得省略\n- 生成一张汇总矩阵（行=子任务，列=系数、se、p、显著性、方向）\n- 若任一子任务失败，返回该任务的错误码与 log 片段，不影响其他任务交付\n\n【交付】\n- 汇总矩阵写入飞书多维表格《实证结果中台》，批次号 batch01\n- 诊断报告写入飞书文档，含\"结论稳定性判定\"段落\n- 明确告知：本批次交付完成后我才可发起下一批委派\n模板使用要点（讲给学员的话）\n\n第 3 段”隔离”是防并发覆盖的关键，删掉它事故率会飙升\n“结论方向”字段是防”只报显著”的技术手段\n最后一句是主动声明调度约束，避免学员以为 Agent 能连续接活",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#交付包目录规范与汇总矩阵",
+    "href": "chapters/04-pipeline.html#交付包目录规范与汇总矩阵",
+    "title": "第 4 章 实证科研流",
+    "section": "4.5 交付包目录规范与汇总矩阵",
+    "text": "4.5 交付包目录规范与汇总矩阵\n单批次目录树\n05_delivery/batch01/\n  batch_manifest.json          # 批次元信息：任务清单、开始/结束时间、环境版本\n  summary_matrix.csv           # 汇总矩阵\n  T01/{run.do, run.log, result.json}\n  T02/...\n  T03_1/ ... T03_6/            # 置换类可再分子批\n  figures/                     # 该批次所有图\n  failures/                    # 失败任务与 log 片段\nbatch_manifest.json** 最小字段**\n{\n  \"batch_id\": \"batch01\",\n  \"created_at\": \"2026-11-08T10:00:00+08:00\",\n  \"data_file\": \"01_raw/city_panel_v3.dta\",\n  \"data_hash\": \"sha256:xxxx\",\n  \"stata_version\": \"18.5\",\n  \"python_version\": \"3.12\",\n  \"packages\": [\"reghdfe 6.12.1\", \"csdid 1.7\", \"estout 3.1\"],\n  \"tasks\": [{\"id\":\"T01\",\"status\":\"ok\",\"n\":12431,\"coef\":0.121,\"p\":0.003}],\n  \"seed_policy\": \"T03 使用 20261108+子批索引\"\n}\n为什么要 data_hash：三个月后审稿人问”结果是不是换了数据”，sha256 一句话解决。这一步是”AI 科研”和”AI 乱跑”的分水岭。\n汇总矩阵列设计\n\n\n\ntask_id\n设定\n系数\nse\np\nN\n方向\n显著性\n与基准一致\n备注\n\n\n\n\n\n“与基准一致”列只允许三值：一致 / 反转 / 不显著。禁止自由文本，否则无法统计。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#容错重跑与失败归档",
+    "href": "chapters/04-pipeline.html#容错重跑与失败归档",
+    "title": "第 4 章 实证科研流",
+    "section": "4.6 容错、重跑与失败归档",
+    "text": "4.6 容错、重跑与失败归档\n四类失败与处置\n\n\n\n失败类型\n表现\n处置\n\n\n\n\n环境类\n包缺失、路径不存在\n修正环境后重跑该任务，不动其他\n\n\n语法类\nr(198) 等\n从 log 定位行号，改 do 重跑\n\n\n数据类\n子样本为空、共线\n记录为”不可估计”，写入失败表并说明原因\n\n\n超时类\n置换/自助超时\n拆小批次、降重复次数、提超时\n\n\n\n原则：失败必须进交付包，不能静默消失。失败任务写进 failures/ 与汇总矩阵的”备注”列，评审时一并呈现。学术上，“这条做不了”本身就是信息。\n重跑规范：重跑不改文件名，改版本后缀：T02_v2.do。原版保留。禁止覆盖。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#调度约束下的三种分批策略",
+    "href": "chapters/04-pipeline.html#调度约束下的三种分批策略",
+    "title": "第 4 章 实证科研流",
+    "section": "4.7 调度约束下的三种分批策略",
+    "text": "4.7 调度约束下的三种分批策略\n约束复述：同一对话内，上一批委派未全部交付核验前，不能发起新一批。\n\n\n\n\n\n\n\n\n\n策略\n做法\n适用\n代价\n\n\n\n\nS1 单批大规模\n一次塞 15–20 个任务\n任务同质（如全部置换）\n单点失败影响整批交付时间\n\n\nS2 多对话分区\n按主题拆到不同对话（识别稳健性 / 异质性 / 敏感性各一对话）\n任务异质、想边跑边讨论\n需人工合并各对话交付包\n\n\nS3 串批流水\n批1 交付 → 评审 → 批2\n需要导师逐批把关\n总时长最长，但质量最高\n\n\n\n推荐组合：教学期用 S3（强调评审节奏）；项目冲刺用 S1+S2（强调吞吐）。永远不要为了并行而把”基准设定”和”稳健性”塞进同一批——基准没定，稳健性检验没有意义。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#四大前沿场景含实现要点",
+    "href": "chapters/04-pipeline.html#四大前沿场景含实现要点",
+    "title": "第 4 章 实证科研流",
+    "section": "4.8 四大前沿场景（含实现要点）",
+    "text": "4.8 四大前沿场景（含实现要点）\n\n场景 A：大规模置换检验并行\n目标：给 DID/SCM 的估计量构造经验分布，得到更严格的 p 值。\n实现要点\n\n置换单元选择：处理分配层级（城市/省份）而非观测层级。选错会让 p 值虚低。\n种子分配：seed = base_seed + 子批索引，写进 manifest，保证可复现。\n并行切分：300 次 → 6 个子任务 × 50 次，每子任务落 placebo_XXX.csv。\n合并：汇总所有”伪系数”，计算 p = (#{|β_placebo| ≥ |β_true|}+1)/(M+1)。这个 +1 很多 AI 会漏，必须在 Prompt 里写死。\n出图：置换分布直方图 + 真实系数竖线 + 置信区间。\n\n教学价值：这是最能体现并行收益的场景——串行 300 次可能 2 小时，并行 6 路约 20–30 分钟。\n\n\n场景 B：异质性扫描\n目标：一次性扫出”在哪些子群体里效应更强”，避免人工一个个写循环。\n实现要点\n\n分组维度表：地区、行业、企业规模、所有制、人口密度、财政能力等，每维 2–4 组。\n每组独立子任务，输出组内系数、组间差异检验（suest 或交互项）。\n汇总成热力图：行=维度，列=组，色=系数大小/显著性。\n纪律：异质性扫描属于探索性分析，必须标注”探索性”，不能与预注册假设混为一谈（呼应第七章）。\n\n\n\n场景 C：敏感性曲线\n目标：证明结论不依赖特定参数设定。\n实现要点\n\n扫描维度：带宽（RDD）、缩尾阈值、控制变量集、固定效应层级、聚类层级、权重。\n每个取值一个子任务，输出 (设定值, 系数, 置信区间)。\n绘”系数—设定”敏感性曲线，附”结论翻转临界点”标注。\n交付时明确：哪个设定下结论不成立，这是最有价值的发现，不是污点。\n\n\n\n场景 D：空间权重矩阵与空间计量\n目标：检验空间计量结论对权重矩阵设定的稳健性。\n实现要点\n\n权重矩阵集：邻接（0/1）、地理距离反比、经济距离、嵌套权重。\n每矩阵独立跑 xsmle（SAR/SEM/SDM 各一版）→ 任务数 = 矩阵数 × 模型数。\n汇总：直接效应/间接效应分解表（空间模型必须报告分解，不能只报总系数）。\n注意：spmat 构建矩阵是前置串行步骤，必须先单独跑通并把矩阵存成文件，再并行估计。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#本章实操任务-1",
+    "href": "chapters/04-pipeline.html#本章实操任务-1",
+    "title": "第 4 章 实证科研流",
+    "section": "4.9 本章实操任务",
+    "text": "4.9 本章实操任务\n给定基准 DID，完成：\n\n画任务 DAG（手绘或工具）\n设计一批 10 个子任务（含 1 个基准对齐任务）\n用 4.4 模板委派并行执行\n产出汇总矩阵 + 诊断报告 + 飞书台账 10 行\n提交：batch01/ 完整目录 + 飞书链接\n反思题：你这批里哪一个任务其实不该并行？为什么？",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#交错-did-与异质性处理效应",
+    "href": "chapters/04-pipeline.html#交错-did-与异质性处理效应",
+    "title": "第 4 章 实证科研流",
+    "section": "5.1 交错 DID 与异质性处理效应",
+    "text": "5.1 交错 DID 与异质性处理效应\n\n\n\n\n\n\n\n\n\n命令\n用途\n接入要点\nAI 常见错\n\n\n\n\ncsdid\nCallaway–Sant’Anna 组别—时期 ATT\n必须给 gvar（首次处理期，未处理设为 0 或缺失）；method(dripw) 与 method(dr) 结果常不同，必须都报\n把 gvar 填成”是否处理”的 0/1\n\n\ndrdid\n双重稳健 DID\n需 ivar time treatment 三要素清晰\n混淆面板与重复截面语法\n\n\ndid_imputation\nBorusyak 等插补估计\n需完整面板，缺失处理需说明\n面板不平衡未处理\n\n\neventdd\n事件研究图 + 同步置信带\n可配 accum 累积效应\n基期未指定导致共线\n\n\ndid_multiplegt_dyn\n多期/多组异质稳健\n需 placebo 与 controls 参数\n忽略其”动态效应”含义，仍按静态解读\n\n\nalldid\n多估计量对照集合\n适合作为”一个任务=多方法对照”的聚合任务\n只看其中一个估计量就下结论\n\n\n\n流水线接法：把”同一数据的 4 种 DID 估计量”做成一个子任务（内部串行、对外并行），输出”多估计量对照表”。这比拆成 4 个子任务更有解释力，也更省交付成本。\n教学金句：交错 DID 的稳健性不在于”换一个命令”,而在于同时报告多个估计量并解释差异。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#合成控制与合成-did",
+    "href": "chapters/04-pipeline.html#合成控制与合成-did",
+    "title": "第 4 章 实证科研流",
+    "section": "5.2 合成控制与合成 DID",
+    "text": "5.2 合成控制与合成 DID\n\n\n\n\n\n\n\n\n命令\n用途\n要点\n\n\n\n\nsynth\n单处理单元 SCM\n需 predictor 与 donor pool；trunit/trperiod 明确\n\n\nsynth_runner\nSCM + 安慰剂空间 + 前处理 RMSPE\n一次出置换推断，批量并行的最佳载体\n\n\nsdid\n合成 DID（Arkhangelsky 等）\n需平衡面板；权重与单位权重可输出\n\n\n\n并行设计：synth_runner 自带 placebo 循环，可作为单任务；若处理单元多（多省政策），则”每省一个任务”并行，最后汇总”处理效应分布”。\nAI 常见错：donor pool 污染（把受政策影响的其他单元放进对照池）；前处理拟合期太短；RMSPE 比值不报告。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#模糊分位数-rdd-与门槛回归",
+    "href": "chapters/04-pipeline.html#模糊分位数-rdd-与门槛回归",
+    "title": "第 4 章 实证科研流",
+    "section": "5.3 模糊/分位数 RDD 与门槛回归",
+    "text": "5.3 模糊/分位数 RDD 与门槛回归\n\n\n\n\n\n\n\n\n方法\n命令\n要点\n\n\n\n\n模糊 RDD\nrdrobust + iv 思路，或 ivregress 局部样本\n需报告第一阶段强度（弱工具问题）\n\n\n分位数 RDD\nqrd 类命令（外部包）或分位数切分近似\n分位数结果必须报多条分位线，不能只挑中位数\n\n\n面板门槛\nxthreg\n需 rx() qx() thx() 明确；门槛个数用 bootstrap\n\n\n密度操纵检验\nrddensity\n必做，报告 p 值与图\n\n\n\n流水线接法：门槛回归的”门槛个数 + 门槛值 + 置信区间”三件套必须一起交付；分位数 RDD 建议做成”分位扫描”子任务集（0.25/0.5/0.75/0.9 各一任务）。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#空间计量与空间-did",
+    "href": "chapters/04-pipeline.html#空间计量与空间-did",
+    "title": "第 4 章 实证科研流",
+    "section": "5.4 空间计量与空间 DID",
+    "text": "5.4 空间计量与空间 DID\n\n\n\n\n\n\n\n\n命令\n用途\n要点\n\n\n\n\nspmat\n构建空间权重矩阵\n前置串行；矩阵存文件复用\n\n\nxsmle\nSAR/SEM/SDM 面板估计\n需 wmat()、model()、fe/re 明确\n\n\nspregress / spxtregress\n官方 sp 系列\n与 xsmle 结果口径不同，别混用\n\n\n空间 DID\n交互项 + 空间滞后\n需同时报直接效应与间接效应\n\n\n\n必须报告：效应分解（直接/间接/总）。只报总系数是空间计量最常见的外行错误。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#机器学习因果dml因果森林政策学习",
+    "href": "chapters/04-pipeline.html#机器学习因果dml因果森林政策学习",
+    "title": "第 4 章 实证科研流",
+    "section": "5.5 机器学习因果：DML、因果森林、政策学习",
+    "text": "5.5 机器学习因果：DML、因果森林、政策学习\n\n\n\n\n\n\n\n\n方法\nStata 路径\n要点\n\n\n\n\n双重机器学习\nddml（SSC）\n需 3 个 learner（如 reg + lasso + rf），样本分割次数、交叉拟合折数必须写死\n\n\n堆叠/集成\npystacked\n依赖 Python；需在 ENV.md 记录 Python 包版本\n\n\nLASSO 变量选择\nlassopack（lasso2/rlasso）\n仅作选择，后续推断需正交化或 Post-double-selection\n\n\n因果森林\nStata 内嵌 Python 调 grf\n输出 CATE 分布 + 分组异质性 + 校准检验\n\n\n政策学习\n同上 + 自定义策略评价\n需明确”政策价值函数”定义\n\n\n\n并行设计：DML 的”不同 learner 组合”天然可并行（每组合一任务），输出对照表：ATE 估计的稳定性。这比调参追显著性更有学术价值。\nAI 常见错：把 DML 当”高级 OLS”直接报系数不做稳健性；不报告 learner 设定；不检查重叠性（overlap）。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#动态效应pvar局部投影",
+    "href": "chapters/04-pipeline.html#动态效应pvar局部投影",
+    "title": "第 4 章 实证科研流",
+    "section": "5.6 动态效应：PVAR、局部投影",
+    "text": "5.6 动态效应：PVAR、局部投影\n\n\n\n方法\n命令\n要点\n\n\n\n\nPVAR\npvar\n需 lags()、inst()（GMM）、Helmholtz–Hoffmann 变换\n\n\n局部投影\nlpirfs 类外部包\n需明确 horizon、控制基期、聚类\n\n\n脉冲响应图\npvarirf / irf\n必须带置信带\n\n\n\n流水线接法：PVAR 的”滞后阶数选择”（AIC/BIC/HQIC 三准则）可做成并行任务，输出阶数敏感性对照。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#stata-python-混合执行",
+    "href": "chapters/04-pipeline.html#stata-python-混合执行",
+    "title": "第 4 章 实证科研流",
+    "section": "5.7 Stata × Python 混合执行",
+    "text": "5.7 Stata × Python 混合执行\n为什么需要：Stata 强在估计与面板处理，Python 强在置换分布、机器学习、可视化与批量 IO。\n三种混合形态\n\n\n\n形态\n做法\n适用\n\n\n\n\nStata 调 Python\npython script.py / python: 块\n生成图、跑 sklearn\n\n\nPython 调 Stata\npystata（stata.run()）\nPython 编排、Stata 计算\n\n\nMCP 分别调\n两个工具并列，各跑各的\n最稳，适合并行流水线\n\n\n\n推荐第三种：并行场景下，让 Stata 任务与 Python 任务互不内嵌，各自独立进程，避免版本/路径互扰。混合内嵌只在单机探索时用。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#方法数据样本量适配表",
+    "href": "chapters/04-pipeline.html#方法数据样本量适配表",
+    "title": "第 4 章 实证科研流",
+    "section": "5.8 方法—数据—样本量适配表",
+    "text": "5.8 方法—数据—样本量适配表\n\n\n\n方法\n最低样本结构\n常见失败点\n建议批次规模\n\n\n\n\n双向 FE DID\n面板 ≥ 5 期，处理组 ≥ 30 单元\n聚类层级过低\n8–12 任务\n\n\n交错 DID (csdid)\n多处理时点，每组 ≥ 2 单元\ngvar 构造错\n6–10\n\n\nRDD\n断点邻域 ≥ 500 观测\n带宽过窄\n10–15（扫描类）\n\n\nSCM\n前处理期 ≥ 10 期，donor ≥ 10\ndonor 污染\n按处理单元数 ×2\n\n\n空间计量\n空间单元 ≥ 100\n权重矩阵未标准化\n4–8（矩阵×模型）\n\n\nDML\nN ≥ 2000，特征 ≥ 20\nlearner 未调、重叠不足\n4–6（learner 组合）\n\n\nPVAR\nT ≥ 15，N ≥ 30\n滞后阶数过多\n3–5\n\n\n\n授课提醒：这张表是”该不该用这个方法”的第一道闸。AI 不会告诉你”你样本不够”，它只会给你一个 p 值。判断样本适配是人不可让渡的责任。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#多维表格字段与视图设计",
+    "href": "chapters/04-pipeline.html#多维表格字段与视图设计",
+    "title": "第 4 章 实证科研流",
+    "section": "6.1 多维表格字段与视图设计",
+    "text": "6.1 多维表格字段与视图设计\n主表《实证结果中台》字段（最小可行集，详细版见 04 号文件）\n\n\n\n字段\n类型\n说明\n\n\n\n\n项目ID\n文本\nP01、P02…\n\n\n批次号\n文本\nbatch01、batch02\n\n\n任务ID\n文本\nT01、T02…\n\n\n分析类型\n单选\n基准/安慰剂/稳健性/异质性/敏感性/空间/ML\n\n\n方法\n单选\nreghdfe / csdid / rdrobust / synth / xsmle / ddml\n\n\n设定摘要\n文本\n一句话写清这行在测什么\n\n\n系数 / se / p\n数字\n同源 log\n\n\nN\n数字\n\n\n\nR²\n数字\n\n\n\n方向\n单选\n一致/反转/不显著\n\n\n状态\n单选\n通过/失败/待复核\n\n\ndo 链接 / log 链接 / 图链接\nURL\n云盘直链\n\n\n评审人 / 评审意见\n人员/文本\n\n\n\n数据哈希\n文本\n便于溯源\n\n\n探索性标记\n复选\n是/否\n\n\n\n四个必备视图\n\n批次视图：按批次分组，看一批是否齐\n异常视图：筛选 方向=反转 或 状态=失败\n评审视图：筛选 状态=待复核\n看板视图：按分析类型统计通过率",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#版本治理与命名规范",
+    "href": "chapters/04-pipeline.html#版本治理与命名规范",
+    "title": "第 4 章 实证科研流",
+    "section": "6.2 版本治理与命名规范",
+    "text": "6.2 版本治理与命名规范\n命名公式：{批次}_{任务}_{内容}_v{版本}.{ext} 示例：b01_T04_drop_municipality_v2.do\n版本规则\n\nv1 首次执行；v2 因评审修改；v3 因数据更新\n禁止 final、final2、最终版、真的最终 —— 这类命名是证据链的天敌\n每次升版，多维表格新增一行，不覆盖旧行（旧行状态改”已废弃”）\n\n为什么这么严：论文返修时最常见的灾难是”我改了一版，旧结果找不到了”。多维表格天然保留全部历史，这是它相对文件夹管理的核心优势。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#评审泳道与批注工作流",
+    "href": "chapters/04-pipeline.html#评审泳道与批注工作流",
+    "title": "第 4 章 实证科研流",
+    "section": "6.3 评审泳道与批注工作流",
+    "text": "6.3 评审泳道与批注工作流\n学生：设计批次 → 委派执行 → 交付包回流（表格+文档+云盘）\n   ↓\n导师：只看\"异常视图\"与\"评审视图\" → 在文档评论区批注 → 表格\"评审意见\"栏\n   ↓\n学生：据批注发起下一批（新批次号）→ 旧批次标\"已废弃\"\n   ↓\n终稿：交付包 + 诊断报告 + ENV.md + 预注册清单 一并归档\n评审三问（导师只需问这三句）\n\n基准的样本与聚类层级，为什么是这个设定？\n反转的那几条，论文里怎么处理？\nlog 里 N 和表里 N 一致吗？\n\n这三问能在 3 分钟内判定一个实证项目是否可交付。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#知识库挂载变量字典与课题组规范",
+    "href": "chapters/04-pipeline.html#知识库挂载变量字典与课题组规范",
+    "title": "第 4 章 实证科研流",
+    "section": "6.4 知识库挂载：变量字典与课题组规范",
+    "text": "6.4 知识库挂载：变量字典与课题组规范\n挂载三样东西\n\n变量字典：变量名、含义、口径、来源、构造公式、缺失率\n课题组规范：命名规则、表注模板、星号规则、图样式\n识别策略说明：处理定义、对照池规则、样本筛选规则\n\n价值：AI 生成代码时读取知识库，产出符合课题组口径的 do，而不是”通用教科书式” do。这一步把”AI 写的代码”变成”我们组的代码”。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#仪表盘与项目看板",
+    "href": "chapters/04-pipeline.html#仪表盘与项目看板",
+    "title": "第 4 章 实证科研流",
+    "section": "6.5 仪表盘与项目看板",
+    "text": "6.5 仪表盘与项目看板\n单项目看板四块\n\n稳健性通过率（通过/总数）\n反转任务数（红色计数）\n失败任务数\n批次进度（已交付/计划）\n\n多项目看板（团队负责人视角）\n\n各项目最近交付时间\n各项目待复核行数\n各项目数据哈希是否与登记一致",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#权限矩阵",
+    "href": "chapters/04-pipeline.html#权限矩阵",
+    "title": "第 4 章 实证科研流",
+    "section": "6.6 权限矩阵",
+    "text": "6.6 权限矩阵\n\n\n\n角色\n原始数据\ndo/log\n多维表格\n文档\n云盘交付包\n\n\n\n\n项目负责人\n读写\n读写\n读写\n读写\n读写\n\n\n执行学生\n只读\n读写\n读写（本批次）\n评论\n读写本人目录\n\n\n导师/评审\n只读\n只读\n只读\n评论\n只读\n\n\n外部合作者\n不可见\n只读指定批次\n只读指定视图\n只读\n只读\n\n\n\n原则：原始数据最小可见，结果最大可审。这与直觉相反——很多人把数据锁死、结果随便传；正确做法是数据严格、结果透明可审。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#五条学术红线",
+    "href": "chapters/04-pipeline.html#五条学术红线",
+    "title": "第 4 章 实证科研流",
+    "section": "7.1 五条学术红线",
+    "text": "7.1 五条学术红线\n\nAI 产出必须人工复核。所有进入论文的数字，作者必须亲自核对 log。署名意味着责任，AI 不能署名。\n不得选择性报告。所有跑过的检验（含失败、含反转）必须在台账留痕；论文可以只报部分，但台账必须全。\n不得为显著性反复改设定。设定修改必须留版本号与理由；“试了 30 个设定取最好的”属于 p-hacking。\n不得隐藏样本修改。样本筛选规则写死在 do 里，不得在结果出来后偷偷剔除。\n不得把探索性分析包装成预注册假设。异质性扫描结果必须标注”探索性”。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#可复现性八件套",
+    "href": "chapters/04-pipeline.html#可复现性八件套",
+    "title": "第 4 章 实证科研流",
+    "section": "7.2 可复现性八件套",
+    "text": "7.2 可复现性八件套\n\n\n\n#\n内容\n落地方式\n\n\n\n\n1\ndo 文件完整可跑\n从原始数据到最终表的单一入口 master.do\n\n\n2\n种子固定\n所有随机过程 set seed，写进 manifest\n\n\n3\n包版本记录\nENV.md 记录每个外部命令版本\n\n\n4\n数据哈希\nsha256 写入 manifest 与多维表格\n\n\n5\n样本规则前置\n所有 keep/drop 集中在 do 前部，不散落\n\n\n6\nlog 全留\n每任务一 log，命名与 do 对应\n\n\n7\n表图可再生成\n表由 esttab 出、图由命令出，禁止手工贴数\n\n\n8\n交付包归档\n05_delivery 按批次归档，不删除\n\n\n\nmaster.do** 骨架**\n* master.do —— 单一入口，按批次顺序调用\ndo \"02_do/00_setup.do\"        // 环境、路径、宏\ndo \"02_do/01_clean.do\"        // 清洗（串行，唯一）\ndo \"02_do/b01_T01_baseline.do\"\ndo \"02_do/b01_T02_placebo_time.do\"\n* ... 按批次排列\ndo \"02_do/99_export_tables.do\" // 统一出表出图",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#反-p-hacking预注册检验清单",
+    "href": "chapters/04-pipeline.html#反-p-hacking预注册检验清单",
+    "title": "第 4 章 实证科研流",
+    "section": "7.3 反 p-hacking：预注册检验清单",
+    "text": "7.3 反 p-hacking：预注册检验清单\n做法：在跑任何稳健性之前，先在飞书文档写一份《稳健性检验预注册清单》，列明要做的检验、判定标准、以及”若不一致将如何解释”。执行时严格按清单委派。\n三个收益\n\n技术上：清单即批次模板，直接转成任务表\n学术上：具备预注册痕迹，抗审稿质疑\n心理上：防止”跑着跑着开始找显著”\n\n清单模板字段：检验编号｜质疑维度｜检验设计｜预期方向｜判定标准｜若不一致的处理方式",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#数据安全与合规",
+    "href": "chapters/04-pipeline.html#数据安全与合规",
+    "title": "第 4 章 实证科研流",
+    "section": "7.4 数据安全与合规",
+    "text": "7.4 数据安全与合规\n\n\n\n风险\n处置\n\n\n\n\n原始微观数据外泄\nStataMCP 本地/内网部署；数据不出域\n\n\n个体隐私字段\n进 Stata 前脱敏；do 中不 print 明细\n\n\n涉密/受限数据\n独立机器、断网、禁止上传云盘\n\n\n云盘权限过宽\n按 6.6 矩阵设置；外部合作者限定批次\n\n\n提示词泄露数据\nPrompt 里只写路径与字段名，不贴数据行\n\n\n\n一句话原则：指令可以出域，数据不出域；结果可以上云，原始不上云。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#平台能力边界与预案",
+    "href": "chapters/04-pipeline.html#平台能力边界与预案",
+    "title": "第 4 章 实证科研流",
+    "section": "7.5 平台能力边界与预案",
+    "text": "7.5 平台能力边界与预案\n\n\n\n\n\n\n\n\n边界\n表现\n预案\n\n\n\n\n批次锁\n上一批未交付不能开新批\n提前规划批次；或用多对话分区（S2）\n\n\n并发资源上限\n任务太多排队\n单批 ≤ 20 个；置换类再分子批\n\n\nMCP 服务单点\n服务挂了全部停\n关键批次前做 L1–L5 验证；保留 batch 回退路径\n\n\n长任务超时\n置换/自助超时\n降重复次数、拆批、提高超时\n\n\n模型理解偏差\n生成的设定与意图不符\nPrompt 六要素 + 执行后必查 log 首行设定",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#六小时工坊时间表",
+    "href": "chapters/04-pipeline.html#六小时工坊时间表",
+    "title": "第 4 章 实证科研流",
+    "section": "8.1 六小时工坊时间表",
+    "text": "8.1 六小时工坊时间表\n\n\n\n时段\n内容\n产出\n\n\n\n\n0:00–0:40\n环境自检（L1–L5）+ 故障排除\n五级验证截图\n\n\n0:40–1:30\n单任务跑通基准 DID\n基准 do/log/表\n\n\n1:30–2:00\n事件研究 + 平行趋势判读\n事件研究图\n\n\n2:00–2:15\n休息\n\n\n\n2:15–3:30\n批次设计（DAG + 10 任务清单）\n任务表\n\n\n3:30–4:30\n并行委派执行 + 汇总\nbatch01/ 交付包\n\n\n4:30–5:15\n飞书台账 + 诊断报告\n多维表 10 行 + 文档\n\n\n5:15–6:00\n交叉评审 + 讲师点评\n评审记录",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#综合实战任务书",
+    "href": "chapters/04-pipeline.html#综合实战任务书",
+    "title": "第 4 章 实证科研流",
+    "section": "8.2 综合实战任务书",
+    "text": "8.2 综合实战任务书\n题目：任选一个公开政策冲击（环保督察、高铁开通、自贸区设立、低碳城市试点等），使用地级市面板，完成一套可提交评审的实证交付包。\n必做项\n\n识别策略说明（1 页，含处理定义、对照逻辑、样本规则）\n基准 DID（含聚类，报 N 与组别样本量）\n事件研究（基期明确、端点合并规则写明）\n预注册稳健性清单（≥ 8 项）\n一次并行委派执行（≥ 8 子任务）\n汇总矩阵 + 置换分布图或异质性热力图（二选一）\n飞书多维表格台账（每任务一行，含 do/log/图链接）\n诊断报告（含”结论稳定性判定”与”反转项处理说明”）\nENV.md + batch_manifest.json\n\n选做项（加分）\n\n多估计量 DID 对照表（csdid/drdid/did_imputation）\n合成控制对照\nDML 稳健性\n空间权重矩阵敏感性",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#评分-rubric",
+    "href": "chapters/04-pipeline.html#评分-rubric",
+    "title": "第 4 章 实证科研流",
+    "section": "8.3 评分 Rubric",
+    "text": "8.3 评分 Rubric\n\n\n\n\n\n\n\n\n\n\n维度\n权重\n优秀（90+）\n合格（75–89）\n不合格（&lt;75）\n\n\n\n\n识别设计\n20%\n处理定义清晰、对照逻辑站得住、有反事实讨论\n基本成立，个别环节含糊\n处理/对照混淆\n\n\n执行完整性\n20%\n批次全交付、无静默失败、目录规范\n有 1–2 项缺失但已说明\n大量缺失且无说明\n\n\n校验严谨性\n20%\n12 项自检全打勾、反转项如实报告并解释\n少数项缺失\n只报显著、隐藏反转\n\n\n可复现性\n20%\nmaster.do 可一键跑通、ANOM 版本齐全、哈希登记\n部分可复现\n换机跑不通\n\n\n协同治理\n15%\n台账字段完整、版本规范、评审痕迹清晰\n台账可用\n无台账或手填数据\n\n\n前沿应用\n5%\n有方法对照或敏感性曲线\n有 1 项拓展\n无",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#验收-checklist讲师逐项打勾",
+    "href": "chapters/04-pipeline.html#验收-checklist讲师逐项打勾",
+    "title": "第 4 章 实证科研流",
+    "section": "8.4 验收 Checklist（讲师逐项打勾）",
+    "text": "8.4 验收 Checklist（讲师逐项打勾）\n\nL1–L5 连通性全部通过\n基准 do 含 set seed、样本规则前置\n事件研究基期与端点合并规则写明\n批次任务 ≥ 8 且各自独立目录\nbatch_manifest.json 含数据哈希与包版本\n汇总矩阵”方向”列仅三值\n失败任务进 failures/ 且台账有记录\n多维表格字段无空值\n诊断报告含稳定性判定段落\nmaster.do 可从原始数据一键重跑",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#结业后的三条延展路径",
+    "href": "chapters/04-pipeline.html#结业后的三条延展路径",
+    "title": "第 4 章 实证科研流",
+    "section": "8.5 结业后的三条延展路径",
+    "text": "8.5 结业后的三条延展路径\n\n课题组制度化：把本课流水线写成《课题组实证规范 v1》，含命名、目录、批次、评审、归档五章；新生入学第一周培训。\n共享计算池：搭一台课题组 StataMCP 服务器，统一版本与包，成员各用各的对话、共用一套环境。\n方法扩展：把第五章某一方法（如 SCM 安慰剂、DML、空间）做成标准化批次模板，沉淀成”组内方法卡”。\n\n关于工具链切换的判断标准（回应第一章对比）\n\n单人、快速调试单个 do、要即时看每一步输出 → TraeWork 类 IDE 更顺手\n要自研 Agent 流程、自定义工具编排 → DeepSeek Harness\n日常办公 + 轻量分析 → Workbuddy\n多人协作、批量检验、需要导师逐条核验证据链 → 本课方案",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#a-术语表",
+    "href": "chapters/04-pipeline.html#a-术语表",
+    "title": "第 4 章 实证科研流",
+    "section": "A 术语表",
+    "text": "A 术语表\n\n\n\n术语\n含义\n\n\n\n\nMCP\nModel Context Protocol，模型调用外部工具的标准化协议\n\n\nStataMCP\n把 Stata 进程封装为 MCP 工具的服务端\n\n\n委派 Delegation\n主会话把可独立完成的工作切给后台子智能体\n\n\n批次 Batch\n一次委派下发的任务集合，有唯一批次号\n\n\n交付包\ndo+log+图+结果行+汇总矩阵 五件齐全的产物集合\n\n\n批次锁\n上一批未交付不得开新批的调度约束\n\n\nDAG\n有向无环图，用于判定任务依赖与并行度\n\n\n预注册清单\n执行前写定的检验清单与判定标准\n\n\n数据哈希\n数据文件指纹，用于溯源\n\n\n方向列\n汇总矩阵中标记结果与基准一致/反转/不显著的字段",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#b-命令速查",
+    "href": "chapters/04-pipeline.html#b-命令速查",
+    "title": "第 4 章 实证科研流",
+    "section": "B 命令速查",
+    "text": "B 命令速查\n* 固定效应与表格\nreghdfe y x, absorb(id t) cluster(id)\nesttab m1 m2 using out.rtf, b(3) se(3) star(* 0.1 ** 0.05 *** 0.01) stats(N r2_a)\n\n* DID 家族\ncsdid y x, ivar(id) time(t) gvar(g) method(dripw)\ndrdid y x, ivar(id) time(t) treatment(treat)\neventdd y x, timevar(t) cohort(g) graph\n\n* RDD\nrdrobust y run, c(0) all\nrddensity run, c(0) plot\n\n* 匹配\npsmatch2 t x1 x2, outcome(y) neighbor(1) common cal(0.01)\npstest x1 x2, both graph\n\n* 合成控制\nsynth y x1 x2, trunit(3) trperiod(2015) fig\nsynth_runner y x1 x2, trunit(3) trperiod(2015) preperiod(2006) postperiod(2020)\n\n* 门槛与空间\nxthreg y x1 x2, rx(x1) qx(th) thx(th) trim(0.01 0.01) grid(100)\nxsmle y x1 x2, wmat(W) model(sdm) fe type(both) nolog\n\n* 机器学习\nddml crossfit, y(y) d(did) learners(reg lasso) fold(5)\n\n* 动态\npvar y x, lags(1) inst(gmm)",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  },
+  {
+    "objectID": "chapters/04-pipeline.html#c-参考读物与资源",
+    "href": "chapters/04-pipeline.html#c-参考读物与资源",
+    "title": "第 4 章 实证科研流",
+    "section": "C 参考读物与资源",
+    "text": "C 参考读物与资源\n\nStata 官方手册：help reghdfe、help csdid、help rdrobust、help xsmle、help pvar\nCallaway & Sant’Anna (2021) 交错 DID 与异质性处理效应\nGoodman-Bacon (2021) 双向固定效应 DID 的偏误分解\nBorusyak, Jaravel & Spiess (2024) 插补估计\nArkhangelsky et al. (2021) 合成 DID\nChernozhukov et al. (2018) 双重机器学习\nAbadie, Diamond & Hainmueller 合成控制系列\n各组方法卡：建议课题组自建”方法—数据—陷阱”三列表，随用随补\n\n\n\n讲义结语（建议作为最后一页 PPT） AI 不会让实证研究变简单，它只是把”跑得慢”变成”想得清”的机会。 并行省下的时间，应该花在识别策略上，而不是花在找更多设定上。",
+    "crumbs": [
+      "首页",
+      "课程正文",
+      "第 4 章 实证科研流"
+    ]
+  }
+]

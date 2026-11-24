@@ -1,0 +1,81 @@
+// ============================================================
+// 因果推断方法精读 · 清新自然深色主题（SCSS 变量覆盖 Bootswatch Darkly）
+// ============================================================
+// 深色模式：墨绿 + 深灰 + 薄荷绿点缀
+// ============================================================
+
+/*-- scss:defaults --*/
+
+// 主色（深色模式调亮，确保对比度）
+$primary:       #52b788;   // 薄荷绿
+$secondary:     #74c69d;   // 浅草绿
+$success:       #40916c;   // 森林绿
+$info:          #52b788;   // 草绿
+$warning:       #f4a261;   // 浅橙
+$danger:        #e07a5f;   // 珊瑚橙
+
+$body-bg:       #1a241e;   // 深墨绿灰
+$body-color:    #cdd9d1;   // 浅灰绿
+
+// 字体（与浅色一致）
+$font-family-sans-serif:      "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+$font-family-serif:           "Noto Serif SC", "Source Han Serif SC", "SimSun", Georgia, serif;
+$font-family-monospace:       "JetBrains Mono", "Fira Code", "Consolas", "Courier New", monospace;
+$font-size-base:              1rem;
+$line-height-base:            1.8;
+
+// 头部
+$headings-font-family:        $font-family-sans-serif;
+$headings-font-weight:        600;
+$headings-color:              #e8f0ea;   // 极浅绿白
+$headings-line-height:        1.4;
+
+// 链接
+$link-color:                  #52b788;   // 薄荷绿
+$link-decoration:             none;
+$link-hover-color:            #74c69d;   // 浅草绿
+$link-hover-decoration:       underline;
+
+// 边框与圆角
+$border-radius:               10px;
+$border-radius-lg:            14px;
+$border-radius-sm:            6px;
+$border-color:                #2d3d33;
+
+// 阴影
+$box-shadow-sm:               0 1px 4px rgba(0, 0, 0, 0.2);
+$box-shadow:                  0 3px 10px rgba(0, 0, 0, 0.25);
+$box-shadow-lg:               0 8px 24px rgba(0, 0, 0, 0.3);
+
+// 表格
+$table-bg:                    transparent;
+$table-color:                 $body-color;
+$table-head-bg:               #2d6a4f;   // 森林绿表头
+$table-head-color:            #fff;
+$table-striped-bg:            #212e26;
+$table-hover-bg:              #2a3b30;
+$table-border-color:          #2d3d33;
+
+// 代码
+$code-font-size:              0.9em;
+$code-color:                  #52b788;   // 薄荷绿
+$pre-color:                   #cdd9d1;
+$pre-bg:                      #212e26;   // 深墨绿灰
+
+// TOC
+$toc-color:                   #8aa393;
+$toc-active-color:            #52b788;
+
+// Navbar
+$navbar-dark-color:           #cdd9d1;
+$navbar-dark-hover-color:     #52b788;
+$navbar-dark-active-color:    #e8f0ea;
+$navbar-dark-bg:              rgba(26, 36, 30, 0.92);
+$navbar-dark-border-color:    #2d3d33;
+
+// Sidebar
+$sidebar-bg:                  #1e2b24;
+$sidebar-color:               #8aa393;
+$sidebar-active-bg:           rgba(82, 183, 136, 0.15);
+$sidebar-active-color:        #e8f0ea;
+$sidebar-section-title-color: #5c7065;
